@@ -15,6 +15,7 @@
     
     
     \usepackage[T1]{fontenc}
+    \usepackage{array}
     % Nicer default font (+ math font) than Computer Modern for most use cases
     \usepackage{mathpazo}
 
@@ -575,37 +576,27 @@ per run to analyze the average model behavior over 100 runs.
     \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
 Single-lane Traffic Model, 0.1 car density
 
-{\ldots}1.0{\ldots}3{\ldots}0{\ldots}1.01{\ldots}1{\ldots}3
-{\ldots}4{\ldots}
+{\ldots}1.0{\ldots}3{\ldots}0{\ldots}1.01{\ldots}1{\ldots}3{\ldots}4{\ldots}
 
-{\ldots}00{\ldots}01{\ldots}01.2{\ldots}1{\ldots}
-..3{\ldots}5{\ldots}
+{\ldots}00{\ldots}01{\ldots}01.2{\ldots}1{\ldots}..3{\ldots}5{\ldots}
 
-{\ldots}00{\ldots}0.1{\ldots}1.2..2{\ldots}2{\ldots}
-{\ldots}3{\ldots}5.
+{\ldots}00{\ldots}0.1{\ldots}1.2..2{\ldots}2{\ldots}{\ldots}3{\ldots}5.
 
-{\ldots}4{\ldots}00{\ldots}0..1{\ldots}1..1..3{\ldots}2{\ldots}
-{\ldots}4{\ldots}
+{\ldots}4{\ldots}00{\ldots}0..1{\ldots}1..1..3{\ldots}2{\ldots}{\ldots}4{\ldots}
 
-{\ldots}3{\ldots}00{\ldots}1{\ldots}1{\ldots}1..1{\ldots}4{\ldots}2{\ldots}
-{\ldots}4.
+{\ldots}3{\ldots}00{\ldots}1{\ldots}1{\ldots}1..1{\ldots}4{\ldots}2{\ldots}{\ldots}4.
 
 Single-lane Traffic Model, 0.5 car density
 
-{\ldots}03{\ldots}0000{\ldots}01..1..01.00000001..0.2{\ldots}1..1{\ldots}0005{\ldots}0.0.2..01.2..1.0.001.0.0
-1.001.02..0003
+{\ldots}03{\ldots}0000{\ldots}01..1..01.00000001..0.2{\ldots}1..1{\ldots}0005{\ldots}0.0.2..01.2..1.0.001.0.01.001.02..0003
 
-..0.0{\ldots}0.0001{\ldots}0.1..0.0.00000000.1.1{\ldots}1..1..2{\ldots}000{\ldots}00.0{\ldots}01.1..1.00.01.01.1
-.001.01..0001.
+..0.0{\ldots}0.0001{\ldots}0.1..0.0.00000000.1.1{\ldots}1..1..2{\ldots}000{\ldots}00.0{\ldots}01.1..1.00.01.01.1.001.01..0001.
 
-..0.0{\ldots}0.000.2{\ldots}0..1.1.0.00000001..0.1{\ldots}2..2{\ldots}0.000{\ldots}01.1{\ldots}1.1.2..001.0.01.1.
-000.01.1.000.2
+..0.0{\ldots}0.000.2{\ldots}0..1.1.0.00000001..0.1{\ldots}2..2{\ldots}0.000{\ldots}01.1{\ldots}1.1.2..001.0.01.1.000.01.1.000.2
 
-.00.0{\ldots}0.001{\ldots}2..1{\ldots}1.01.0000000.1.1..1{\ldots}1..0.1.000{\ldots}1.1.2{\ldots}1.2..001.01.0.1.0
-000.0.1.0001..
+.00.0{\ldots}0.001{\ldots}2..1{\ldots}1.01.0000000.1.1..1{\ldots}1..0.1.000{\ldots}1.1.2{\ldots}1.2..001.01.0.1.0000.0.1.0001..
 
-.00.0{\ldots}1.01.2{\ldots}0.1{\ldots}01.00000000..1.2..2{\ldots}1.1..0001{\ldots}0.2..1..2..001.00.01..00
-000.1..0000.2.
+.00.0{\ldots}1.01.2{\ldots}0.1{\ldots}01.00000000..1.2..2{\ldots}1.1..0001{\ldots}0.2..1..2..001.00.01..00000.1..0000.2.
 
 Single-lane Traffic Model, 0.9 car density
 
@@ -623,8 +614,6 @@ Single-lane Traffic Model, 0.9 car density
 
 000000000000001.0000000001.000000000000000000.01.0000.0000000000.0000000000.00001.0000
 00.000000001.0
-
-
     \end{Verbatim}
 
     \subsection{Running Simulations}
@@ -743,7 +732,8 @@ Single-lane Traffic Model, 0.9 car density
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.7\linewidth}{0.9\paperheight}}{CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_8_0.png}
+    \adjustimage{max size={0.7\linewidth}{0.9\paperheight}}{CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_8_0.png}\footnote{\textbf{\#confidenceintervals: }I plotted 95\% confidence intervals in the traffic density vs traffic flow graph in order to capture the variability in the simulation runs. While the blue line represents the mean of the 100 simulations and can be used as the main reference point of the overall traffic flow for a given density, the dotted lower and upper-boundary 95\% confidence interval lines allows us to recognize the variation and uncertainty that we get at different densities so that expectations can be adjusted. For example, while 0.1 density does deliver the highest mean flow, it also has the widest 95\% CI. This means that it might surpass expectations on some runs (reaching an upper boundary of 0.43), but fail expectations on others (reaching a lower boundary of 0.25).}
+    
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -761,7 +751,7 @@ Single-lane Traffic Model, 0.9 car density
           9               0.9                 0.0470                    [0.02, 0.08]
           10              1.0                 0.0000                      [0.0, 0.0]
 \end{Verbatim}
-            
+            \newpage
 \section{Multi-lane Highways}
 
 \textbf{Two-lane Traffic Simulation Model}\\
@@ -935,84 +925,54 @@ their velocity.\\
     \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
 Two-lane Traffic Model, 0.1 car density
 
-{\ldots}3{\ldots}3{\ldots}2{\ldots}44{\ldots}2{\ldots}4.
-{\ldots}5{\ldots}
-{\ldots}2{\ldots}5{\ldots}3{\ldots}3{\ldots}4{\ldots}2{\ldots}0.02{\ldots}
-.1{\ldots}2{\ldots}5{\ldots}
+{\ldots}3{\ldots}3{\ldots}2{\ldots}44{\ldots}2{\ldots}4.{\ldots}5{\ldots}
+{\ldots}2{\ldots}5{\ldots}3{\ldots}3{\ldots}4{\ldots}2{\ldots}0.02{\ldots}.1{\ldots}2{\ldots}5{\ldots}
 
-5{\ldots}4{\ldots}3{\ldots}3{\ldots}05{\ldots}2{\ldots}
-..4{\ldots}
-.5{\ldots}2{\ldots}5{\ldots}3{\ldots}4{\ldots}5{\ldots}3{\ldots}1.1..2{\ldots}
-..2{\ldots}2{\ldots}
+5{\ldots}4{\ldots}3{\ldots}3{\ldots}05{\ldots}2{\ldots}..4{\ldots}
+.5{\ldots}2{\ldots}5{\ldots}3{\ldots}4{\ldots}5{\ldots}3{\ldots}1.1..2{\ldots}..2{\ldots}2{\ldots}
 
-{\ldots}5{\ldots}5{\ldots}4{\ldots}4{\ldots}1{\ldots}3{\ldots}3{\ldots}
-{\ldots}4{\ldots}
-{\ldots}5{\ldots}2{\ldots}4{\ldots}3{\ldots}5{\ldots}4{\ldots}2..1.2{\ldots}3{\ldots}
-{\ldots}3{\ldots}2{\ldots}
+{\ldots}5{\ldots}5{\ldots}4{\ldots}4{\ldots}1{\ldots}3{\ldots}3{\ldots}{\ldots}4{\ldots}
+{\ldots}5{\ldots}2{\ldots}4{\ldots}3{\ldots}5{\ldots}4{\ldots}2..1.2{\ldots}3{\ldots}{\ldots}3{\ldots}2{\ldots}
 
-{\ldots}5{\ldots}5{\ldots}4{\ldots}5{\ldots}1{\ldots}3{\ldots}4.
-{\ldots}5{\ldots}
-{\ldots}3{\ldots}3{\ldots}5{\ldots}3{\ldots}5{\ldots}4{\ldots}1.2..3{\ldots}4
-{\ldots}4{\ldots}3.
+{\ldots}5{\ldots}5{\ldots}4{\ldots}5{\ldots}1{\ldots}3{\ldots}4.{\ldots}5{\ldots}
+{\ldots}3{\ldots}3{\ldots}5{\ldots}3{\ldots}5{\ldots}4{\ldots}1.2..3{\ldots}4{\ldots}4{\ldots}3.
 
-.4{\ldots}4{\ldots}4{\ldots}4{\ldots}5{\ldots}1{\ldots}3{\ldots}
-..4{\ldots}
-.4{\ldots}2{\ldots}3{\ldots}4{\ldots}3{\ldots}3{\ldots}2{\ldots}2..2{\ldots}3..
-{\ldots}4{\ldots}3..
+.4{\ldots}4{\ldots}4{\ldots}4{\ldots}5{\ldots}1{\ldots}3{\ldots}..4{\ldots}
+.4{\ldots}2{\ldots}3{\ldots}4{\ldots}3{\ldots}3{\ldots}2{\ldots}2..2{\ldots}3..{\ldots}4{\ldots}3..
 
 Two-lane Traffic Model, 0.5 car density
 
-002..0{\ldots}004{\ldots}02{\ldots}000{\ldots}01.2{\ldots}0..0001.003{\ldots}1.001..00000001..0.2..1..3{\ldots}00
-1.00004{\ldots}01.
-2..02..000.002{\ldots}2{\ldots}01{\ldots}1.001..0001..2{\ldots}3{\ldots}0.00.00.1..0{\ldots}00001{\ldots}000002{\ldots}000
-.0{\ldots}01..00000
+002..0{\ldots}004{\ldots}02{\ldots}000{\ldots}01.2{\ldots}0..0001.003{\ldots}1.001..00000001..0.2..1..3{\ldots}001.00004{\ldots}01.
+2..02..000.002{\ldots}2{\ldots}01{\ldots}1.001..0001..2{\ldots}3{\ldots}0.00.00.1..0{\ldots}00001{\ldots}000002{\ldots}000.0{\ldots}01..00000
 
-01..00{\ldots}01{\ldots}1..1..2{\ldots}001{\ldots}1.1..0.1..001.001{\ldots}0.000.1.0000000.0.0{\ldots}1.2{\ldots}000
-.00001{\ldots}00.0
-..01..0000.00..2{\ldots}0.0.1{\ldots}001.0.001.2{\ldots}2{\ldots}01.00.00..0.1{\ldots}0000.1{\ldots}00001..1.001
-.1{\ldots}1.1.00000
+01..00{\ldots}01{\ldots}1..1..2{\ldots}001{\ldots}1.1..0.1..001.001{\ldots}0.000.1.0000000.0.0{\ldots}1.2{\ldots}000.00001{\ldots}00.0
+..01..0000.00..2{\ldots}0.0.1{\ldots}001.0.001.2{\ldots}2{\ldots}01.00.00..0.1{\ldots}0000.1{\ldots}00001..1.001.1{\ldots}1.1.00000
 
-0.0.01{\ldots}1.2{\ldots}1..2{\ldots}1..00.1{\ldots}0.0.1..1.01.001.1..1.000..00000000.1.0{\ldots}2..2..001
-.0001.1{\ldots}01.0
-..0.0.0001.00{\ldots}0.0.0..2..00.00.01.1..2{\ldots}2..1.000.00..1..2{\ldots}0000..2{\ldots}0000.2..000.
-0.2{\ldots}1.000000
+0.0.01{\ldots}1.2{\ldots}1..2{\ldots}1..00.1{\ldots}0.0.1..1.01.001.1..1.000..00000000.1.0{\ldots}2..2..001.0001.1{\ldots}01.0
+..0.0.0001.00{\ldots}0.0.0..2..00.00.01.1..2{\ldots}2..1.000.00..1..2{\ldots}0000..2{\ldots}0000.2..000.0.2{\ldots}1.000000
 
-0.0.0.2{\ldots}2..2{\ldots}2{\ldots}2..1.01..1..0.1..1..00.000.1.1..0001..00000000..00{\ldots}1..001.
-0000.1.2..0.00
-..0.1.001.000{\ldots}1.0.0{\ldots}000.01.0.0.1{\ldots}3{\ldots}1.0001.01{\ldots}2{\ldots}2..0001{\ldots}1.0001{\ldots}0000.
-0{\ldots}2..0000001
+0.0.0.2{\ldots}2..2{\ldots}2{\ldots}2..1.01..1..0.1..1..00.000.1.1..0001..00000000..00{\ldots}1..001.0000.1.2..0.00
+..0.1.001.000{\ldots}1.0.0{\ldots}000.01.0.0.1{\ldots}3{\ldots}1.0001.01{\ldots}2{\ldots}2..0001{\ldots}1.0001{\ldots}0000.0{\ldots}2..0000001
 
-0.1.1{\ldots}2{\ldots}2..2{\ldots}3{\ldots}0.01.2..1.1..1..0.01.001..1.1.000.1.00000001..01{\ldots}1.01.0
-0001..1..00.00
-1.0..000.0000{\ldots}01.0{\ldots}000.0.00.1..1{\ldots}1.0000.01.2{\ldots}2{\ldots}0001.1{\ldots}0001.1..0001.
-1{\ldots}0000001.
+0.1.1{\ldots}2{\ldots}2..2{\ldots}3{\ldots}0.01.2..1.1..1..0.01.001..1.1.000.1.00000001..01{\ldots}1.01.00001..1..00.00
+1.0..000.0000{\ldots}01.0{\ldots}000.0.00.1..1{\ldots}1.0000.01.2{\ldots}2{\ldots}0001.1{\ldots}0001.1..0001.1{\ldots}0000001.
 
 Two-lane Traffic Model, 0.9 car density
 
-000001..0000002..00001.001.0000000000000.000000000000000000000000000001.000.0000000000
-0000000000001.
-1.000.000000000001.000000000000000000.000.01.001.0000001.00000.00000000000000000000000
-01.00000000000
+000001..0000002..00001.001.0000000000000.000000000000000000000000000001.000.00000000000000000000001.
+1.000.000000000001.000000000000000000.000.01.001.0000001.00000.0000000000000000000000001.00000000000
 
-00001.1.000001..00000.000.00000000000000.00000000000000000000000000001.0000.0000000000
-000000000001.0
-.0001.00000000001.0000000000000000001.000.1.000.0000000.000001.00000000000000000000000
-1.000000000001
+00001.1.000001..00000.000.00000000000000.00000000000000000000000000001.0000.0000000000000000000001.0
+.0001.00000000001.0000000000000000001.000.1.000.0000000.000001.000000000000000000000001.000000000001
 
-0000.1.000001.0.00000.001.00000000000001.0000000000000000000000000000.00001.0000000000
-00000000000.00
-0000.00000000000.0000000000000000000.0001..0001.0000000.00001.000000000000000000000000
-.000000000000.
+0000.1.000001.0.00000.001.00000000000001.0000000000000000000000000000.00001.000000000000000000000.00
+0000.00000000000.0000000000000000000.0001..0001.0000000.00001.000000000000000000000000.000000000000.
 
-0001..000000.01.00001.01.00000000000001.00000000000000000000000000001.0001.00000000000
-00000000001.00
-0000.00000000001.0000000000000000001.001.0.001.00000001.0001.0000000000000000000000000
-.000000000000.
+0001..000000.01.00001.01.00000000000001.00000000000000000000000000001.0001.0000000000000000000001.00
+0000.00000000001.0000000000000000001.001.0.001.00000001.0001.0000000000000000000000000.000000000000.
 
-001.1.000001.1.00001.01.00000000000001.00000000000000000000000000001.0001.000000000000
-0000000000.000
-0001.0000000000.0000000000000000000.000.00.00.00000001.0001.00000000000000000000000001
-.000000000000.
+001.1.000001.1.00001.01.00000000000001.00000000000000000000000000001.0001.0000000000000000000000.000
+0001.0000000000.0000000000000000000.000.00.00.00000001.0001.00000000000000000000000001.000000000000.
 
 
     \end{Verbatim}
@@ -1142,7 +1102,7 @@ Two-Lane (0.5 switch\_lane\_prob): Max mean flow is 0.7614 at traffic density 0.
 Two-Lane (1.0 switch\_lane\_prob): Max mean flow is 0.7662 at traffic density 0.1
 
     \end{Verbatim}
-
+\newpage
     \subsection{How the Models Work}
 
 \subsubsection{Single-lane Model}
@@ -1186,7 +1146,7 @@ becomes unpredictable, and so a stable traffic flow cannot be achieved.
 The random slow down is initiated by generating a random number bewteen
 0 and 1 from the np.random.uniform function and comparing it against the
 slow\_down\_prob. If the number is less than the slow\_down\_prob, then
-the car decreases its velocity by 1 unit.\\
+the car decreases its velocity by 1 unit.
 
 \subsubsection{Two-lane Model}
 
@@ -1199,7 +1159,7 @@ lanes. If the car can safely switch lanes, it will switch to the other
 lane. If it cannot safely switch lanes, it will decelerate in the
 current lane.\\
 
-\textbf{Conditions needed to safely switch lanes:}\\
+\textbf{Conditions needed to safely switch lanes:}
 
 \begin{itemize}
 \item
@@ -1237,8 +1197,7 @@ double the single-lane flow.\\
 The results show that at a density of 0.1 (the optimal density for both
 the single-lane and two-lane models), and a switch\_lane\_prob of 0, the
 two-lane model actually underperforms the single-lane model by a
-relative measurement of \((2 \times 0.3551) - 0.673 = 0.0372\) units. -
-this is probably due to the uneven distribution of the 0.1 car\_density
+relative measurement of \((2 \times 0.3551) - 0.673 = 0.0372\) units.\footnote{\textbf{\#descriptivestats: }I generated basic descriptive statistics from the various model simulations in order to compare the model traffic flows at different densities. By comparing the mean traffic flow at different densities, and extracting the density which provided the max traffic flow rate, I could observe that the two-lane model only outperforms the single-lane model at a density of 0.1, and even then only by a slight margin of 0.05 units.} This is probably due to the uneven distribution of the 0.1 car\_density
 throughout the entire two-lane system, i.e. 1 road could have 5 cars
 while the other has 15, which overall would lead to suboptimal
 performance compared to the optimal 10 cars per 100 cells as achieved by
@@ -1264,21 +1223,21 @@ increased traffic flow. At traffic densities greater or less than 0.1,
 the difference in traffic flow between the two-lane traffic models and
 the single-lane model decreases. Both these observations suggest that
 overall, the two-lane model does not significantly improve traffic-flow
-performance, even at a switch\_lane\_prob of 1.
+performance, even at a switch\_lane\_prob of 1.\footnote{\textbf{\#systemdynamics: }By analyzing the model simulation results through the visualizations and descriptive stats, I can infer the critical point wherein the traffic flow performance peaks, and then starts decreasing - this critical point in the phase space is a traffic density of 0.1. The sensitivity of the system can also be observed by analyzing the change in traffic flow as the density changes. We can see that the two-lane system has a higher sensitivity than the single-lane system, since a similar increase in traffic density initiates a steeper decrease in traffic flow within the two-lane system.}
 
 \subsubsection{Prediction of Three-lane Model Performance}
 
 The lacklustre increase in traffic-flow of the two-lane model at a
-switch\_lane\_prob of 1 vs the single-lane model, even at an optimal
+switch\_lane\_prob of 1.0 vs the single-lane model, even at an optimal
 traffic density of 0.1, suggests that a three-lane model would not
 perform that much better. There will probably be a small increase in
 traffic-flow around the optimal density point of 0.1 - when cars can
 safely switch lanes without interrupting the traffic-flow of the other
 lanes - but at densities greater or less than 0.1, the three-lane model
 traffic-flow will probably only be roughly 3 times the single-lane
-model's traffic-flow, which means that there isn't a significant
+model's traffic-flow, \(3 \times 0.3551\pm 0.05\). This means that there will not be a significant
 improvement besides the expected improvement of having a system that is
-3 times the size of the original one.\\
+3 times the size of the original one.\footnote{\textbf{\#estimation:} I compared the simulation statistics of the two-lane model vs the single-lane model to estimate the performance of a three-lane model. Since the two-lane model did not perform that much better than the single-lane model, with only a slight improvement of about ~0.05 units of traffic flow at an optimal traffic flow density of 0.1, I estimated that a three-lane model would probably demonstrate the same behavior and have roughly 3-times the traffic flow of the single-lane model at a density of 0.1.}
 
 \subsubsection{Applicability of Traffic Model to Buenos Aires}
 
@@ -1302,8 +1261,8 @@ rather accurately, and I have not personally witnessed any behavior in
 Buenos Aires that goes against normal driving behavior. With the
 addition of more lanes and other features (traffic lights,
 zebra-crossings, random pedestrians crossing the road, obstacles, etc.),
-perhaps the model could be applicable to Buenos Aires traffic.\\
-
+perhaps the model could be applicable to Buenos Aires traffic.
+\newpage
 \section{Extended Single-lane Model}
 
 The extended single-lane model builds on the TrafficSim parent class.
@@ -1528,58 +1487,40 @@ speed-limit zones, and traffic lights on regular traffic flow.\\
     \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
 Single-lane Extended Traffic Model, 0.1 car density
 
-{\ldots}1{\ldots}2{\ldots}02{\ldots}\textcolor{ansi-blue}{0}.2{\ldots}\textcolor{ansi-red}{0}..0{\ldots}1{\ldots}
-{\ldots}3{\ldots}1{\ldots}
+{\ldots}1{\ldots}2{\ldots}02{\ldots}\textcolor{ansi-blue}{0}.2{\ldots}\textcolor{ansi-red}{0}..0{\ldots}1{\ldots}{\ldots}3{\ldots}1{\ldots}
 
-{\ldots}2{\ldots}0.0..3{\ldots}\textcolor{ansi-blue}{0}{\ldots}0{\ldots}\textcolor{ansi-red}{0}..1{\ldots}1{\ldots}
-{\ldots}4{\ldots}1{\ldots}
+{\ldots}2{\ldots}0.0..3{\ldots}\textcolor{ansi-blue}{0}{\ldots}0{\ldots}\textcolor{ansi-red}{0}..1{\ldots}1{\ldots}{\ldots}4{\ldots}1{\ldots}
 
-{\ldots}2{\ldots}1.1{\ldots}3{\ldots}\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-red}{0}{\ldots}1{\ldots}0{\ldots}
-{\ldots}4{\ldots}2{\ldots}
+{\ldots}2{\ldots}1.1{\ldots}3{\ldots}\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-red}{0}{\ldots}1{\ldots}0{\ldots}{\ldots}4{\ldots}2{\ldots}
 
-{\ldots}3{\ldots}0.2{\ldots}4{\ldots}\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-green}{0}{\ldots}1{\ldots}0{\ldots}
-{\ldots}5{\ldots}2{\ldots}
+{\ldots}3{\ldots}0.2{\ldots}4{\ldots}\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-green}{0}{\ldots}1{\ldots}0{\ldots}{\ldots}5{\ldots}2{\ldots}
 
-{\ldots}01{\ldots}3{\ldots}1..\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-green}{0}{\ldots}0{\ldots}0{\ldots}
-{\ldots}4{\ldots}2..
+{\ldots}01{\ldots}3{\ldots}1..\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-green}{0}{\ldots}0{\ldots}0{\ldots}{\ldots}4{\ldots}2..
 
 Single-lane Extended Traffic Model, 0.5 car density
 
-001.1.0.2{\ldots}0.0001..1.2..0.000\textcolor{ansi-blue}{0}0.2..0.0..0..00{\ldots}\textcolor{ansi-red}{0}1..1..001..01..01
-.1..00001.2..0.1.0.3{\ldots}01.03{\ldots}
+001.1.0.2{\ldots}0.0001..1.2..0.000\textcolor{ansi-blue}{0}0.2..0.0..0..00{\ldots}\textcolor{ansi-red}{0}1..1..001..01..01.1..00001.2..0.1.0.3{\ldots}01.03{\ldots}
 
-01.0.01{\ldots}1.0.000.1..1..01.000\textcolor{ansi-blue}{0}1{\ldots}01.0..0..01{\ldots}\textcolor{ansi-red}{0}.0..1.01.1.1.1.0.
-0.0.0000.2..00..00{\ldots}00.01{\ldots}1.
+01.0.01{\ldots}1.0.000.1..1..01.000\textcolor{ansi-blue}{0}1{\ldots}01.0..0..01{\ldots}\textcolor{ansi-red}{0}.0..1.01.1.1.1.0.0.0.0000.2..00..00{\ldots}00.01{\ldots}1.
 
-0.00.1.2{\ldots}01.001..2..0.0.0000\textcolor{ansi-blue}{0}.1..1.00..1..1.1{\ldots}\textcolor{ansi-red}{0}.0{\ldots}00.0.0.1.00.
-0.1.0000{\ldots}001..00{\ldots}01.0.2{\ldots}0
+0.00.1.2{\ldots}01.001..2..0.0.0000\textcolor{ansi-blue}{0}.1..1.00..1..1.1{\ldots}\textcolor{ansi-red}{0}.0{\ldots}00.0.0.1.00.0.1.0000{\ldots}001..00{\ldots}01.0.2{\ldots}0
 
-1.01..1..1.0.001.2{\ldots}00.1.0000\textcolor{ansi-blue}{0}..1..001{\ldots}1..0.0..\textcolor{ansi-green}{0}.1{\ldots}00.0.0..000.
-0..00000{\ldots}00.0.00{\ldots}0.01{\ldots}1.0
+1.01..1..1.0.001.2{\ldots}00.1.0000\textcolor{ansi-blue}{0}..1..001{\ldots}1..0.0..\textcolor{ansi-green}{0}.1{\ldots}00.0.0..000.0..00000{\ldots}00.0.00{\ldots}0.01{\ldots}1.0
 
-.00.2..1..01.01.1..1.00..00000\textcolor{ansi-blue}{0}{\ldots}1.00.1{\ldots}1.0.1..\textcolor{ansi-green}{1}..0..00.1.1..000.
-1..00001{\ldots}01.1.01{\ldots}0.0.1{\ldots}01
+.00.2..1..01.01.1..1.00..00000\textcolor{ansi-blue}{0}{\ldots}1.00.1{\ldots}1.0.1..\textcolor{ansi-green}{1}..0..00.1.1..000.1..00001{\ldots}01.1.01{\ldots}0.0.1{\ldots}01
 
 Single-lane Extended Traffic Model, 0.9 car density
 
-00000000000000000000.00.00.000\textcolor{ansi-blue}{0}1.00000000000.00000\textcolor{ansi-red}{0}1.000000000000000
-0000000001.01.001.0000.000000000
+00000000000000000000.00.00.000\textcolor{ansi-blue}{0}1.00000000000.00000\textcolor{ansi-red}{0}1.0000000000000000000000001.01.001.0000.000000000
 
-00000000000000000000.01.00.000\textcolor{ansi-blue}{0}.000000000000.00000\textcolor{ansi-red}{0}.0000000000000000
-000000000.01.001.00001.000000000
+00000000000000000000.01.00.000\textcolor{ansi-blue}{0}.000000000000.00000\textcolor{ansi-red}{0}.0000000000000000000000000.01.001.00001.000000000
 
-00000000000000000001.0.000.000\textcolor{ansi-blue}{0}.000000000001.00000\textcolor{ansi-red}{0}.0000000000000000
-000000000.1.001.00001.0000000000
+00000000000000000001.0.000.000\textcolor{ansi-blue}{0}.000000000001.00000\textcolor{ansi-red}{0}.0000000000000000000000000.1.001.00001.0000000000
 
-0000000000000000000.01.001.000\textcolor{ansi-blue}{0}.00000000000.000000\textcolor{ansi-green}{0}.0000000000000000
-000000001..001.00000.00000000000
+0000000000000000000.01.001.000\textcolor{ansi-blue}{0}.00000000000.000000\textcolor{ansi-green}{0}.0000000000000000000000001..001.00000.00000000000
 
-0000000000000000000.0.000.0000\textcolor{ansi-blue}{0}.00000000000.000000\textcolor{ansi-green}{0}.0000000000000000
-00000000.0.00.000000.00000000000
-
-
+0000000000000000000.0.000.0000\textcolor{ansi-blue}{0}.00000000000.000000\textcolor{ansi-green}{0}.000000000000000000000000.0.00.000000.00000000000
     \end{Verbatim}
-\newpage
 \section{Extended Two-lane Model}
 
 The extended two-lane model builds on the TrafficSimTwoLane parent
@@ -1787,85 +1728,54 @@ with the addition of a lane-merge feature:
     \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
 Two-lane Extended Traffic Model, 0.1 car density
 
-{\ldots}5{\ldots}04{\ldots}\textcolor{ansi-blue}{0}1{\ldots}1{\ldots}\textcolor{ansi-red}{.}..1{\ldots}
-..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-{\ldots}3{\ldots}3{\ldots}2{\ldots}4{\ldots}4{\ldots}2{\ldots}5{\ldots}02..2..3
-{\ldots}5{\ldots}
+{\ldots}5{\ldots}04{\ldots}\textcolor{ansi-blue}{0}1{\ldots}1{\ldots}\textcolor{ansi-red}{.}..1{\ldots}..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+{\ldots}3{\ldots}3{\ldots}2{\ldots}4{\ldots}4{\ldots}2{\ldots}5{\ldots}02..2..3{\ldots}5{\ldots}
 
-{\ldots}5{\ldots}1{\ldots}5{\ldots}\textcolor{ansi-blue}{0}.2{\ldots}1{\ldots}\textcolor{ansi-red}{.}{\ldots}1{\ldots}
-..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-{\ldots}3{\ldots}4{\ldots}3{\ldots}5{\ldots}5{\ldots}3{\ldots}5{\ldots}1..2..3.
-..4{\ldots}5{\ldots}
+{\ldots}5{\ldots}1{\ldots}5{\ldots}\textcolor{ansi-blue}{0}.2{\ldots}1{\ldots}\textcolor{ansi-red}{.}{\ldots}1{\ldots}..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+{\ldots}3{\ldots}4{\ldots}3{\ldots}5{\ldots}5{\ldots}3{\ldots}5{\ldots}1..2..3...4{\ldots}5{\ldots}
 
-{\ldots}5{\ldots}2{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-red}{.}{\ldots}1{\ldots}
-..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-{\ldots}4{\ldots}5{\ldots}4{\ldots}5{\ldots}4{\ldots}4{\ldots}5{\ldots}2{\ldots}3..
-.4{\ldots}5{\ldots}5
+{\ldots}5{\ldots}2{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-red}{.}{\ldots}1{\ldots}..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+{\ldots}4{\ldots}5{\ldots}4{\ldots}5{\ldots}4{\ldots}4{\ldots}5{\ldots}2{\ldots}3...4{\ldots}5{\ldots}5
 
-{\ldots}2..3{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-green}{.}{\ldots}1{\ldots}
-..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}4{\ldots}5{\ldots}3{\ldots}3{\ldots}
-4{\ldots}5{\ldots}5..
+{\ldots}2..3{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-green}{.}{\ldots}1{\ldots}..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}4{\ldots}5{\ldots}3{\ldots}3{\ldots}4{\ldots}5{\ldots}5..
 
-{\ldots}3{\ldots}3{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-green}{.}1{\ldots}1{\ldots}
-..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-..5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}3{\ldots}4.
-{\ldots}5{\ldots}5{\ldots}
+{\ldots}3{\ldots}3{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-green}{.}1{\ldots}1{\ldots}..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+..5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}3{\ldots}4.{\ldots}5{\ldots}5{\ldots}
 
 Two-lane Extended Traffic Model, 0.5 car density
 
-.2..0001.0000001.001{\ldots}2{\ldots}\textcolor{ansi-blue}{0}..0001{\ldots}001.01.\textcolor{ansi-red}{.}..01.00001.01..00
-3.\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-1.002..001{\ldots}1.001{\ldots}2{\ldots}3{\ldots}0002..003{\ldots}02..002..2..000002..00001.1.3{\ldots}1.1.
-004{\ldots}01{\ldots}
+.2..0001.0000001.001{\ldots}2{\ldots}\textcolor{ansi-blue}{0}..0001{\ldots}001.01.\textcolor{ansi-red}{.}..01.00001.01..003.\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.002..001{\ldots}1.001{\ldots}2{\ldots}3{\ldots}0002..003{\ldots}02..002..2..000002..00001.1.3{\ldots}1.1.004{\ldots}01{\ldots}
 
-{\ldots}0001.0000001.001.2{\ldots}3{\ldots}\textcolor{ansi-blue}{0}..001.1{\ldots}01.01.0\textcolor{ansi-red}{.}..1.00001.01.1.01
-..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-.001..001.2{\ldots}001.2{\ldots}3{\ldots}0001..001{\ldots}01..001..2..000001..00001.1.2{\ldots}1.1.0
-01{\ldots}2..1.2..
+{\ldots}0001.0000001.001.2{\ldots}3{\ldots}\textcolor{ansi-blue}{0}..001.1{\ldots}01.01.0\textcolor{ansi-red}{.}..1.00001.01.1.01..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+.001..001.2{\ldots}001.2{\ldots}3{\ldots}0001..001{\ldots}01..001..2..000001..00001.1.2{\ldots}1.1.001{\ldots}2..1.2..
 
-{\ldots}001.0000001.001.2..3{\ldots}1.\textcolor{ansi-blue}{0}..01.1.1{\ldots}1.01.00\textcolor{ansi-red}{.}{\ldots}00001.01.1.01.
-1.\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-.01.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}001.1.01.2..1.1.01.2{\ldots}000001.1.0001.1.2..2..1.00
-1.2{\ldots}1.2..1
+{\ldots}001.0000001.001.2..3{\ldots}1.\textcolor{ansi-blue}{0}..01.1.1{\ldots}1.01.00\textcolor{ansi-red}{.}{\ldots}00001.01.1.01.1.\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+.01.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}001.1.01.2..1.1.01.2{\ldots}000001.1.0001.1.2..2..1.001.2{\ldots}1.2..1
 
-{\ldots}01.0000001.001.2..3{\ldots}3{\ldots}0\textcolor{ansi-blue}{0}..1.1.1.1{\ldots}01.000\textcolor{ansi-green}{.}{\ldots}0001.01.1.01.1
-.0\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-01.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}001.1.01.2..1.1.01.2..1.00001.1.0001.1.2..2..1.001
-.2..3{\ldots}2..1.
+{\ldots}01.0000001.001.2..3{\ldots}3{\ldots}0\textcolor{ansi-blue}{0}..1.1.1.1{\ldots}01.000\textcolor{ansi-green}{.}{\ldots}0001.01.1.01.1.0\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+01.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}001.1.01.2..1.1.01.2..1.00001.1.0001.1.2..2..1.001.2..3{\ldots}2..1.
 
-{\ldots}1.0000001.001.2..3{\ldots}3{\ldots}00\textcolor{ansi-blue}{0}{\ldots}1.1.1.1{\ldots}1.0001\textcolor{ansi-green}{.}1..001.01.1.01.1.
-00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-1.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}5{\ldots}01.1.01.2..1.1.01.2..1.00001.1.0001.1.2..2..1.001.
-2..3{\ldots}3{\ldots}1.0
+{\ldots}1.0000001.001.2..3{\ldots}3{\ldots}00\textcolor{ansi-blue}{0}{\ldots}1.1.1.1{\ldots}1.0001\textcolor{ansi-green}{.}1..001.01.1.01.1.00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}5{\ldots}01.1.01.2..1.1.01.2..1.00001.1.0001.1.2..2..1.001.2..3{\ldots}3{\ldots}1.0
 
 Two-lane Extended Traffic Model, 0.9 car density
 
-0001.1.0001.000000000000001..0\textcolor{ansi-blue}{0}0001.00000000000000\textcolor{ansi-red}{0}00001.00000000000
-00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-0001.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.000000000
-00000000000000
+0001.1.0001.000000000000001..0\textcolor{ansi-blue}{0}0001.00000000000000\textcolor{ansi-red}{0}00001.0000000000000\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+0001.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.00000000000000000000000
 
-001.1.0001.000000000000001.1.0\textcolor{ansi-blue}{0}001.000000000000000\textcolor{ansi-red}{0}0001.000000000000
-00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-001.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.0000000000
-00000000000000
+001.1.0001.000000000000001.1.0\textcolor{ansi-blue}{0}001.000000000000000\textcolor{ansi-red}{0}0001.00000000000000\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+001.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.000000000000000000000000
 
-01.1.0001.000000000000001.1.00\textcolor{ansi-blue}{0}01.0000000000000000\textcolor{ansi-red}{0}001.0000000000000
-00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-01.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.00000000000
-00000000000000
+01.1.0001.000000000000001.1.00\textcolor{ansi-blue}{0}01.0000000000000000\textcolor{ansi-red}{0}001.000000000000000\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+01.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.0000000000000000000000000
 
-1.1.0001.000000000000001.1.000\textcolor{ansi-blue}{0}1.00000000000000000\textcolor{ansi-green}{1}01.00000000000000
-00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-1.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.000000000000
-00000000000000
+1.1.0001.000000000000001.1.000\textcolor{ansi-blue}{0}1.00000000000000000\textcolor{ansi-green}{1}01.0000000000000000\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.00000000000000000000000000
 
-.1.0001.000000000000001.1.0000\textcolor{ansi-blue}{0}.000000000000000000\textcolor{ansi-green}{.}1.000000000000000
-00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.0000000000000
-00000000000001
-
+.1.0001.000000000000001.1.0000\textcolor{ansi-blue}{0}.000000000000000000\textcolor{ansi-green}{.}1.00000000000000000\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.000000000000000000000000001
 
     \end{Verbatim}
 
@@ -1920,7 +1830,7 @@ All the added features will have the same settings, e.g. same lane, same
 index, same time-intervals (for traffic light). For example, if the
 obstacle was located on lane 0, index 30 in the single-lane model, it
 will also be located on lane 0, index 30 in the two-lane model.
-\newpage
+
    \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
 {\color{incolor}In [{\color{incolor}947}]:} \PY{c+c1}{\PYZsh{}speed\PYZhy{}limit zones}
           
@@ -2189,9 +2099,12 @@ Suggestions to make the model more realistic:
   demonstrated.
 \end{itemize}
 
+\newpage
 \section{Appendix}
 
-The code can be located online at: 
+All code can be located online at: \\
+
+\url{https://github.com/hueyning/cs166-repo/blob/master/CS166%20Session%204.1%20-%20Case%20study%20Traffic%20flow/CS166_traffic_sim_assignment.ipynb}
 
 
     % Add a bibliography block to the postdoc

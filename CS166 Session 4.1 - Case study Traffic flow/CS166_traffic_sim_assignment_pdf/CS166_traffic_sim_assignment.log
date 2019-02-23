@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  22 FEB 2019 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  23 FEB 2019 00:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -31,6 +31,14 @@ Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
 File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
+(/usr/local/texlive/2017/texmf-dist/tex/latex/tools/array.sty
+Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
+\col@sep=\dimen103
+\extrarowheight=\dimen104
+\NC@list=\toks14
+\extratabsurround=\skip43
+\backup@length=\skip44
+)
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/mathpazo.sty
 Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
 \symupright=\mathgroup4
@@ -40,7 +48,7 @@ Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks14
+\KV@toks@=\toks15
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
@@ -64,8 +72,8 @@ Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count87
 ))
-\Gin@req@height=\dimen103
-\Gin@req@width=\dimen104
+\Gin@req@height=\dimen105
+\Gin@req@width=\dimen106
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
@@ -73,13 +81,13 @@ Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 (/usr/local/texlive/2017/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen105
-\captionmargin@=\dimen106
-\captionwidth=\dimen107
-\caption@tempdima=\dimen108
-\caption@indent=\dimen109
-\caption@parindent=\dimen110
-\caption@hangindent=\dimen111
+\captionmargin=\dimen107
+\captionmargin@=\dimen108
+\captionwidth=\dimen109
+\caption@tempdima=\dimen110
+\caption@indent=\dimen111
+\caption@parindent=\dimen112
+\caption@hangindent=\dimen113
 )
 \c@ContinuedFloat=\count88
 )
@@ -91,8 +99,8 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (/usr/local/texlive/2017/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/local/texlive/2017/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks15
-\XKV@tempa@toks=\toks16
+\XKV@toks=\toks16
+\XKV@tempa@toks=\toks17
 )
 \XKV@depth=\count89
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -108,19 +116,19 @@ Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
 \collectedbox=\box26
 )
-\tc@llx=\dimen112
-\tc@lly=\dimen113
-\tc@urx=\dimen114
-\tc@ury=\dimen115
+\tc@llx=\dimen114
+\tc@lly=\dimen115
+\tc@urx=\dimen116
+\tc@ury=\dimen117
 Package trimclip Info: Using driver 'tc-pdftex.def'.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
 File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
 ))
-\adjbox@Width=\dimen116
-\adjbox@Height=\dimen117
-\adjbox@Depth=\dimen118
-\adjbox@Totalheight=\dimen119
+\adjbox@Width=\dimen118
+\adjbox@Height=\dimen119
+\adjbox@Depth=\dimen120
+\adjbox@Totalheight=\dimen121
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
@@ -130,8 +138,8 @@ Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box27
 \sift@deathcycles=\count91
-\@vwid@loff=\dimen120
-\@vwid@roff=\dimen121
+\@vwid@loff=\dimen122
+\@vwid@roff=\dimen123
 ))
 (/usr/local/texlive/2017/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
@@ -152,7 +160,7 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/tools/enumerate.sty
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
-\@enLab=\toks17
+\@enLab=\toks18
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
@@ -170,19 +178,19 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@cnth=\count92
 \Gm@cntv=\count93
 \c@Gm@tempcnt=\count94
-\Gm@bindingoffset=\dimen122
-\Gm@wd@mp=\dimen123
-\Gm@odd@mp=\dimen124
-\Gm@even@mp=\dimen125
-\Gm@layoutwidth=\dimen126
-\Gm@layoutheight=\dimen127
-\Gm@layouthoffset=\dimen128
-\Gm@layoutvoffset=\dimen129
-\Gm@dimlist=\toks18
+\Gm@bindingoffset=\dimen124
+\Gm@wd@mp=\dimen125
+\Gm@odd@mp=\dimen126
+\Gm@even@mp=\dimen127
+\Gm@layoutwidth=\dimen128
+\Gm@layoutheight=\dimen129
+\Gm@layouthoffset=\dimen130
+\Gm@layoutvoffset=\dimen131
+\Gm@dimlist=\toks19
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/11/05 v2.16a AMS math features
-\@mathmargin=\skip43
+\@mathmargin=\skip45
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -190,12 +198,12 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks19
-\ex@=\dimen130
+\@emptytoks=\toks20
+\ex@=\dimen132
 ))
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen131
+\pmbraise@=\dimen133
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
@@ -212,7 +220,7 @@ LaTeX Info: Redefining \dots on input line 475.
 LaTeX Info: Redefining \cdots on input line 596.
 \Mathstrutbox@=\box28
 \strutbox@=\box29
-\big@size=\dimen132
+\big@size=\dimen134
 LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \macc@depth=\count100
@@ -220,21 +228,21 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \dotsspace@=\muskip10
 \c@parentequation=\count102
 \dspbrk@lvl=\count103
-\tag@help=\toks20
+\tag@help=\toks21
 \row@=\count104
 \column@=\count105
 \maxfields@=\count106
-\andhelp@=\toks21
-\eqnshift@=\dimen133
-\alignsep@=\dimen134
-\tagshift@=\dimen135
-\tagwidth@=\dimen136
-\totwidth@=\dimen137
-\lineht@=\dimen138
-\@envbody=\toks22
-\multlinegap=\skip44
-\multlinetaggap=\skip45
-\mathdisplay@stack=\toks23
+\andhelp@=\toks22
+\eqnshift@=\dimen135
+\alignsep@=\dimen136
+\tagshift@=\dimen137
+\tagwidth@=\dimen138
+\totwidth@=\dimen139
+\lineht@=\dimen140
+\@envbody=\toks23
+\multlinegap=\skip46
+\multlinetaggap=\skip47
+\mathdisplay@stack=\toks24
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
@@ -345,14 +353,14 @@ Package: ucs 2013/05/11 v2.2 UCS: Unicode input support
 File: uni-global.def 2013/05/13 UCS: Unicode global data
 )
 \uc@secondtry=\count107
-\uc@combtoks=\toks24
-\uc@combtoksb=\toks25
-\uc@temptokena=\toks26
+\uc@combtoks=\toks25
+\uc@combtoksb=\toks26
+\uc@temptokena=\toks27
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks27
-\inpenc@posthook=\toks28
+\inpenc@prehook=\toks28
+\inpenc@posthook=\toks29
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/ucs/utf8x.def
 File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
@@ -442,7 +450,7 @@ Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
 (/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 )
-\@linkdim=\dimen139
+\@linkdim=\dimen141
 \Hy@linkcounter=\count111
 \Hy@pagecounter=\count112
 
@@ -468,10 +476,10 @@ Package hyperref Info: Bookmarks ON on input line 4751.
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5104.
-\XeTeXLinkMargin=\dimen140
+\XeTeXLinkMargin=\dimen142
 \Fld@menulength=\count115
-\Field@Width=\dimen141
-\Fld@charsize=\dimen142
+\Field@Width=\dimen143
+\Fld@charsize=\dimen144
 Package hyperref Info: Hyper figures OFF on input line 6358.
 Package hyperref Info: Link nesting OFF on input line 6363.
 Package hyperref Info: Hyper index ON on input line 6366.
@@ -498,16 +506,16 @@ Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip46
+\Hy@SectionHShift=\skip48
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip47
-\LTright=\skip48
-\LTpre=\skip49
-\LTpost=\skip50
+\LTleft=\skip49
+\LTright=\skip50
+\LTpre=\skip51
+\LTpost=\skip52
 \LTchunksize=\count121
-\LTcapwidth=\dimen143
+\LTcapwidth=\dimen145
 \LT@head=\box32
 \LT@firsthead=\box33
 \LT@foot=\box34
@@ -516,77 +524,77 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LT@rows=\count123
 \c@LT@tables=\count124
 \c@LT@chunks=\count125
-\LT@p@ftn=\toks29
+\LT@p@ftn=\toks30
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2016/04/27 v1.618033 publication quality tables
-\heavyrulewidth=\dimen144
-\lightrulewidth=\dimen145
-\cmidrulewidth=\dimen146
-\belowrulesep=\dimen147
-\belowbottomsep=\dimen148
-\aboverulesep=\dimen149
-\abovetopsep=\dimen150
-\cmidrulesep=\dimen151
-\cmidrulekern=\dimen152
-\defaultaddspace=\dimen153
+\heavyrulewidth=\dimen146
+\lightrulewidth=\dimen147
+\cmidrulewidth=\dimen148
+\belowrulesep=\dimen149
+\belowbottomsep=\dimen150
+\aboverulesep=\dimen151
+\abovetopsep=\dimen152
+\cmidrulesep=\dimen153
+\cmidrulekern=\dimen154
+\defaultaddspace=\dimen155
 \@cmidla=\count126
 \@cmidlb=\count127
-\@aboverulesep=\dimen154
-\@belowrulesep=\dimen155
+\@aboverulesep=\dimen156
+\@belowrulesep=\dimen157
 \@thisruleclass=\count128
 \@lastruleclass=\count129
-\@thisrulewidth=\dimen156
+\@thisrulewidth=\dimen158
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
-\labelindent=\skip51
-\enit@outerparindent=\dimen157
-\enit@toks=\toks30
+\labelindent=\skip53
+\enit@outerparindent=\dimen159
+\enit@toks=\toks31
 \enit@inbox=\box36
 \enitdp@description=\count130
 )
 (/usr/local/texlive/2017/texmf-dist/tex/generic/ulem/ulem.sty
 \UL@box=\box37
 \UL@hyphenbox=\box38
-\UL@skip=\skip52
-\UL@hook=\toks31
-\UL@height=\dimen158
+\UL@skip=\skip54
+\UL@hook=\toks32
+\UL@height=\dimen160
 \UL@pe=\count131
-\UL@pixel=\dimen159
+\UL@pixel=\dimen161
 \ULC@box=\box39
 Package: ulem 2012/05/18
-\ULdepth=\dimen160
+\ULdepth=\dimen162
 )
-Package hyperref Info: Option `breaklinks' set `true' on input line 269.
-Package hyperref Info: Option `colorlinks' set `true' on input line 269.
+Package hyperref Info: Option `breaklinks' set `true' on input line 270.
+Package hyperref Info: Option `colorlinks' set `true' on input line 270.
 
 (./CS166_traffic_sim_assignment.aux)
 \openout1 = `CS166_traffic_sim_assignment.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 276.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 276.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 277.
+LaTeX Font Info:    ... okay on input line 277.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 277.
+LaTeX Font Info:    ... okay on input line 277.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 277.
+LaTeX Font Info:    ... okay on input line 277.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 277.
+LaTeX Font Info:    ... okay on input line 277.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 277.
+LaTeX Font Info:    ... okay on input line 277.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 277.
+LaTeX Font Info:    ... okay on input line 277.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 277.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 277.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 276.
+LaTeX Font Info:    ... okay on input line 277.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 277.
+LaTeX Font Info:    ... okay on input line 277.
+LaTeX Font Info:    Try loading font information for T1+ppl on input line 277.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
@@ -594,16 +602,16 @@ File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count132
-\scratchdimen=\dimen161
+\scratchdimen=\dimen163
 \scratchbox=\box40
 \nofMPsegments=\count133
 \nofMParguments=\count134
-\everyMPshowfont=\toks32
+\everyMPshowfont=\toks33
 \MPscratchCnt=\count135
-\MPscratchDim=\dimen162
+\MPscratchDim=\dimen164
 \MPnumerator=\count136
 \makeMPintoPDFobject=\count137
-\everyMPtoPDFconversion=\toks33
+\everyMPtoPDFconversion=\toks34
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -668,7 +676,7 @@ Package caption Info: End \AtBeginDocument code.
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 \AtBeginShipoutBox=\box41
-Package hyperref Info: Link coloring ON on input line 276.
+Package hyperref Info: Link coloring ON on input line 277.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -678,80 +686,80 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count138
 )
-LaTeX Info: Redefining \ref on input line 276.
-LaTeX Info: Redefining \pageref on input line 276.
-LaTeX Info: Redefining \nameref on input line 276.
+LaTeX Info: Redefining \ref on input line 277.
+LaTeX Info: Redefining \pageref on input line 277.
+LaTeX Info: Redefining \nameref on input line 277.
 
 (./CS166_traffic_sim_assignment.out) (./CS166_traffic_sim_assignment.out)
 \@outlinefile=\write4
 \openout4 = `CS166_traffic_sim_assignment.out'.
 
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 280.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 281.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 280
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 281
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 280
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 281
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 280
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 281
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 280
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 281
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 280.
+(Font)              scaled to size 12.50409pt on input line 281.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 280.
+(Font)              scaled to size 9.37807pt on input line 281.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 280.
+(Font)              scaled to size 7.29405pt on input line 281.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 280.
+(Font)              scaled to size 12.50409pt on input line 281.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 280.
+(Font)              scaled to size 9.37807pt on input line 281.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 280.
+(Font)              scaled to size 7.29405pt on input line 281.
 
-Underfull \hbox (badness 10000) in paragraph at lines 299--301
+Underfull \hbox (badness 10000) in paragraph at lines 300--302
 
  []
 
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 303.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 304.
 
-Underfull \hbox (badness 10000) in paragraph at lines 303--304
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 305--307
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 308--309
+Underfull \hbox (badness 10000) in paragraph at lines 306--308
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 311--313
+Underfull \hbox (badness 10000) in paragraph at lines 309--310
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--314
 
  []
 
@@ -759,125 +767,163 @@ Underfull \hbox (badness 10000) in paragraph at lines 311--313
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 320.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 321.
 
-Underfull \hbox (badness 10000) in paragraph at lines 322--324
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 325--327
+Underfull \hbox (badness 10000) in paragraph at lines 323--325
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--329
+Underfull \hbox (badness 10000) in paragraph at lines 326--328
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 330--332
+Underfull \hbox (badness 10000) in paragraph at lines 329--330
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+Underfull \hbox (badness 10000) in paragraph at lines 331--333
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 335--339
+Underfull \hbox (badness 10000) in paragraph at lines 334--335
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 340--341
+Underfull \hbox (badness 10000) in paragraph at lines 336--340
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 342--344
+Underfull \hbox (badness 10000) in paragraph at lines 341--342
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--346
+Underfull \hbox (badness 10000) in paragraph at lines 343--345
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 347--349
+Underfull \hbox (badness 10000) in paragraph at lines 346--347
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 348--350
 
  []
 
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 353.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 355.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 354.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 356.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <8> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 357.
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 372
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 358.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 373
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ) [2] [3] [4]
 [5] [6] [7]
-<CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_8_0.png, id=14
-9, 500.87125pt x 392.46625pt>
+<CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_8_0.png, id=15
+3, 500.87125pt x 392.46625pt>
 File: CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_8_0.png G
 raphic file (type png)
 
 <use CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_8_0.png>
 Package pdftex.def Info: CS166_traffic_sim_assignment_files/CS166_traffic_sim_a
-ssignment_8_0.png used on input line 746.
+ssignment_8_0.png used on input line 735.
 (pdftex.def)             Requested size: 500.87001pt x 392.46527pt.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 735.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 735.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 735.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 735.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 735.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 735.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 735.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 735.
+LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <9> not available
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 735.
 
-Underfull \hbox (badness 10000) in paragraph at lines 748--749
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 767--768
+Underfull \hbox (badness 10000) in paragraph at lines 738--739
 
  []
 
 [8 <./CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_8_0.png>]
 
-Underfull \hbox (badness 10000) in paragraph at lines 769--775
+Underfull \hbox (badness 10000) in paragraph at lines 757--758
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 776--782
+Underfull \hbox (badness 10000) in paragraph at lines 759--765
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 783--784
+Underfull \hbox (badness 10000) in paragraph at lines 766--772
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 785--786
+Underfull \hbox (badness 10000) in paragraph at lines 773--774
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 787--789
+Underfull \hbox (badness 10000) in paragraph at lines 775--776
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 790--791
+Underfull \hbox (badness 10000) in paragraph at lines 777--779
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 792--797
+Underfull \hbox (badness 10000) in paragraph at lines 780--781
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 782--787
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 788--789
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 790--792
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 793--794
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 795--797
 
  []
 
@@ -891,252 +937,210 @@ Underfull \hbox (badness 10000) in paragraph at lines 800--802
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 803--804
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 805--807
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 808--809
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 810--812
-
- []
-
-[9] [10] [11] [12]
+[9] [10] [11]
 <CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_15_0.png, id=1
-74, 2160.07pt x 570.13pt>
+77, 2160.07pt x 570.13pt>
 File: CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_15_0.png 
 Graphic file (type png)
 
 <use CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_15_0.png>
 Package pdftex.def Info: CS166_traffic_sim_assignment_files/CS166_traffic_sim_a
-ssignment_15_0.png used on input line 1048.
+ssignment_15_0.png used on input line 1008.
 (pdftex.def)             Requested size: 2160.06476pt x 570.12862pt.
 
-Overfull \hbox (46.95847pt too wide) in paragraph at lines 1048--1049
+Overfull \hbox (46.95847pt too wide) in paragraph at lines 1008--1009
  [] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1050--1051
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 1010--1011
 
  []
 
 [13 <./CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_15_0.png
 >] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 1150--1151
+Underfull \hbox (badness 10000) in paragraph at lines 1110--1111
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1152--1157
+Underfull \hbox (badness 10000) in paragraph at lines 1112--1117
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1158--1160
+Underfull \hbox (badness 10000) in paragraph at lines 1118--1120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1161--1162
+Underfull \hbox (badness 10000) in paragraph at lines 1121--1122
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1163--1176
+Underfull \hbox (badness 10000) in paragraph at lines 1123--1136
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1177--1178
+Underfull \hbox (badness 10000) in paragraph at lines 1137--1138
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1179--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1153--1161
 
  []
 
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 1193--1201
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1202--1203
-
- []
-
-LaTeX Font Info:    Try loading font information for TS1+ppl on input line 1206
+LaTeX Font Info:    Try loading font information for TS1+ppl on input line 1166
 .
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
-)
-Underfull \hbox (badness 10000) in paragraph at lines 1223--1228
+) [15]
+Underfull \hbox (badness 10000) in paragraph at lines 1183--1188
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1229--1236
+Underfull \hbox (badness 10000) in paragraph at lines 1189--1196
 
  []
 
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 1240.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 1240.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 1240.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 1240.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 1240.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 1240.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1237--1248
+Underfull \hbox (badness 10000) in paragraph at lines 1197--1207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1208--1218
 
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 1249--1259
+Underfull \hbox (badness 10000) in paragraph at lines 1244--1252
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1271--1282
+Underfull \hbox (badness 10000) in paragraph at lines 1253--1257
+
+ []
+
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 1268--1271
+
+ []
+
+[18] [19] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 1526--1530
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1285--1293
+Underfull \hbox (badness 10000) in paragraph at lines 1531--1532
+
+ []
+
+[21] [22] [23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 1784--1794
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1294--1298
+Underfull \hbox (badness 10000) in paragraph at lines 1795--1796
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1299--1306
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1309--1312
-
- []
-
-[17] [18] [19] [20] [21]
-Underfull \hbox (badness 10000) in paragraph at lines 1585--1589
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1590--1591
-
- []
-
-[22] [23] [24] [25]
-Underfull \hbox (badness 10000) in paragraph at lines 1874--1884
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1885--1886
-
- []
-
-[26]
+[25]
 <CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_30_0.png, id=2
-38, 1178.4025pt x 392.46625pt>
+46, 1178.4025pt x 392.46625pt>
 File: CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_30_0.png 
 Graphic file (type png)
 
 <use CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_30_0.png>
 Package pdftex.def Info: CS166_traffic_sim_assignment_files/CS166_traffic_sim_a
-ssignment_30_0.png used on input line 1966.
+ssignment_30_0.png used on input line 1876.
 (pdftex.def)             Requested size: 1178.39963pt x 392.46527pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1968--1969
+Underfull \hbox (badness 10000) in paragraph at lines 1878--1879
 
  []
 
-[27 <./CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_30_0.png
+[26 <./CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_30_0.png
 >]
 <CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_32_0.png, id=2
-44, 1178.4025pt x 392.46625pt>
+52, 1178.4025pt x 392.46625pt>
 File: CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_32_0.png 
 Graphic file (type png)
 
 <use CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_32_0.png>
 Package pdftex.def Info: CS166_traffic_sim_assignment_files/CS166_traffic_sim_a
-ssignment_32_0.png used on input line 2022.
+ssignment_32_0.png used on input line 1932.
 (pdftex.def)             Requested size: 1178.39963pt x 392.46527pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2024--2025
+Underfull \hbox (badness 10000) in paragraph at lines 1934--1935
 
  []
 
-[28 <./CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_32_0.png
+[27 <./CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_32_0.png
 >]
 <CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_34_0.png, id=2
-50, 1178.4025pt x 392.46625pt>
+58, 1178.4025pt x 392.46625pt>
 File: CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_34_0.png 
 Graphic file (type png)
 
 <use CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_34_0.png>
 Package pdftex.def Info: CS166_traffic_sim_assignment_files/CS166_traffic_sim_a
-ssignment_34_0.png used on input line 2078.
+ssignment_34_0.png used on input line 1988.
 (pdftex.def)             Requested size: 1178.39963pt x 392.46527pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2080--2081
+Underfull \hbox (badness 10000) in paragraph at lines 1990--1991
 
  []
 
-[29 <./CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_34_0.png
+[28 <./CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_34_0.png
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 2106--2111
+Underfull \hbox (badness 10000) in paragraph at lines 2016--2021
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2119--2131
+Underfull \hbox (badness 10000) in paragraph at lines 2029--2041
 
  []
 
-[30]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2197.
- [31]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2197.
+[29] [30]
+Underfull \hbox (badness 10000) in paragraph at lines 2105--2106
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2107--2108
+[][][]$\T1/cmtt/m/n/10.95 https : / / github . com / hueyning / cs166-[]repo / 
+blob / master / CS166 % 20Session % 204 . 1 % 20-[] %
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2114.
+[31]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2114.
  (./CS166_traffic_sim_assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2197.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2197.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2114.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2114.
 
 Package rerunfilecheck Info: File `CS166_traffic_sim_assignment.out' has not ch
 anged.
-(rerunfilecheck)             Checksum: 43651F9923C7811A768D30A72F70693F;1917.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2197.
+(rerunfilecheck)             Checksum: FDB31CA73B9EF739A2C4CFB161CA21A9;1961.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2114.
  ) 
 Here is how much of TeX's memory you used:
- 11033 strings out of 492995
- 167276 string characters out of 6132704
- 275579 words of memory out of 5000000
- 14302 multiletter control sequences out of 15000+600000
- 35075 words of font info for 86 fonts, out of 8000000 for 9000
+ 11094 strings out of 492995
+ 167979 string characters out of 6132704
+ 275331 words of memory out of 5000000
+ 14352 multiletter control sequences out of 15000+600000
+ 41778 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,6n,38p,472b,499s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,8n,38p,1043b,500s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/local/tex
 live/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texl
@@ -1149,10 +1153,10 @@ texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2017/te
 xmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2017/texmf-dis
 t/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on CS166_traffic_sim_assignment.pdf (31 pages, 652846 bytes).
+Output written on CS166_traffic_sim_assignment.pdf (31 pages, 657584 bytes).
 PDF statistics:
- 317 PDF objects out of 1000 (max. 8388607)
- 262 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
- 234 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 332 PDF objects out of 1000 (max. 8388607)
+ 277 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 242 words of extra memory for PDF output out of 10000 (max. 10000000)
 
