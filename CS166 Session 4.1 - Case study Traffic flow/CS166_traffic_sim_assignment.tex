@@ -1,0 +1,2201 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CS166: Traffic Simulation using Cellular Automata}
+    \author{Huey Ning Lok}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+
+
+In this assignment, cellular automata is used to model traffic flow and
+explore the differences in traffic flow under varying traffic densities,
+number of lanes, and other conditions. The traffic models to be examined
+are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Single-lane Traffic Model
+\item
+  Two-Lane Traffic Model
+\item
+  Single-lane Extended Traffic Model
+\item
+  Two-Lane Extended Traffic Model
+\end{enumerate}
+\br
+The base model includes the following features:\\
+
+
+  \textbf{Lanes} are represented as Numpy arrays with periodic boundary conditions.\\
+ 
+    \textbf{Cars} are represented by integers \textgreater{}= 0 in the array. 0 represents a stationary car. Higher-value integers represent higher velocities up till the max
+    velocity or current speed limit.\\
+
+    \textbf{Empty space(s) on the road, i.e. the distance between cars} are represented as -1 integers in the array.\\
+
+
+\textbf{Assumptions and Limitations}
+\\
+
+All traffic models are uni-directional, have variable speeds, and
+operate within discrete time-steps. The driver behaviors are limited to
+the rules set in place for the respective models, and it is assumed that
+drivers do not act outside of the defined rule set.
+
+\newpage
+\section{Traffic Jams on a Circular Road}
+
+\textbf{Nagel-Schreckenberg Single-Lane Traffic Simulation Model}
+\\
+
+In the single-lane model, the following actions are conducted in order
+each time-step:\\
+
+\textbf{1) Acceleration}\\
+
+If the car's current velocity is not at the maximum velocity, increase
+its velocity by 1.\\
+
+\textbf{2) Deceleration}\\
+
+If the available front distance (number of empty cells between current
+car and the immediate car in front) is smaller than the car's current
+velocity, decrease its velocity to the value of the available front
+distance to avoid a collision.\\
+
+\textbf{3) Randomization}\\
+
+The speed of all cars that have a velocity greater than or equal to 1
+are reduced by one unit with probability slow\_down\_prob.\\
+
+\textbf{4) Car motion}\\
+
+All cars in the lane are moved forward the number of cells equal to
+their velocity.\\
+
+In the simulation below, the model is run 100 times with 100 time-steps
+per run to analyze the average model behavior over 100 runs.
+
+    \subsection{Building the Model}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}704}]:} \PY{c+c1}{\PYZsh{}import libraries}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{import} \PY{n+nn}{copy}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}608}]:} \PY{c+c1}{\PYZsh{}Traffic Simulation base class}
+          \PY{k}{class} \PY{n+nc}{TrafficSim}\PY{p}{:}
+          
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{length}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{car\PYZus{}density}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}
+          \PY{n}{max\PYZus{}speed}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{demo} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Create a new traffic simulation object. Cars are distributed randomly}
+          \PY{l+s+sd}{        along the road and start with random velocities.}
+          
+          \PY{l+s+sd}{        Inputs:}
+          
+          \PY{l+s+sd}{            length (int) The number of cells in the lane.}
+          \PY{l+s+sd}{                Default: 100.}
+          
+          \PY{l+s+sd}{            no\PYZus{}of\PYZus{}lanes (int) The number of lanes in the simulation.}
+          \PY{l+s+sd}{                Default: 1.}
+          
+          \PY{l+s+sd}{            car\PYZus{}density (float) The fraction of cells that have a car on them.}
+          \PY{l+s+sd}{                Default: 0.3.}
+          
+          \PY{l+s+sd}{            slow\PYZus{}down\PYZus{}prob (float) The probability that a car will randomly}
+          \PY{l+s+sd}{                slow down by 1 during an update step.}
+          \PY{l+s+sd}{                Default: 0.5.}
+          
+          \PY{l+s+sd}{            max\PYZus{}speed (int) The maximum speed in car cells per update step.}
+          \PY{l+s+sd}{                Default: 5.}
+          
+          \PY{l+s+sd}{            demo (bool) If True, will display the lane along with all the cars on it.}
+          \PY{l+s+sd}{                Default: False}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{demo} \PY{o}{=} \PY{n}{demo}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length} \PY{o}{=} \PY{n}{length}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{car\PYZus{}density} \PY{o}{=} \PY{n}{car\PYZus{}density}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes} \PY{o}{=} \PY{n}{no\PYZus{}of\PYZus{}lanes}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed} \PY{o}{=} \PY{n}{max\PYZus{}speed}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{slow\PYZus{}down\PYZus{}prob} \PY{o}{=} \PY{n}{slow\PYZus{}down\PYZus{}prob}
+          
+                  \PY{c+c1}{\PYZsh{} Track the time steps and total number of cars that passed the simulation}
+                  \PY{c+c1}{\PYZsh{} boundary to estimate average traffic flow.}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cumulative\PYZus{}traffic\PYZus{}flow} \PY{o}{=} \PY{l+m+mi}{0}
+          
+                  \PY{c+c1}{\PYZsh{}set state by creating the lane(s)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{create\PYZus{}lane}\PY{p}{(}\PY{p}{)}
+          
+          
+              \PY{k}{def} \PY{n+nf}{create\PYZus{}lane}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Initializes lane according to road length, car density, and number of lanes.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+                  \PY{c+c1}{\PYZsh{}choose random indexes to place the cars}
+                  \PY{n}{random\PYZus{}indexes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{)}\PY{p}{,}
+                                                          \PY{n}{size}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{car\PYZus{}density} \PY{o}{*}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                                                          \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{} \PYZhy{}1 means empty cell}
+                  \PY{n}{state} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}place cars with random velocities along the lane}
+                  \PY{n}{state}\PY{p}{[}\PY{n}{random\PYZus{}indexes}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+                                                                \PY{n}{size}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{random\PYZus{}indexes}\PY{p}{)}\PY{p}{)}
+          
+                  \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{)}
+          
+          
+              \PY{k}{def} \PY{n+nf}{get\PYZus{}distances}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{curr\PYZus{}lane}\PY{p}{,} \PY{n}{index}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Get the front and back distances of the given car.}
+          \PY{l+s+sd}{        Distance is the number of empty cells between current car and next car plus 1.}
+          
+          \PY{l+s+sd}{        Inputs:}
+          
+          \PY{l+s+sd}{            curr\PYZus{}lane: The current road that the car is on (numpy array)}
+          \PY{l+s+sd}{            index: The index of the current car.}
+          
+          \PY{l+s+sd}{        Outputs:}
+          
+          \PY{l+s+sd}{            front\PYZus{}dist: The available front distance of the current car.}
+          \PY{l+s+sd}{            back\PYZus{}dist: The available back distance of the current car.}
+          
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+                  \PY{n}{front\PYZus{}dist}\PY{p}{,} \PY{n}{back\PYZus{}dist} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}
+          
+                  \PY{k}{while} \PY{n}{curr\PYZus{}lane}\PY{p}{[}\PY{p}{(}\PY{n}{index} \PY{o}{+} \PY{n}{front\PYZus{}dist}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{curr\PYZus{}lane}\PY{p}{)}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                      \PY{n}{front\PYZus{}dist} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                      \PY{k}{if} \PY{n}{front\PYZus{}dist} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{6}\PY{p}{:} \PY{k}{break}
+                  \PY{k}{while} \PY{n}{curr\PYZus{}lane}\PY{p}{[}\PY{p}{(}\PY{n}{index} \PY{o}{\PYZhy{}} \PY{n}{back\PYZus{}dist}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{curr\PYZus{}lane}\PY{p}{)}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                      \PY{n}{back\PYZus{}dist} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                      \PY{k}{if} \PY{n}{back\PYZus{}dist} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{6}\PY{p}{:} \PY{k}{break}
+          
+                  \PY{k}{return} \PY{n}{front\PYZus{}dist}\PY{p}{,} \PY{n}{back\PYZus{}dist}
+          
+              \PY{k}{def} \PY{n+nf}{update\PYZus{}cars}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Update car velocities.}
+          
+          \PY{l+s+sd}{        For single\PYZhy{}lane model, the following steps are implemented:}
+          
+          \PY{l+s+sd}{        \PYZhy{} acceleration}
+          \PY{l+s+sd}{        \PYZhy{} deceleration}
+          \PY{l+s+sd}{        \PYZhy{} random slow\PYZhy{}down}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{c+c1}{\PYZsh{}loop through all the cars in the lane}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+          
+                      \PY{c+c1}{\PYZsh{}if the index is a car}
+                      \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+          
+                          \PY{c+c1}{\PYZsh{}get the front and back distances of the current car}
+                          \PY{n}{f\PYZus{}dist}\PY{p}{,} \PY{n}{b\PYZus{}dist} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}distances}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{}Acceleration}
+                          \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{\PYZlt{}} \PY{n}{f\PYZus{}dist}\PY{p}{:}
+                              \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{}Deceleration}
+                          \PY{k}{else}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{f\PYZus{}dist} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{}Randomization}
+                          \PY{k}{if} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{p}{)}\PY{p}{:}
+                              \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+          
+              \PY{k}{def} \PY{n+nf}{move\PYZus{}cars}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Move cars according to their updated velocities.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+                  \PY{c+c1}{\PYZsh{} initialize new empty state according to length and number of lanes}
+                  \PY{n}{new\PYZus{}state} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}\PY{p}{,}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}loop through updated velocities from the old lane}
+                  \PY{c+c1}{\PYZsh{}and move cars to new positions in the new lane}
+                  \PY{k}{for} \PY{n}{lane} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                              \PY{n}{new\PYZus{}state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{[}\PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{p}{]} \PY{o}{=}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+          
+                  \PY{k}{return} \PY{n}{new\PYZus{}state}
+          
+              \PY{k}{def} \PY{n+nf}{step}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Advance one time step in the simulation.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{c+c1}{\PYZsh{}update car velocities}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}cars}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}if demo == True, display the traffic sim}
+                  \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{demo}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}Move cars}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{move\PYZus{}cars}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}Update time and traffic flow}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}traffic\PYZus{}flow}\PY{p}{(}\PY{p}{)}
+          
+              \PY{k}{def} \PY{n+nf}{get\PYZus{}traffic\PYZus{}flow}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Traffic flow is calculated as the number of cars that pass the periodic boundary}
+          \PY{l+s+sd}{per time step.}
+          \PY{l+s+sd}{        This function updates the time step by 1, and updates the number of cars that}
+          \PY{l+s+sd}{have passed}
+          \PY{l+s+sd}{        the periodic boundary at a given time step.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{c+c1}{\PYZsh{}update time\PYZhy{}step}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+          
+                  \PY{c+c1}{\PYZsh{}update traffic flow}
+                  \PY{k}{for} \PY{n}{lane} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed}\PY{p}{)}\PY{p}{:}
+                          \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{i}\PY{p}{:}
+                              \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cumulative\PYZus{}traffic\PYZus{}flow} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+          
+              \PY{k}{def} \PY{n+nf}{display}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Print out the current state of the simulation.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{k}{for} \PY{n}{lane} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{)}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{else} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}811}]:} \PY{k}{def} \PY{n+nf}{sim\PYZus{}demo}\PY{p}{(}\PY{n}{title}\PY{p}{,} \PY{n}{traffic\PYZus{}sim}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    Demo of traffic sim moving 5 time\PYZhy{}steps.}
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{c+c1}{\PYZsh{}initialize sim}
+              \PY{n}{sim} \PY{o}{=} \PY{n}{traffic\PYZus{}sim}\PY{p}{(}\PY{n}{demo}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{title}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{}observe next 10 time\PYZhy{}steps}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{sim}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{demo\PYZus{}densities} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{demo\PYZus{}densities}\PY{p}{:}
+              \PY{n}{sim\PYZus{}demo}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Traffic Model, }\PY{l+s+si}{\PYZob{}d\PYZcb{}}\PY{l+s+s1}{ car density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{TrafficSim}\PY{p}{,} \PY{n}{car\PYZus{}density} \PY{o}{=} \PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Single-lane Traffic Model, 0.1 car density
+
+{\ldots}1.0{\ldots}3{\ldots}0{\ldots}1.01{\ldots}1{\ldots}3
+{\ldots}4{\ldots}
+
+{\ldots}00{\ldots}01{\ldots}01.2{\ldots}1{\ldots}
+..3{\ldots}5{\ldots}
+
+{\ldots}00{\ldots}0.1{\ldots}1.2..2{\ldots}2{\ldots}
+{\ldots}3{\ldots}5.
+
+{\ldots}4{\ldots}00{\ldots}0..1{\ldots}1..1..3{\ldots}2{\ldots}
+{\ldots}4{\ldots}
+
+{\ldots}3{\ldots}00{\ldots}1{\ldots}1{\ldots}1..1{\ldots}4{\ldots}2{\ldots}
+{\ldots}4.
+
+Single-lane Traffic Model, 0.5 car density
+
+{\ldots}03{\ldots}0000{\ldots}01..1..01.00000001..0.2{\ldots}1..1{\ldots}0005{\ldots}0.0.2..01.2..1.0.001.0.0
+1.001.02..0003
+
+..0.0{\ldots}0.0001{\ldots}0.1..0.0.00000000.1.1{\ldots}1..1..2{\ldots}000{\ldots}00.0{\ldots}01.1..1.00.01.01.1
+.001.01..0001.
+
+..0.0{\ldots}0.000.2{\ldots}0..1.1.0.00000001..0.1{\ldots}2..2{\ldots}0.000{\ldots}01.1{\ldots}1.1.2..001.0.01.1.
+000.01.1.000.2
+
+.00.0{\ldots}0.001{\ldots}2..1{\ldots}1.01.0000000.1.1..1{\ldots}1..0.1.000{\ldots}1.1.2{\ldots}1.2..001.01.0.1.0
+000.0.1.0001..
+
+.00.0{\ldots}1.01.2{\ldots}0.1{\ldots}01.00000000..1.2..2{\ldots}1.1..0001{\ldots}0.2..1..2..001.00.01..00
+000.1..0000.2.
+
+Single-lane Traffic Model, 0.9 car density
+
+1.000000000000001.0000000000.000000000000000000..00000.0000000000.00000000001.0000.000
+000001.0000000
+
+.000000000000000.00000000000.000000000000000001..00001.0000000000.0000000001.00000.000
+00001.00000001
+
+0000000000000001.00000000001.00000000000000000.0.0000.00000000001.000000000.000001.000
+0001.00000000.
+
+000000000000000.00000000001.000000000000000001.0.0000.0000000000.0000000000.00000.0000
+001.000000001.
+
+000000000000001.0000000001.000000000000000000.01.0000.0000000000.0000000000.00001.0000
+00.000000001.0
+
+
+    \end{Verbatim}
+
+    \subsection{Running Simulations}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}766}]:} \PY{c+c1}{\PYZsh{}set the default density outside for convenient adjusting}
+          \PY{n}{density}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.05}\PY{p}{,}\PY{l+m+mf}{0.05}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{traffic\PYZus{}sim}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{n}{density}\PY{p}{,} \PY{n}{n\PYZus{}loops}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+          
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    Run traffic simulation at different densities to analyze traffic behavior.}
+          \PY{l+s+sd}{    For each loop in n\PYZus{}loops, the simulation is updated by 100 steps.}
+          
+          \PY{l+s+sd}{    Inputs:}
+          
+          \PY{l+s+sd}{    traffic\PYZus{}sim (class) The traffic simulation class to be used.}
+          
+          \PY{l+s+sd}{    density (arr) The range of traffic densities to test for.}
+          \PY{l+s+sd}{        Default: np.arange(0,1.05,0.05)}
+          
+          \PY{l+s+sd}{    n\PYZus{}loops (int) The number of times to run the simulation.}
+          \PY{l+s+sd}{        Default: 100}
+          
+          \PY{l+s+sd}{    **kwargs Any additional keywords for the traffic\PYZus{}sim class}
+          
+          \PY{l+s+sd}{    Outputs:}
+          
+          \PY{l+s+sd}{    avg\PYZus{}traffic\PYZus{}flows (lst) Traffic flows for each density (length: n\PYZus{}loops)}
+          
+          \PY{l+s+sd}{    mean\PYZus{}traffic\PYZus{}flows (lst) Mean traffic flows for each density (length: len(density))}
+          
+          \PY{l+s+sd}{    CI\PYZus{}traffic\PYZus{}flows (lst) 95\PYZpc{} Confidence intervals of traffic flows for each density}
+          \PY{l+s+sd}{                            (length: len(density))}
+          
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{n}{avg\PYZus{}traffic\PYZus{}flows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{n}{mean\PYZus{}traffic\PYZus{}flows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{n}{CI\PYZus{}traffic\PYZus{}flows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+              \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{density}\PY{p}{:}
+          
+                  \PY{n}{temp} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+                  \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}loops}\PY{p}{)}\PY{p}{:}
+                      \PY{c+c1}{\PYZsh{}initialize the sim with a given density}
+                      \PY{n}{sim} \PY{o}{=} \PY{n}{traffic\PYZus{}sim}\PY{p}{(}\PY{n}{car\PYZus{}density}\PY{o}{=}\PY{n}{d}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+          
+                      \PY{c+c1}{\PYZsh{}update the sim 100 times}
+                      \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{sim}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+          
+                      \PY{c+c1}{\PYZsh{}get the traffic flow for a given density}
+                      \PY{n}{avg\PYZus{}traffic\PYZus{}flows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{d}\PY{p}{,} \PY{n}{sim}\PY{o}{.}\PY{n}{cumulative\PYZus{}traffic\PYZus{}flow} \PY{o}{/} \PY{n}{sim}\PY{o}{.}\PY{n}{time\PYZus{}step}\PY{p}{)}\PY{p}{)}
+                      \PY{n}{temp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sim}\PY{o}{.}\PY{n}{cumulative\PYZus{}traffic\PYZus{}flow} \PY{o}{/} \PY{n}{sim}\PY{o}{.}\PY{n}{time\PYZus{}step}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}mean traffic flow for a given density}
+                  \PY{n}{mean\PYZus{}traffic\PYZus{}flows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{temp}\PY{p}{)}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}95 CI of traffic flow for a given density}
+                  \PY{n}{CI\PYZus{}traffic\PYZus{}flows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{temp}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{2.5}\PY{p}{,}\PY{l+m+mf}{97.5}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+              \PY{k}{return} \PY{n}{avg\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{mean\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{CI\PYZus{}traffic\PYZus{}flows}
+          
+          \PY{k}{def} \PY{n+nf}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{avg\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{mean\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{CI\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{n}{density}\PY{o}{=}\PY{n}{density}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    Plots the traffic flows, mean and 95\PYZpc{} CI across different densities.}
+          \PY{l+s+sd}{    x\PYZhy{}axis: range of densities}
+          \PY{l+s+sd}{    y\PYZhy{}axis: traffic flow value}
+          
+          \PY{l+s+sd}{    Inputs:}
+          
+          \PY{l+s+sd}{    avg\PYZus{}traffic\PYZus{}flows (lst) Traffic flows for each density}
+          
+          \PY{l+s+sd}{    mean\PYZus{}traffic\PYZus{}flows (lst) Mean traffic flows for each density}
+          
+          \PY{l+s+sd}{    CI\PYZus{}traffic\PYZus{}flows (lst) 95\PYZpc{} Confidence intervals of traffic flows for each density}
+          
+          \PY{l+s+sd}{    density (arr) The different levels of traffic density.}
+          \PY{l+s+sd}{        Default: np.arange(0,1.05,0.05)}
+          
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{n}{traffic\PYZus{}flows} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{avg\PYZus{}traffic\PYZus{}flows}\PY{p}{)}
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{traffic\PYZus{}flows}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{traffic\PYZus{}flows}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{density}\PY{p}{,} \PY{n}{mean\PYZus{}traffic\PYZus{}flows}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{density}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{CI\PYZus{}traffic\PYZus{}flows}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{density}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{CI\PYZus{}traffic\PYZus{}flows}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot of Traffic Density vs Traffic Flow (}\PY{l+s+si}{\PYZob{}title\PYZcb{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Traffic Density}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Traffic flow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}719}]:} \PY{c+c1}{\PYZsh{}run simulation and store generated output in variables}
+          \PY{n}{single\PYZus{}lane\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{single\PYZus{}lane\PYZus{}mean}\PY{p}{,} \PY{n}{single\PYZus{}lane\PYZus{}CI} \PY{o}{=}
+          \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSim}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}770}]:} \PY{c+c1}{\PYZsh{}plot stats}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{single\PYZus{}lane\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{single\PYZus{}lane\PYZus{}mean}\PY{p}{,} \PY{n}{single\PYZus{}lane\PYZus{}CI}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}create dataframe}
+          \PY{n}{single\PYZus{}lane\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Traffic Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{density}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{single\PYZus{}lane\PYZus{}mean}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{95 CI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{single\PYZus{}lane\PYZus{}CI}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+              \PY{p}{\PYZcb{}}\PY{p}{)}
+          
+          \PY{n}{single\PYZus{}lane\PYZus{}df}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.7\linewidth}{0.9\paperheight}}{CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}770}]:}     Traffic Density  Single-lane Mean flow                           95 CI
+          0               0.0                 0.0000                      [0.0, 0.0]
+          1               0.1                 0.3551     [0.25475000000000003, 0.43]
+          2               0.2                 0.2987                    [0.25, 0.35]
+          3               0.3                 0.2740  [0.21475, 0.32524999999999993]
+          4               0.4                 0.2358                    [0.19, 0.29]
+          5               0.5                 0.2065      [0.16, 0.2552499999999999]
+          6               0.6                 0.1667     [0.11474999999999999, 0.21]
+          7               0.7                 0.1282                    [0.09, 0.17]
+          8               0.8                 0.0889                 [0.05475, 0.12]
+          9               0.9                 0.0470                    [0.02, 0.08]
+          10              1.0                 0.0000                      [0.0, 0.0]
+\end{Verbatim}
+            
+\section{Multi-lane Highways}
+
+\textbf{Two-lane Traffic Simulation Model}\\
+
+The two-lane model builds off the single-lane parent class. The most
+prominent addition in the two-lane model is that cars are now able to
+switch lanes if they are unable to accelerate in their current lane.
+This is under the condition that there is sufficient front and back
+distance in the other lane for the car to safely switch without risk of
+collision.\\
+
+Note that the car\_density parameter in the two-lane model refers to the
+car\_density in the \emph{entire system}, not just for a single lane.
+For example, a car\_density = 0.5 would mean 50 cars in the original
+100-cell lane model, but since the two-lane model has a total length of
+200 cells, a car\_density of 0.5 would produce 100 cars in the whole
+system, distributed in random ratios between the two lanes.\\
+
+The new rule-set is as follows:\\
+
+\textbf{1) Acceleration in current lane}\\
+
+Similar to the single-lane model, the car first checks if there is
+available front distance to accelerate in their current lane.\\
+
+\textbf{2) Check if lane-switch is possible}\\
+
+Iff there isn't available front distance in the current lane: - check if
+there is available front distance in the other lane to accelerate. -
+check if there is available back distance in the other lane (back
+distance \textless{} max speed to ensure that a collision is impossible
+no matter the back car's location or current velocity).\\
+
+\textbf{3) Switch lanes with probability switch\_lane\_prob}\\
+
+If the above conditions are met, switch lane with probability
+switch\_lane\_prob.\\
+
+\textbf{4) Randomization}\\
+
+The speed of all cars that have a velocity greater than or equal to 1
+are reduced by one unit with probability slow\_down\_prob.\\
+
+\textbf{4) Car motion}\\
+
+All cars in the lane(s) are moved forward the number of cells equal to
+their velocity.\\
+
+\newpage
+
+    \subsection{Building the Model}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}721}]:} \PY{k}{class} \PY{n+nc}{TrafficSimTwoLane}\PY{p}{(}\PY{n}{TrafficSim}\PY{p}{)}\PY{p}{:}
+          
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{length}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}lanes} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{car\PYZus{}density}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}
+          \PY{n}{switch\PYZus{}lane\PYZus{}prob}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{max\PYZus{}speed}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{demo} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        TrafficSimTwoLane inherits from the TrafficSim parent class.}
+          \PY{l+s+sd}{        The no\PYZus{}of\PYZus{}lanes is now defaulted at 2.}
+          \PY{l+s+sd}{        A new variable, switch\PYZus{}lane\PYZus{}prob, is introduced.}
+          
+          \PY{l+s+sd}{        Inputs:}
+          
+          \PY{l+s+sd}{            no\PYZus{}of\PYZus{}lanes (int) The number of lanes in the simulation.}
+          \PY{l+s+sd}{                                Default: 2.}
+          
+          \PY{l+s+sd}{            switch\PYZus{}lane\PYZus{}prob (int) The probability of a car switching lanes,}
+          \PY{l+s+sd}{                                   given that a lane switch is possible.}
+          \PY{l+s+sd}{                                    Default: 1.}
+          
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+                  \PY{c+c1}{\PYZsh{}inherit from parent TrafficSim class}
+                  \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{length}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{,} \PY{n}{car\PYZus{}density}\PY{p}{,} \PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{p}{,} \PY{n}{max\PYZus{}speed}\PY{p}{,}
+          \PY{n}{demo}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}initialize switch\PYZus{}lane\PYZus{}prob}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{switch\PYZus{}lane\PYZus{}prob} \PY{o}{=} \PY{n}{switch\PYZus{}lane\PYZus{}prob}
+          
+              \PY{k}{def} \PY{n+nf}{update\PYZus{}cars}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{old\PYZus{}state}\PY{p}{,}\PY{n}{curr\PYZus{}lane}\PY{p}{,}\PY{n}{other\PYZus{}lane}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Update car velocities with/without lane switch.}
+          
+          \PY{l+s+sd}{        For two\PYZhy{}lane model, the following steps are implemented:}
+          
+          \PY{l+s+sd}{        \PYZhy{} acceleration}
+          \PY{l+s+sd}{        \PYZhy{} lane\PYZhy{}switch}
+          \PY{l+s+sd}{        \PYZhy{} random slow down}
+          
+          \PY{l+s+sd}{        Inputs:}
+          
+          \PY{l+s+sd}{            old\PYZus{}state (arr) A deep copy of the last updated state as reference when}
+          \PY{l+s+sd}{                            updating both lanes}
+          
+          \PY{l+s+sd}{            curr\PYZus{}lane (int) The index of the current lane that the car is on.}
+          
+          \PY{l+s+sd}{            other\PYZus{}lane (int) The index of the other lane that the car can switch to.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{c+c1}{\PYZsh{}loop through the lane}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+          
+                      \PY{c+c1}{\PYZsh{}if the index is a car}
+                      \PY{k}{if} \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+          
+                          \PY{c+c1}{\PYZsh{}get front and back distance of current lane}
+                          \PY{n}{f\PYZus{}dist}\PY{p}{,} \PY{n}{b\PYZus{}dist} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}distances}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{}get front and back distance of other lane}
+                          \PY{n}{fo\PYZus{}dist}\PY{p}{,} \PY{n}{bo\PYZus{}dist} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}distances}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{other\PYZus{}lane}\PY{p}{]}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{}Try accelerating in current lane}
+                          \PY{k}{if} \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{\PYZlt{}} \PY{n}{f\PYZus{}dist}\PY{p}{:}
+                              \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed}\PY{p}{)}
+          
+                          \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{}if acceleration is not possible, try switching lanes:}
+          
+                              \PY{c+c1}{\PYZsh{}if switching lanes is possible, switch lane with probability}
+          \PY{n}{switch\PYZus{}lane\PYZus{}prob}\PY{o}{.}
+                              \PY{k}{if} \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{other\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{\PYZlt{}}
+          \PY{n}{fo\PYZus{}dist} \PY{o+ow}{and} \PY{n}{bo\PYZus{}dist} \PY{o}{\PYZgt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed}\PY{p}{:}
+          
+                                  \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{switch\PYZus{}lane\PYZus{}prob}\PY{p}{:}
+          
+                                      \PY{c+c1}{\PYZsh{}switch to the other lane}
+                                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{other\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed}\PY{p}{)}
+                                      \PY{c+c1}{\PYZsh{}assign empty spot where the car used to be}
+                                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+          
+                              \PY{c+c1}{\PYZsh{}if switching lanes is not possible, decelerate in current lane}
+                              \PY{k}{else}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{f\PYZus{}dist} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+          
+          
+                          \PY{c+c1}{\PYZsh{} Random slow down}
+                          \PY{k}{if} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{p}{)}\PY{p}{:}
+                              \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+          
+          
+              \PY{k}{def} \PY{n+nf}{step}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Advance one time step in the simulation.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{c+c1}{\PYZsh{}create deep copy of current state for reference when updating both lanes}
+                  \PY{n}{old\PYZus{}state} \PY{o}{=} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}update car velocities and/or switch lanes}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}cars}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}cars}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}if demo == True, display the traffic sim}
+                  \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{demo}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}move cars}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{move\PYZus{}cars}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}Update time and traffic flow}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}traffic\PYZus{}flow}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}737}]:} \PY{c+c1}{\PYZsh{}demo of two\PYZhy{}lane traffic simulation}
+          \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{demo\PYZus{}densities}\PY{p}{:}
+              \PY{n}{sim\PYZus{}demo}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane Traffic Model, }\PY{l+s+si}{\PYZob{}d\PYZcb{}}\PY{l+s+s1}{ car density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{TrafficSimTwoLane}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}lanes}
+          \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{car\PYZus{}density} \PY{o}{=} \PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Two-lane Traffic Model, 0.1 car density
+
+{\ldots}3{\ldots}3{\ldots}2{\ldots}44{\ldots}2{\ldots}4.
+{\ldots}5{\ldots}
+{\ldots}2{\ldots}5{\ldots}3{\ldots}3{\ldots}4{\ldots}2{\ldots}0.02{\ldots}
+.1{\ldots}2{\ldots}5{\ldots}
+
+5{\ldots}4{\ldots}3{\ldots}3{\ldots}05{\ldots}2{\ldots}
+..4{\ldots}
+.5{\ldots}2{\ldots}5{\ldots}3{\ldots}4{\ldots}5{\ldots}3{\ldots}1.1..2{\ldots}
+..2{\ldots}2{\ldots}
+
+{\ldots}5{\ldots}5{\ldots}4{\ldots}4{\ldots}1{\ldots}3{\ldots}3{\ldots}
+{\ldots}4{\ldots}
+{\ldots}5{\ldots}2{\ldots}4{\ldots}3{\ldots}5{\ldots}4{\ldots}2..1.2{\ldots}3{\ldots}
+{\ldots}3{\ldots}2{\ldots}
+
+{\ldots}5{\ldots}5{\ldots}4{\ldots}5{\ldots}1{\ldots}3{\ldots}4.
+{\ldots}5{\ldots}
+{\ldots}3{\ldots}3{\ldots}5{\ldots}3{\ldots}5{\ldots}4{\ldots}1.2..3{\ldots}4
+{\ldots}4{\ldots}3.
+
+.4{\ldots}4{\ldots}4{\ldots}4{\ldots}5{\ldots}1{\ldots}3{\ldots}
+..4{\ldots}
+.4{\ldots}2{\ldots}3{\ldots}4{\ldots}3{\ldots}3{\ldots}2{\ldots}2..2{\ldots}3..
+{\ldots}4{\ldots}3..
+
+Two-lane Traffic Model, 0.5 car density
+
+002..0{\ldots}004{\ldots}02{\ldots}000{\ldots}01.2{\ldots}0..0001.003{\ldots}1.001..00000001..0.2..1..3{\ldots}00
+1.00004{\ldots}01.
+2..02..000.002{\ldots}2{\ldots}01{\ldots}1.001..0001..2{\ldots}3{\ldots}0.00.00.1..0{\ldots}00001{\ldots}000002{\ldots}000
+.0{\ldots}01..00000
+
+01..00{\ldots}01{\ldots}1..1..2{\ldots}001{\ldots}1.1..0.1..001.001{\ldots}0.000.1.0000000.0.0{\ldots}1.2{\ldots}000
+.00001{\ldots}00.0
+..01..0000.00..2{\ldots}0.0.1{\ldots}001.0.001.2{\ldots}2{\ldots}01.00.00..0.1{\ldots}0000.1{\ldots}00001..1.001
+.1{\ldots}1.1.00000
+
+0.0.01{\ldots}1.2{\ldots}1..2{\ldots}1..00.1{\ldots}0.0.1..1.01.001.1..1.000..00000000.1.0{\ldots}2..2..001
+.0001.1{\ldots}01.0
+..0.0.0001.00{\ldots}0.0.0..2..00.00.01.1..2{\ldots}2..1.000.00..1..2{\ldots}0000..2{\ldots}0000.2..000.
+0.2{\ldots}1.000000
+
+0.0.0.2{\ldots}2..2{\ldots}2{\ldots}2..1.01..1..0.1..1..00.000.1.1..0001..00000000..00{\ldots}1..001.
+0000.1.2..0.00
+..0.1.001.000{\ldots}1.0.0{\ldots}000.01.0.0.1{\ldots}3{\ldots}1.0001.01{\ldots}2{\ldots}2..0001{\ldots}1.0001{\ldots}0000.
+0{\ldots}2..0000001
+
+0.1.1{\ldots}2{\ldots}2..2{\ldots}3{\ldots}0.01.2..1.1..1..0.01.001..1.1.000.1.00000001..01{\ldots}1.01.0
+0001..1..00.00
+1.0..000.0000{\ldots}01.0{\ldots}000.0.00.1..1{\ldots}1.0000.01.2{\ldots}2{\ldots}0001.1{\ldots}0001.1..0001.
+1{\ldots}0000001.
+
+Two-lane Traffic Model, 0.9 car density
+
+000001..0000002..00001.001.0000000000000.000000000000000000000000000001.000.0000000000
+0000000000001.
+1.000.000000000001.000000000000000000.000.01.001.0000001.00000.00000000000000000000000
+01.00000000000
+
+00001.1.000001..00000.000.00000000000000.00000000000000000000000000001.0000.0000000000
+000000000001.0
+.0001.00000000001.0000000000000000001.000.1.000.0000000.000001.00000000000000000000000
+1.000000000001
+
+0000.1.000001.0.00000.001.00000000000001.0000000000000000000000000000.00001.0000000000
+00000000000.00
+0000.00000000000.0000000000000000000.0001..0001.0000000.00001.000000000000000000000000
+.000000000000.
+
+0001..000000.01.00001.01.00000000000001.00000000000000000000000000001.0001.00000000000
+00000000001.00
+0000.00000000001.0000000000000000001.001.0.001.00000001.0001.0000000000000000000000000
+.000000000000.
+
+001.1.000001.1.00001.01.00000000000001.00000000000000000000000000001.0001.000000000000
+0000000000.000
+0001.0000000000.0000000000000000000.000.00.00.00000001.0001.00000000000000000000000001
+.000000000000.
+
+
+    \end{Verbatim}
+
+    \subsection{Running Simulations}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}738}]:} \PY{c+c1}{\PYZsh{}generate two\PYZhy{}lane traffic flow stats using switch\PYZus{}lane\PYZus{}prob of 0, 0.5, and 1.}
+          \PY{n}{two\PYZus{}lane\PYZus{}traffic\PYZus{}flows\PYZus{}0}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}0}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}CI\PYZus{}0} \PY{o}{=}
+          \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimTwoLane}\PY{p}{,} \PY{n}{switch\PYZus{}lane\PYZus{}prob}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{two\PYZus{}lane\PYZus{}traffic\PYZus{}flows\PYZus{}05}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}05}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}CI\PYZus{}05} \PY{o}{=}
+          \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimTwoLane}\PY{p}{,} \PY{n}{switch\PYZus{}lane\PYZus{}prob}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{n}{two\PYZus{}lane\PYZus{}traffic\PYZus{}flows\PYZus{}1}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}1}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}CI\PYZus{}1} \PY{o}{=}
+          \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimTwoLane}\PY{p}{,} \PY{n}{switch\PYZus{}lane\PYZus{}prob}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}772}]:} \PY{c+c1}{\PYZsh{}plot stats}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{two\PYZus{}lane\PYZus{}traffic\PYZus{}flows\PYZus{}0}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}0}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}CI\PYZus{}0}\PY{p}{,} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane, 0}
+          \PY{n}{switch}\PY{o}{\PYZhy{}}\PY{n}{lane}\PY{o}{\PYZhy{}}\PY{n}{prob}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{two\PYZus{}lane\PYZus{}traffic\PYZus{}flows\PYZus{}05}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}05}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}CI\PYZus{}05}\PY{p}{,} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane, 0.5}
+          \PY{n}{switch}\PY{o}{\PYZhy{}}\PY{n}{lane}\PY{o}{\PYZhy{}}\PY{n}{prob}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{two\PYZus{}lane\PYZus{}traffic\PYZus{}flows\PYZus{}1}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}1}\PY{p}{,} \PY{n}{two\PYZus{}lane\PYZus{}CI\PYZus{}1}\PY{p}{,} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane, 1.0}
+          \PY{n}{switch}\PY{o}{\PYZhy{}}\PY{n}{lane}\PY{o}{\PYZhy{}}\PY{n}{prob}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={1.1\linewidth}{1.0\paperheight}}{CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}781}]:} \PY{c+c1}{\PYZsh{}create dataframe for two\PYZhy{}lane model}
+          \PY{n}{two\PYZus{}lane\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Traffic Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{density}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}Lane (0 switch\PYZus{}lane\PYZus{}prob) Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}0}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}Lane (0.5 switch\PYZus{}lane\PYZus{}prob) Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}05}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}Lane (1.0 switch\PYZus{}lane\PYZus{}prob) Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{two\PYZus{}lane\PYZus{}mean\PYZus{}1}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+              \PY{p}{\PYZcb{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}merge single\PYZhy{}lane and two\PYZhy{}lane dfs together}
+          \PY{n}{traffic\PYZus{}flow\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{single\PYZus{}lane\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Traffic Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Mean}
+          \PY{n}{flow}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]],two\PYZus{}lane\PYZus{}df)}
+          
+          \PY{n}{traffic\PYZus{}flow\PYZus{}df}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}781}]:}     Traffic Density  Single-lane Mean flow  \textbackslash{}
+          0               0.0                 0.0000   
+          1               0.1                 0.3551   
+          2               0.2                 0.2987   
+          3               0.3                 0.2740   
+          4               0.4                 0.2358   
+          5               0.5                 0.2065   
+          6               0.6                 0.1667   
+          7               0.7                 0.1282   
+          8               0.8                 0.0889   
+          9               0.9                 0.0470   
+          10              1.0                 0.0000   
+          
+              Two-Lane (0 switch\_lane\_prob) Mean flow  \textbackslash{}
+          0                                    0.0000   
+          1                                    0.6730   
+          2                                    0.6326   
+          3                                    0.5758   
+          4                                    0.4947   
+          5                                    0.4120   
+          6                                    0.3321   
+          7                                    0.2563   
+          8                                    0.1818   
+          9                                    0.0972   
+          10                                   0.0000   
+          
+              Two-Lane (0.5 switch\_lane\_prob) Mean flow  \textbackslash{}
+          0                                      0.0000   
+          1                                      0.7614   
+          2                                      0.6470   
+          3                                      0.5622   
+          4                                      0.4912   
+          5                                      0.4030   
+          6                                      0.3304   
+          7                                      0.2589   
+          8                                      0.1799   
+          9                                      0.0973   
+          10                                     0.0000   
+          
+              Two-Lane (1.0 switch\_lane\_prob) Mean flow  
+          0                                      0.0000  
+          1                                      0.7662  
+          2                                      0.6416  
+          3                                      0.5738  
+          4                                      0.4963  
+          5                                      0.4134  
+          6                                      0.3345  
+          7                                      0.2620  
+          8                                      0.1751  
+          9                                      0.0950  
+          10                                     0.0000  
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}798}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}max\PYZus{}vals}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{col\PYZus{}name}\PY{p}{)}\PY{p}{:}
+          
+              \PY{n}{max\PYZus{}mean\PYZus{}flow} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{col\PYZus{}name}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+              \PY{n}{max\PYZus{}flow\PYZus{}density} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{col\PYZus{}name}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{df}\PY{p}{[}\PY{n}{col\PYZus{}name}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Mean}
+          \PY{n}{flow}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{].max()][}\PY{l+s+s1}{\PYZsq{}}\PY{n}{Traffic} \PY{n}{Density}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{][1]}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}col\PYZus{}name\PYZcb{}}\PY{l+s+s2}{: Max mean flow is }\PY{l+s+si}{\PYZob{}max\PYZus{}mean\PYZus{}flow\PYZcb{}}\PY{l+s+s2}{ at traffic density}
+          \PY{p}{\PYZob{}}\PY{n}{max\PYZus{}flow\PYZus{}density}\PY{p}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+          
+          \PY{n}{get\PYZus{}max\PYZus{}vals}\PY{p}{(}\PY{n}{traffic\PYZus{}flow\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{get\PYZus{}max\PYZus{}vals}\PY{p}{(}\PY{n}{traffic\PYZus{}flow\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}Lane (0 switch\PYZus{}lane\PYZus{}prob)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{get\PYZus{}max\PYZus{}vals}\PY{p}{(}\PY{n}{traffic\PYZus{}flow\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}Lane (0.5 switch\PYZus{}lane\PYZus{}prob)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{get\PYZus{}max\PYZus{}vals}\PY{p}{(}\PY{n}{traffic\PYZus{}flow\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}Lane (1.0 switch\PYZus{}lane\PYZus{}prob)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Single-lane: Max mean flow is 0.3551 at traffic density 0.1
+Two-Lane (0 switch\_lane\_prob): Max mean flow is 0.673 at traffic density 0.1
+Two-Lane (0.5 switch\_lane\_prob): Max mean flow is 0.7614 at traffic density 0.1
+Two-Lane (1.0 switch\_lane\_prob): Max mean flow is 0.7662 at traffic density 0.1
+
+    \end{Verbatim}
+
+    \subsection{How the Models Work}
+
+\subsubsection{Single-lane Model}
+
+\textbf{Step 1: Creating the Road}\\
+
+First, the model is initialized by creating a numpy array of length 100.
+This is the specified road length, and can be adjusted as needed. Each
+cell in the numpy array represents a unit of distance in the road - if
+the cell is empty, it represent the distance between cars; if the cell
+is filled, the filled value represents the current velocity of a car.\\
+
+Random indexes are selected from the numpy array, and filled with random
+car velocities as according to the specified car density.\\
+
+\textbf{Step 2: Updating Car Velocities}\\
+
+After the lane and cars have been initialized, the updating can begin.
+At each time-step, we loop through the lane(s) in the model to update
+each car index according to a set of rules: acceleration, deceleration,
+and randomization. In acceleration, we check that there is enough front
+distance for the car to move forward the number of steps equal to its
+current velocity. If the front distance is greater than the current car
+velocity + 1, we allow the car to increase its velocity by 1 (up to the
+max velocity ceiling) since it can do so without colliding into the car
+in front. If the front distance is smaller than or equal to the car
+velocity + 1, then the car has to either decelerate or maintain its
+current velocity so that at most, it only reaches the cell immediately
+behind the car in front in the next time-step. The lowest possible
+velocity is 0, which symbolizes a stationary car.\\
+
+\textbf{Step 3: Random Slow Down}\\
+
+The random slow down step is needed in order to simulate traffic jam
+behavior. Without a randomized slow down, the cars will keep driving at
+a stable speed at an adjusted distance from each other that maintains a
+steady flow. Theoretically if people in real life drove like this, there
+would be no traffic jams in real life either. Unfortuantely, that is
+never the case. When a driver randomly slows down, their behavior
+becomes unpredictable, and so a stable traffic flow cannot be achieved.
+The random slow down is initiated by generating a random number bewteen
+0 and 1 from the np.random.uniform function and comparing it against the
+slow\_down\_prob. If the number is less than the slow\_down\_prob, then
+the car decreases its velocity by 1 unit.\\
+
+\subsubsection{Two-lane Model}
+
+The two-lane model builds off the single-lane model by introducing the
+option of switching lanes. The switch-lane step occurs right after the
+acceleration step. If the car can accelerate in its current lane, it
+will do so and will not switch lanes. If the car cannot accelerate in
+its current lane, it will check the other lane to see if it can switch
+lanes. If the car can safely switch lanes, it will switch to the other
+lane. If it cannot safely switch lanes, it will decelerate in the
+current lane.\\
+
+\textbf{Conditions needed to safely switch lanes:}\\
+
+\begin{itemize}
+\item
+  the front distance in the other lane should be greater than the car's
+  current velocity + 1 so that the car can accelerate in the other lane,
+  in a way that it could not in its own lane.
+\item
+  the back distance in the other lane should be greater than the max
+  velocity of the cars to ensure that it is \emph{impossible} for a car
+  behind to hit into the current car. Even if a car in the other lane is
+  4 cells behind us and has a speed of 1, we still will not switch lanes
+  since the available back distance is only 4, while the general max
+  velocity of all cars in this model is 5. The back distance has to be
+  greater than 5 for the current car to safely switch lanes.
+\end{itemize}
+
+    \subsection{Summary of Key Results}
+
+\subsubsection{Two-lane Model vs Single-lane Model}
+
+From the graph and tables generated above, we see that for each model,
+the highest mean traffic flow occurs at a density of 0.1. For the
+single-lane model of 100 cells, this means that maximum flow occurs when
+there are 10 cars in the system. For the two-lane model of a total of
+200 cells, the maximum flow occurs when there are 20 cars in the system.\\
+
+Since the two-lane model is double the size of the single-lane model, if
+the two-lane model is at least as efficient as the single-lane model,
+then given a fixed density, the two-lane flow should be double the
+single-lane flow. If the two-lane model is less efficient, then the
+two-lane flow should be less than double the single-lane flow; if the
+two-lane model is more efficient, the two-lane flow should be more than
+double the single-lane flow.\\
+
+The results show that at a density of 0.1 (the optimal density for both
+the single-lane and two-lane models), and a switch\_lane\_prob of 0, the
+two-lane model actually underperforms the single-lane model by a
+relative measurement of \((2 \times 0.3551) - 0.673 = 0.0372\) units. -
+this is probably due to the uneven distribution of the 0.1 car\_density
+throughout the entire two-lane system, i.e. 1 road could have 5 cars
+while the other has 15, which overall would lead to suboptimal
+performance compared to the optimal 10 cars per 100 cells as achieved by
+the single-lane model. Since the switch\_lane\_prob is 0, the cars
+cannot switch lanes to create an "optimized" ratio that could lead to
+better flow.\\
+
+At the same traffic density of 0.1, the 0.5 and 1.0 switch\_lane\_prob
+two-lane models both outperform the single-lane model, i.e. they have
+traffic flows that are more than double the single-lane flow. The
+relative measurements of improvement are
+\(0.7614 - (2 \times 0.3551)= 0.051\) units for the 0.5
+switch\_lane\_prob model, and \(0.7662 - (2 \times 0.3551)= 0.056\) for
+the 1.0 switch\_lane\_prob model. This suggests that if there is a high
+probability of cars switching lanes given that they can safely do so,
+then the traffic flow performance will increase at the optimal system
+density of 0.1.\\
+
+It should be noted that this improved traffic flow performance appears
+to \emph{only occur at the optimal system density of 0.1}, and even
+then, the improvement is small - only \textasciitilde{}0.05 units of
+increased traffic flow. At traffic densities greater or less than 0.1,
+the difference in traffic flow between the two-lane traffic models and
+the single-lane model decreases. Both these observations suggest that
+overall, the two-lane model does not significantly improve traffic-flow
+performance, even at a switch\_lane\_prob of 1.
+
+\subsubsection{Prediction of Three-lane Model Performance}
+
+The lacklustre increase in traffic-flow of the two-lane model at a
+switch\_lane\_prob of 1 vs the single-lane model, even at an optimal
+traffic density of 0.1, suggests that a three-lane model would not
+perform that much better. There will probably be a small increase in
+traffic-flow around the optimal density point of 0.1 - when cars can
+safely switch lanes without interrupting the traffic-flow of the other
+lanes - but at densities greater or less than 0.1, the three-lane model
+traffic-flow will probably only be roughly 3 times the single-lane
+model's traffic-flow, which means that there isn't a significant
+improvement besides the expected improvement of having a system that is
+3 times the size of the original one.\\
+
+\subsubsection{Applicability of Traffic Model to Buenos Aires}
+
+As it is, the model is too bare-bones to be applicable to Buenos Aires
+traffic. The fact that the model only consists of a single, straight
+road, without any traffic lights or intersections, means that it could
+only be applicable to a very simple traffic environment, perhaps in the
+country-side or in a small town. Buenos Aires is a busy city with one of
+the widest roads in the world (9 de Julio Avenue), and I don't believe
+that the complexity of it's traffic flow could be accurately captured in
+such a reduced form.\\
+
+I do not think that the model can even capture the behavior of small,
+single lanes in Buenos Aires since these lanes always end up opening
+onto a main road, and are also not long enough to be considered a
+self-contained system.\\
+
+While I do not know too much about the driving rules and regulations in
+Buenos Aires, the model does seem to capture general driving behavior
+rather accurately, and I have not personally witnessed any behavior in
+Buenos Aires that goes against normal driving behavior. With the
+addition of more lanes and other features (traffic lights,
+zebra-crossings, random pedestrians crossing the road, obstacles, etc.),
+perhaps the model could be applicable to Buenos Aires traffic.\\
+
+\section{Extended Single-lane Model}
+
+The extended single-lane model builds on the TrafficSim parent class.
+Using the extended model, we can investigate the effects of obstacles,
+speed-limit zones, and traffic lights on regular traffic flow.\\
+
+\textbf{Additional Features of Extended Model:}
+
+\begin{itemize}
+\tightlist
+\item
+  Obstacles
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Permanent 0-valued stationary object set at a specific cell on the
+    road.
+  \end{itemize}
+\item
+  Speed-limit zones
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Permanent maximum velocity set for specific sections of the road.
+  \item
+    Different sections can have different maximum velocities.
+  \end{itemize}
+\item
+  Traffic lights
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Temporarily enforced 0-value max velocity at a specific cell in the
+    road for regular intervals in the simulation.
+  \item
+    The traffic light maintains the same green-light (go) interval and
+    same red-light (stop) interval throughout the entire simulation,
+    i.e. it does not change intervals according to the road status.
+  \end{itemize}
+\end{itemize}
+
+    \subsection{Building the Model}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}871}]:} \PY{c+c1}{\PYZsh{}the global time is the number of steps that the model will be updated in the simulation}
+          \PY{k}{for} \PY{n}{each} \PY{n}{simulation} \PY{n}{loop}\PY{o}{.}
+          \PY{n}{global\PYZus{}time} \PY{o}{=} \PY{l+m+mi}{100}
+          
+          \PY{k}{class} \PY{n+nc}{TrafficSimExtended}\PY{p}{(}\PY{n}{TrafficSim}\PY{p}{)}\PY{p}{:}
+          
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{length}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}lanes} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{car\PYZus{}density}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}
+                           \PY{n}{max\PYZus{}speed}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{speed\PYZus{}lim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{obstacle} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{demo} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        TrafficSimExtended inherits from the TrafficSim parent class.}
+          \PY{l+s+sd}{        New variables: speed\PYZus{}lim, speed\PYZus{}lim\PYZus{}zone, traffic\PYZus{}light, obstacle.}
+          
+          \PY{l+s+sd}{        Inputs:}
+          
+          \PY{l+s+sd}{            speed\PYZus{}lim (arr) The speed limits in the speed limit zone ranges.}
+          \PY{l+s+sd}{                Default: [5,1,5]}
+          
+          \PY{l+s+sd}{            speed\PYZus{}lim\PYZus{}zone (tuple) The speed limit zone lane and ranges.}
+          \PY{l+s+sd}{                Default: (0,[np.arange(0,34),np.arange(34,67),np.arange(67,100)])}
+          
+          \PY{l+s+sd}{            traffic\PYZus{}light (arr) The traffic light lane, index, on\PYZhy{}time, and off\PYZhy{}time as}
+          \PY{l+s+sd}{a tuple.}
+          \PY{l+s+sd}{                Default: (0,50,10,10) traffic light at lane 0, index 50, with 10 on\PYZhy{}time}
+          \PY{l+s+sd}{and 10 off\PYZhy{}time.}
+          
+          \PY{l+s+sd}{            obstacle (tuple) The lane and index of the obstacle.}
+          \PY{l+s+sd}{                Default: (0,30) \PYZhy{} First lane, index 30.}
+          
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+                  \PY{c+c1}{\PYZsh{}inherit from parent TrafficSim class}
+                  \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{length}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{,} \PY{n}{car\PYZus{}density}\PY{p}{,} \PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{p}{,} \PY{n}{max\PYZus{}speed}\PY{p}{,}
+          \PY{n}{demo}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}speed limit variables}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{speed\PYZus{}lim} \PY{o}{=} \PY{n}{speed\PYZus{}lim}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{speed\PYZus{}lim\PYZus{}zone} \PY{o}{=} \PY{n}{speed\PYZus{}lim\PYZus{}zone}
+          
+                  \PY{c+c1}{\PYZsh{}traffic light variables}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{n}{traffic\PYZus{}light}
+                  \PY{c+c1}{\PYZsh{}create regular intervals for go\PYZhy{}time and stop\PYZhy{}time}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light\PYZus{}int} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}
+                                              \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{i} \PY{o}{+} \PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+                                              \PY{k}{if} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{n}{global\PYZus{}time} \PY{k}{else}
+          \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{global\PYZus{}time}\PY{p}{)}
+                                              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in}
+          \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{global\PYZus{}time}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{(}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{+}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{]}
+                                              \PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}obstacle variables}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle} \PY{o}{=} \PY{n}{obstacle}
+          
+              \PY{k}{def} \PY{n+nf}{update\PYZus{}cars}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+          
+                      \PY{c+c1}{\PYZsh{}set obstacle index to 0}
+                      \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+          
+          
+                      \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{}if index is not obstacle, proceed as usual}
+          
+                          \PY{c+c1}{\PYZsh{}if the index is a car}
+                          \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+          
+                              \PY{c+c1}{\PYZsh{}set current max speed according to traffic light and speed\PYZhy{}limit\PYZhy{}}
+          \PY{n}{zone} \PY{n}{checks}
+                              \PY{n}{curr\PYZus{}max\PYZus{}speed} \PY{o}{=}
+          \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{check\PYZus{}speed\PYZus{}limit}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{check\PYZus{}traffic\PYZus{}light}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+          
+                              \PY{c+c1}{\PYZsh{}get the front and back distances of the current car}
+                              \PY{n}{f\PYZus{}dist}\PY{p}{,} \PY{n}{b\PYZus{}dist} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}distances}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+          
+                              \PY{c+c1}{\PYZsh{}Acceleration}
+                              \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{\PYZlt{}} \PY{n}{f\PYZus{}dist}\PY{p}{:}
+                                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{curr\PYZus{}max\PYZus{}speed}\PY{p}{)}
+          
+                              \PY{c+c1}{\PYZsh{}Deceleration}
+                              \PY{k}{else}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{f\PYZus{}dist} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{curr\PYZus{}max\PYZus{}speed}\PY{p}{)}
+          
+                              \PY{c+c1}{\PYZsh{}Randomization}
+                              \PY{k}{if} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{p}{)}\PY{p}{:}
+                                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+          
+          
+              \PY{k}{def} \PY{n+nf}{check\PYZus{}speed\PYZus{}limit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{lane}\PY{p}{,}\PY{n}{index}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        set the current max speed of the car according to speed limit zone restrictions}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{k}{if} \PY{n}{lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+          
+                          \PY{c+c1}{\PYZsh{}check which speed limit zone the car is in}
+                          \PY{k}{if} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+          
+                              \PY{c+c1}{\PYZsh{}assign the appropriate speed limit for that zone}
+                              \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{speed\PYZus{}lim}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+          
+                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed}
+          
+              \PY{k}{def} \PY{n+nf}{check\PYZus{}traffic\PYZus{}light}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{lane}\PY{p}{,}\PY{n}{index}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Checks if:}
+          \PY{l+s+sd}{        \PYZhy{} traffic light is on,}
+          \PY{l+s+sd}{        \PYZhy{} car is on traffic light lane, and}
+          \PY{l+s+sd}{        \PYZhy{} car\PYZsq{}s current velocity + index \PYZgt{}= traffic light index}
+          \PY{l+s+sd}{        if all conditions are met, the car\PYZsq{}s max velocity is (traffic\PYZus{}light\PYZus{}index \PYZhy{}}
+          \PY{l+s+sd}{car\PYZus{}index).}
+          
+          \PY{l+s+sd}{        Traffic light turns on at the first time\PYZhy{}step, then turns off and on in regular}
+          \PY{l+s+sd}{intervals}
+          \PY{l+s+sd}{        as specified in self.traffic\PYZus{}light\PYZus{}int}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{c+c1}{\PYZsh{}if traffic light is on}
+                  \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light\PYZus{}int}\PY{p}{:}
+          
+                      \PY{c+c1}{\PYZsh{}if the current lane is the traffic light lane}
+                      \PY{k}{if} \PY{n}{lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+          
+                          \PY{c+c1}{\PYZsh{}if the car is behind or at the traffic light}
+                          \PY{k}{if} \PY{n}{index} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+          
+                              \PY{c+c1}{\PYZsh{}if the car\PYZsq{}s next step \PYZgt{}= the traffic light index}
+                              \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{+} \PY{n}{index} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{index}
+          
+                  \PY{c+c1}{\PYZsh{}if none of the above conditions are met, return regular max velocity}
+                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed}
+          
+              \PY{k}{def} \PY{n+nf}{display}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Traffic light index is red when off, green when on.}
+          \PY{l+s+sd}{        Obstacle index is blue.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{k}{for} \PY{n}{lane} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{)}\PY{p}{:}
+          
+                      \PY{n}{disp} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{else} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{]}
+          
+                      \PY{c+c1}{\PYZsh{}print obstacle blue}
+                      \PY{k}{if} \PY{n}{lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                          \PY{n}{disp}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[34m}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{disp[self.obstacle[1]]\PYZcb{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[0m}\PY{l+s+s2}{\PYZdq{}}
+          
+                      \PY{c+c1}{\PYZsh{}print traffic light red when it\PYZsq{}s on, green when it\PYZsq{}s off}
+                      \PY{k}{if} \PY{n}{lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                          \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light\PYZus{}int}\PY{p}{:}
+                              \PY{n}{disp}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=}
+          \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[31m}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{disp[self.traffic\PYZus{}light[1]]\PYZcb{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[0m}\PY{l+s+s2}{\PYZdq{}}
+                          \PY{k}{else}\PY{p}{:}
+                              \PY{n}{disp}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=}
+          \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[32m}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{disp[self.traffic\PYZus{}light[1]]\PYZcb{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[0m}\PY{l+s+s2}{\PYZdq{}}
+          
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{disp}\PY{p}{)}\PY{p}{)}
+          
+                  \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}945}]:} \PY{c+c1}{\PYZsh{}demo of extended single\PYZhy{}lane traffic simulation}
+          \PY{c+c1}{\PYZsh{}obstacle at index 30}
+          \PY{c+c1}{\PYZsh{}traffic light at index 50, on\PYZhy{}time of 3, off\PYZhy{}time of 2.}
+          \PY{c+c1}{\PYZsh{}speed limit of 1 in the range (34,67)}
+          
+          \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{)}
+          \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{demo\PYZus{}densities}\PY{p}{:}
+              \PY{n}{sim\PYZus{}demo}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Extended Traffic Model, }\PY{l+s+si}{\PYZob{}d\PYZcb{}}\PY{l+s+s1}{ car density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{TrafficSimExtended}\PY{p}{,}
+          \PY{n}{car\PYZus{}density} \PY{o}{=} \PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Single-lane Extended Traffic Model, 0.1 car density
+
+{\ldots}1{\ldots}2{\ldots}02{\ldots}\textcolor{ansi-blue}{0}.2{\ldots}\textcolor{ansi-red}{0}..0{\ldots}1{\ldots}
+{\ldots}3{\ldots}1{\ldots}
+
+{\ldots}2{\ldots}0.0..3{\ldots}\textcolor{ansi-blue}{0}{\ldots}0{\ldots}\textcolor{ansi-red}{0}..1{\ldots}1{\ldots}
+{\ldots}4{\ldots}1{\ldots}
+
+{\ldots}2{\ldots}1.1{\ldots}3{\ldots}\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-red}{0}{\ldots}1{\ldots}0{\ldots}
+{\ldots}4{\ldots}2{\ldots}
+
+{\ldots}3{\ldots}0.2{\ldots}4{\ldots}\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-green}{0}{\ldots}1{\ldots}0{\ldots}
+{\ldots}5{\ldots}2{\ldots}
+
+{\ldots}01{\ldots}3{\ldots}1..\textcolor{ansi-blue}{0}{\ldots}1{\ldots}\textcolor{ansi-green}{0}{\ldots}0{\ldots}0{\ldots}
+{\ldots}4{\ldots}2..
+
+Single-lane Extended Traffic Model, 0.5 car density
+
+001.1.0.2{\ldots}0.0001..1.2..0.000\textcolor{ansi-blue}{0}0.2..0.0..0..00{\ldots}\textcolor{ansi-red}{0}1..1..001..01..01
+.1..00001.2..0.1.0.3{\ldots}01.03{\ldots}
+
+01.0.01{\ldots}1.0.000.1..1..01.000\textcolor{ansi-blue}{0}1{\ldots}01.0..0..01{\ldots}\textcolor{ansi-red}{0}.0..1.01.1.1.1.0.
+0.0.0000.2..00..00{\ldots}00.01{\ldots}1.
+
+0.00.1.2{\ldots}01.001..2..0.0.0000\textcolor{ansi-blue}{0}.1..1.00..1..1.1{\ldots}\textcolor{ansi-red}{0}.0{\ldots}00.0.0.1.00.
+0.1.0000{\ldots}001..00{\ldots}01.0.2{\ldots}0
+
+1.01..1..1.0.001.2{\ldots}00.1.0000\textcolor{ansi-blue}{0}..1..001{\ldots}1..0.0..\textcolor{ansi-green}{0}.1{\ldots}00.0.0..000.
+0..00000{\ldots}00.0.00{\ldots}0.01{\ldots}1.0
+
+.00.2..1..01.01.1..1.00..00000\textcolor{ansi-blue}{0}{\ldots}1.00.1{\ldots}1.0.1..\textcolor{ansi-green}{1}..0..00.1.1..000.
+1..00001{\ldots}01.1.01{\ldots}0.0.1{\ldots}01
+
+Single-lane Extended Traffic Model, 0.9 car density
+
+00000000000000000000.00.00.000\textcolor{ansi-blue}{0}1.00000000000.00000\textcolor{ansi-red}{0}1.000000000000000
+0000000001.01.001.0000.000000000
+
+00000000000000000000.01.00.000\textcolor{ansi-blue}{0}.000000000000.00000\textcolor{ansi-red}{0}.0000000000000000
+000000000.01.001.00001.000000000
+
+00000000000000000001.0.000.000\textcolor{ansi-blue}{0}.000000000001.00000\textcolor{ansi-red}{0}.0000000000000000
+000000000.1.001.00001.0000000000
+
+0000000000000000000.01.001.000\textcolor{ansi-blue}{0}.00000000000.000000\textcolor{ansi-green}{0}.0000000000000000
+000000001..001.00000.00000000000
+
+0000000000000000000.0.000.0000\textcolor{ansi-blue}{0}.00000000000.000000\textcolor{ansi-green}{0}.0000000000000000
+00000000.0.00.000000.00000000000
+
+
+    \end{Verbatim}
+\newpage
+\section{Extended Two-lane Model}
+
+The extended two-lane model builds on the TrafficSimTwoLane parent
+class. Using the extended model, we can investigate the effects of
+obstacles, speed-limit zones, traffic lights, and lane-merges on regular
+traffic flow.\\
+
+\textbf{Additional Features of Extended Two-Lane Model:}\\
+
+The additional features are similar to the extended single-lane model,
+with the addition of a lane-merge feature:
+
+\begin{itemize}
+\tightlist
+\item
+  Lane merges (only for two-lane model)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Permanent 0-valued chain of stationary objects set along a series of
+    cells on the road.
+  \end{itemize}
+\end{itemize}
+
+    \subsection{Building the Model}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}938}]:} \PY{k}{class} \PY{n+nc}{TrafficSimExtendedTwoLane}\PY{p}{(}\PY{n}{TrafficSimExtended}\PY{p}{)}\PY{p}{:}
+          
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{length}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}lanes} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{car\PYZus{}density}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,}
+                           \PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{switch\PYZus{}lane\PYZus{}prob} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,}
+                           \PY{n}{max\PYZus{}speed}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{speed\PYZus{}lim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{obstacle} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{lane\PYZus{}merge} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{demo} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        TrafficSimExtendedTwoLane inherits from the TrafficSimExtended parent class.}
+          \PY{l+s+sd}{        The no\PYZus{}of\PYZus{}lanes is now defaulted at 2.}
+          \PY{l+s+sd}{        New variables: switch\PYZus{}lane\PYZus{}prob, lane\PYZus{}merge.}
+          
+          \PY{l+s+sd}{        Inputs:}
+          
+          \PY{l+s+sd}{            no\PYZus{}of\PYZus{}lanes (int) The number of lanes in the simulation.}
+          \PY{l+s+sd}{                Default: 2.}
+          
+          \PY{l+s+sd}{            switch\PYZus{}lane\PYZus{}prob (int) The probability of a car switching lanes,}
+          \PY{l+s+sd}{                                    given that a lane switch is possible.}
+          \PY{l+s+sd}{                Default: 1.}
+          
+          \PY{l+s+sd}{            lane\PYZus{}merge (tuple) The lane and indices where lane\PYZhy{}merge occurs.}
+          \PY{l+s+sd}{                Default: (0, np.arange(75,100))}
+          
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+                  \PY{c+c1}{\PYZsh{}inherit from TrafficSimExtended class}
+                  \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{length}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{,} \PY{n}{car\PYZus{}density}\PY{p}{,} \PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{p}{,}
+                                   \PY{n}{max\PYZus{}speed}\PY{p}{,} \PY{n}{speed\PYZus{}lim}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{p}{,}
+                                   \PY{n}{traffic\PYZus{}light}\PY{p}{,} \PY{n}{obstacle}\PY{p}{,} \PY{n}{demo}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}initialize new variable, switch\PYZhy{}lane\PYZus{}prob}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{switch\PYZus{}lane\PYZus{}prob} \PY{o}{=} \PY{n}{switch\PYZus{}lane\PYZus{}prob}
+          
+                  \PY{c+c1}{\PYZsh{}lane\PYZhy{}merge variable}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lane\PYZus{}merge} \PY{o}{=} \PY{n}{lane\PYZus{}merge}
+          
+              \PY{k}{def} \PY{n+nf}{update\PYZus{}cars}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{old\PYZus{}state}\PY{p}{,}\PY{n}{curr\PYZus{}lane}\PY{p}{,}\PY{n}{other\PYZus{}lane}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+          
+                      \PY{c+c1}{\PYZsh{}obstacle check}
+                      \PY{k}{if} \PY{n}{curr\PYZus{}lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{and} \PY{n}{i} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                          \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+          
+                      \PY{c+c1}{\PYZsh{}lane\PYZhy{}merge check}
+                      \PY{k}{elif} \PY{n}{curr\PYZus{}lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lane\PYZus{}merge}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{and} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lane\PYZus{}merge}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                          \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+          
+                      \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{}if not obstacle, proceed as usual}
+          
+                          \PY{c+c1}{\PYZsh{}if the index is a car}
+                          \PY{k}{if} \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+          
+                              \PY{c+c1}{\PYZsh{}set current max speed according to traffic light and speed\PYZhy{}limit\PYZhy{}}
+          \PY{n}{zone} \PY{n}{checks}
+                              \PY{n}{curr\PYZus{}max\PYZus{}speed} \PY{o}{=}
+          \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{check\PYZus{}speed\PYZus{}limit}\PY{p}{(}\PY{n}{curr\PYZus{}lane}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{check\PYZus{}traffic\PYZus{}light}\PY{p}{(}\PY{n}{curr\PYZus{}lane}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+          
+                              \PY{c+c1}{\PYZsh{}get front and back distance of current lane}
+                              \PY{n}{f\PYZus{}dist}\PY{p}{,} \PY{n}{b\PYZus{}dist} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}distances}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+          
+                              \PY{c+c1}{\PYZsh{}get front and back distance of other lane}
+                              \PY{n}{fo\PYZus{}dist}\PY{p}{,} \PY{n}{bo\PYZus{}dist} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}distances}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{other\PYZus{}lane}\PY{p}{]}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+          
+                              \PY{c+c1}{\PYZsh{}Acceleration in current lane}
+                              \PY{k}{if} \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{\PYZlt{}} \PY{n}{f\PYZus{}dist}\PY{p}{:}
+                                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+          \PY{n}{curr\PYZus{}max\PYZus{}speed}\PY{p}{)}
+          
+                              \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{}if acceleration is not possible, try switching lanes}
+          
+                                  \PY{c+c1}{\PYZsh{}check if there is no car occupying the other lane at the same}
+          \PY{n}{index}\PY{p}{,} \PY{o+ow}{and} \PY{n}{that} \PY{n}{there} \PY{o+ow}{is} \PY{n}{sufficient} \PY{n}{front} \PY{o+ow}{and} \PY{n}{back} \PY{n}{distance}
+                                  \PY{k}{if} \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{other\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+}
+          \PY{l+m+mi}{1} \PY{o}{\PYZlt{}} \PY{n}{fo\PYZus{}dist} \PY{o+ow}{and} \PY{n}{bo\PYZus{}dist} \PY{o}{\PYZgt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}speed}\PY{p}{:}
+          
+                                      \PY{c+c1}{\PYZsh{}check what the max speed in the other lane would be based}
+          \PY{n}{on} \PY{n}{speed} \PY{n}{limits} \PY{o+ow}{and} \PY{n}{traffic} \PY{n}{lights}
+                                      \PY{n}{other\PYZus{}max\PYZus{}speed} \PY{o}{=}
+          \PY{n+nb}{min}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{check\PYZus{}speed\PYZus{}limit}\PY{p}{(}\PY{n}{other\PYZus{}lane}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{check\PYZus{}traffic\PYZus{}light}\PY{p}{(}\PY{n}{other\PYZus{}lane}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+          
+                                      \PY{c+c1}{\PYZsh{}if the car can travel faster in the other lane}
+                                      \PY{k}{if} \PY{n}{other\PYZus{}max\PYZus{}speed} \PY{o}{\PYZgt{}} \PY{n}{curr\PYZus{}max\PYZus{}speed} \PY{o+ow}{and} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)}
+          \PY{o}{\PYZlt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{switch\PYZus{}lane\PYZus{}prob}\PY{p}{:}
+          
+                                          \PY{c+c1}{\PYZsh{}switch to the other lane}
+                                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{other\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+          \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{other\PYZus{}max\PYZus{}speed}\PY{p}{)}
+                                          \PY{c+c1}{\PYZsh{}assign empty spot where the car used to be}
+                                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+          
+                                  \PY{c+c1}{\PYZsh{}if switching lanes is not possible or not worth it, decelerate}
+          \PY{o+ow}{in} \PY{n}{current} \PY{n}{lane}
+                                  \PY{k}{else}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{f\PYZus{}dist} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}
+          \PY{n}{curr\PYZus{}max\PYZus{}speed}\PY{p}{)}
+          
+                              \PY{c+c1}{\PYZsh{} Random slow down}
+                              \PY{k}{if} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{p}{)}\PY{p}{:}
+                                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{curr\PYZus{}lane}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+          
+          
+              \PY{k}{def} \PY{n+nf}{step}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Advance one time step in the simulation.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{c+c1}{\PYZsh{}create deep copy of current state for reference when updating both lanes}
+                  \PY{n}{old\PYZus{}state} \PY{o}{=} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}update car velocities / switch lanes and update velocities}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}cars}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update\PYZus{}cars}\PY{p}{(}\PY{n}{old\PYZus{}state}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}if demo == True, display the traffic sim}
+                  \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{demo}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}move cars}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{move\PYZus{}cars}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{}Update time and traffic flow}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}traffic\PYZus{}flow}\PY{p}{(}\PY{p}{)}
+          
+              \PY{k}{def} \PY{n+nf}{display}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Traffic light index is red when off, green when on.}
+          \PY{l+s+sd}{        Obstacle is blue.}
+          \PY{l+s+sd}{        Lane merge is represented as \PYZsq{}\PYZus{}\PYZsq{}}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{k}{for} \PY{n}{lane} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{no\PYZus{}of\PYZus{}lanes}\PY{p}{)}\PY{p}{:}
+          
+                      \PY{n}{disp} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{else} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{lane}\PY{p}{]}\PY{p}{]}
+          
+                      \PY{c+c1}{\PYZsh{}print obstacle blue}
+                      \PY{k}{if} \PY{n}{lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                          \PY{n}{disp}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[34m}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{disp[self.obstacle[1]]\PYZcb{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[0m}\PY{l+s+s2}{\PYZdq{}}
+          
+                      \PY{c+c1}{\PYZsh{}print lane merge as \PYZsq{}\PYZus{}\PYZsq{}}
+                      \PY{k}{if} \PY{n}{lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lane\PYZus{}merge}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lane\PYZus{}merge}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                              \PY{n}{disp}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lane\PYZus{}merge}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}}
+          
+                      \PY{c+c1}{\PYZsh{}print traffic light red when it\PYZsq{}s on, green when it\PYZsq{}s off}
+                      \PY{k}{if} \PY{n}{lane} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                          \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light\PYZus{}int}\PY{p}{:}
+                              \PY{n}{disp}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=}
+          \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[31m}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{disp[self.traffic\PYZus{}light[0]]\PYZcb{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[0m}\PY{l+s+s2}{\PYZdq{}}
+                          \PY{k}{else}\PY{p}{:}
+                              \PY{n}{disp}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{traffic\PYZus{}light}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=}
+          \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[32m}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{disp[self.traffic\PYZus{}light[0]]\PYZcb{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[0m}\PY{l+s+s2}{\PYZdq{}}
+          
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{disp}\PY{p}{)}\PY{p}{)}
+          
+                  \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}942}]:} \PY{c+c1}{\PYZsh{}demo of extended two\PYZhy{}lane traffic simulation}
+          \PY{c+c1}{\PYZsh{}obstacle at index 30}
+          \PY{c+c1}{\PYZsh{}lane\PYZhy{}merge in the range(70,100)}
+          \PY{c+c1}{\PYZsh{}traffic light at index 50, on\PYZhy{}time of 3, off\PYZhy{}time of 2.}
+          \PY{c+c1}{\PYZsh{}speed limit of 1 in the range (34,67)}
+          
+          \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{123}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{demo\PYZus{}densities}\PY{p}{:}
+              \PY{n}{sim\PYZus{}demo}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane Extended Traffic Model, }\PY{l+s+si}{\PYZob{}d\PYZcb{}}\PY{l+s+s1}{ car density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{n}{TrafficSimExtendedTwoLane}\PY{p}{,} \PY{n}{car\PYZus{}density} \PY{o}{=} \PY{n}{d}\PY{p}{,} \PY{n}{slow\PYZus{}down\PYZus{}prob}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Two-lane Extended Traffic Model, 0.1 car density
+
+{\ldots}5{\ldots}04{\ldots}\textcolor{ansi-blue}{0}1{\ldots}1{\ldots}\textcolor{ansi-red}{.}..1{\ldots}
+..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+{\ldots}3{\ldots}3{\ldots}2{\ldots}4{\ldots}4{\ldots}2{\ldots}5{\ldots}02..2..3
+{\ldots}5{\ldots}
+
+{\ldots}5{\ldots}1{\ldots}5{\ldots}\textcolor{ansi-blue}{0}.2{\ldots}1{\ldots}\textcolor{ansi-red}{.}{\ldots}1{\ldots}
+..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+{\ldots}3{\ldots}4{\ldots}3{\ldots}5{\ldots}5{\ldots}3{\ldots}5{\ldots}1..2..3.
+..4{\ldots}5{\ldots}
+
+{\ldots}5{\ldots}2{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-red}{.}{\ldots}1{\ldots}
+..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+{\ldots}4{\ldots}5{\ldots}4{\ldots}5{\ldots}4{\ldots}4{\ldots}5{\ldots}2{\ldots}3..
+.4{\ldots}5{\ldots}5
+
+{\ldots}2..3{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-green}{.}{\ldots}1{\ldots}
+..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}4{\ldots}5{\ldots}3{\ldots}3{\ldots}
+4{\ldots}5{\ldots}5..
+
+{\ldots}3{\ldots}3{\ldots}0\textcolor{ansi-blue}{0}{\ldots}1{\ldots}1{\ldots}\textcolor{ansi-green}{.}1{\ldots}1{\ldots}
+..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+..5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}5{\ldots}3{\ldots}4.
+{\ldots}5{\ldots}5{\ldots}
+
+Two-lane Extended Traffic Model, 0.5 car density
+
+.2..0001.0000001.001{\ldots}2{\ldots}\textcolor{ansi-blue}{0}..0001{\ldots}001.01.\textcolor{ansi-red}{.}..01.00001.01..00
+3.\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.002..001{\ldots}1.001{\ldots}2{\ldots}3{\ldots}0002..003{\ldots}02..002..2..000002..00001.1.3{\ldots}1.1.
+004{\ldots}01{\ldots}
+
+{\ldots}0001.0000001.001.2{\ldots}3{\ldots}\textcolor{ansi-blue}{0}..001.1{\ldots}01.01.0\textcolor{ansi-red}{.}..1.00001.01.1.01
+..\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+.001..001.2{\ldots}001.2{\ldots}3{\ldots}0001..001{\ldots}01..001..2..000001..00001.1.2{\ldots}1.1.0
+01{\ldots}2..1.2..
+
+{\ldots}001.0000001.001.2..3{\ldots}1.\textcolor{ansi-blue}{0}..01.1.1{\ldots}1.01.00\textcolor{ansi-red}{.}{\ldots}00001.01.1.01.
+1.\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+.01.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}001.1.01.2..1.1.01.2{\ldots}000001.1.0001.1.2..2..1.00
+1.2{\ldots}1.2..1
+
+{\ldots}01.0000001.001.2..3{\ldots}3{\ldots}0\textcolor{ansi-blue}{0}..1.1.1.1{\ldots}01.000\textcolor{ansi-green}{.}{\ldots}0001.01.1.01.1
+.0\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+01.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}001.1.01.2..1.1.01.2..1.00001.1.0001.1.2..2..1.001
+.2..3{\ldots}2..1.
+
+{\ldots}1.0000001.001.2..3{\ldots}3{\ldots}00\textcolor{ansi-blue}{0}{\ldots}1.1.1.1{\ldots}1.0001\textcolor{ansi-green}{.}1..001.01.1.01.1.
+00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.1.01.2..3{\ldots}01.2..3{\ldots}4{\ldots}5{\ldots}01.1.01.2..1.1.01.2..1.00001.1.0001.1.2..2..1.001.
+2..3{\ldots}3{\ldots}1.0
+
+Two-lane Extended Traffic Model, 0.9 car density
+
+0001.1.0001.000000000000001..0\textcolor{ansi-blue}{0}0001.00000000000000\textcolor{ansi-red}{0}00001.00000000000
+00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+0001.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.000000000
+00000000000000
+
+001.1.0001.000000000000001.1.0\textcolor{ansi-blue}{0}001.000000000000000\textcolor{ansi-red}{0}0001.000000000000
+00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+001.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.0000000000
+00000000000000
+
+01.1.0001.000000000000001.1.00\textcolor{ansi-blue}{0}01.0000000000000000\textcolor{ansi-red}{0}001.0000000000000
+00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+01.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.00000000000
+00000000000000
+
+1.1.0001.000000000000001.1.000\textcolor{ansi-blue}{0}1.00000000000000000\textcolor{ansi-green}{1}01.00000000000000
+00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.000000000000
+00000000000000
+
+.1.0001.000000000000001.1.0000\textcolor{ansi-blue}{0}.000000000000000000\textcolor{ansi-green}{.}1.000000000000000
+00\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+.1.2..0000000001.0000001.000000000000001.1.1.000001.000001.00000000001.1.0000000000000
+00000000000001
+
+
+    \end{Verbatim}
+
+        \subsection{Running Simulations for Extended Models}
+
+Before running any simulations, we can intuitively predict that the
+extended single-lane model will always have a poorer performance vs the
+extended two-lane model when there are speed limit zones, obstacles, or
+traffic lights. This is because in the two-lane model, if there is an
+obstacle, speed limit zone, or red traffic light on the current lane, if
+the car can travel faster in the other lane and it is safe to switch
+lanes, the car can switch lanes. However, in the single-lane model, cars
+will always be stuck in the same lane. If there is a speed limit, they
+have to adhere; if there is an obstacle, they will start forming a
+build-up, if there is a red traffic-light, they will have to stop.\\
+
+Simulations will be carried out to confirm this intuition.\\
+
+The simulations will compare:
+
+\begin{itemize}
+\item
+  Speed-limit zone in single-lane model vs two-lane model.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Speed-limit of {[} 5, 1, 5 {]} in ranges ( 0, 34 ), ( 34, 67 ), (
+    67, 100 ) respectively.
+  \end{itemize}
+\item
+  Traffic light in single-lane model vs two-lane model.
+
+  \begin{itemize}
+  \item
+    Traffic light in lane 0, index 50.
+  \item
+    traffic light intervals of 10 on, 10 off.
+  \end{itemize}
+\item
+  Obstacle in single-lane model vs lane-merge in two-lane model.
+
+  \begin{itemize}
+  \item
+    Obstacle in lane 0, index 70 for single-lane model.
+  \item
+    Lane-merge in lane 0, in range ( 70, 100 ) for two-lane model.
+  \end{itemize}
+\end{itemize}
+
+All the added features will have the same settings, e.g. same lane, same
+index, same time-intervals (for traffic light). For example, if the
+obstacle was located on lane 0, index 30 in the single-lane model, it
+will also be located on lane 0, index 30 in the two-lane model.
+\newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}947}]:} \PY{c+c1}{\PYZsh{}speed\PYZhy{}limit zones}
+          
+          \PY{n}{speed\PYZus{}lim\PYZus{}1\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}1\PYZus{}mean}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}1\PYZus{}CI} \PY{o}{=}
+          \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimExtended}\PY{p}{,}
+          \PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                                                                                          \PY{n}{obstacle}
+          \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{speed\PYZus{}lim\PYZus{}2\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}2\PYZus{}mean}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}2\PYZus{}CI} \PY{o}{=}
+          \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimExtendedTwoLane}\PY{p}{,}
+          \PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                                                                                          \PY{n}{obstacle}
+          \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+          \PY{n}{lane\PYZus{}merge} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}953}]:} \PY{c+c1}{\PYZsh{}plot stats}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{speed\PYZus{}lim\PYZus{}1\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}1\PYZus{}mean}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}1\PYZus{}CI}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane}
+          \PY{n}{Speed} \PY{n}{Limit} \PY{n}{Zone}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{speed\PYZus{}lim\PYZus{}2\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}2\PYZus{}mean}\PY{p}{,} \PY{n}{speed\PYZus{}lim\PYZus{}2\PYZus{}CI}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane Speed}
+          \PY{n}{Limit} \PY{n}{Zone}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}create dataframe}
+          \PY{n}{speed\PYZus{}lim\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Traffic Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{density}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{speed\PYZus{}lim\PYZus{}1\PYZus{}mean}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{speed\PYZus{}lim\PYZus{}2\PYZus{}mean}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+              \PY{p}{\PYZcb{}}\PY{p}{)}
+          
+          \PY{n}{speed\PYZus{}lim\PYZus{}df}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}953}]:}     Traffic Density  Single-lane Mean flow  Two-lane Mean flow
+          0               0.0                 0.0000              0.0000
+          1               0.1                 0.0694              0.4309
+          2               0.2                 0.1373              0.4812
+          3               0.3                 0.2002              0.5127
+          4               0.4                 0.1817              0.4766
+          5               0.5                 0.1521              0.4049
+          6               0.6                 0.1223              0.3269
+          7               0.7                 0.0897              0.2551
+          8               0.8                 0.0621              0.1790
+          9               0.9                 0.0314              0.0946
+          10              1.0                 0.0000              0.0000
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}954}]:} \PY{c+c1}{\PYZsh{}traffic lights}
+          
+          \PY{n}{tl\PYZus{}1\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{tl\PYZus{}1\PYZus{}mean}\PY{p}{,} \PY{n}{tl\PYZus{}1\PYZus{}CI} \PY{o}{=} \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimExtended}\PY{p}{,}
+                                                                  \PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{obstacle} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{speed\PYZus{}lim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{tl\PYZus{}2\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{tl\PYZus{}2\PYZus{}mean}\PY{p}{,} \PY{n}{tl\PYZus{}2\PYZus{}CI} \PY{o}{=} \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimExtendedTwoLane}\PY{p}{,}
+                                                                  \PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{obstacle} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{speed\PYZus{}lim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{lane\PYZus{}merge} \PY{o}{=}
+          \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}956}]:} \PY{c+c1}{\PYZsh{}plot stats}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{tl\PYZus{}1\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{tl\PYZus{}1\PYZus{}mean}\PY{p}{,} \PY{n}{tl\PYZus{}1\PYZus{}CI}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Traffic Light}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{tl\PYZus{}2\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{tl\PYZus{}2\PYZus{}mean}\PY{p}{,} \PY{n}{tl\PYZus{}2\PYZus{}CI}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane Traffic Light}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}create dataframe}
+          \PY{n}{tl\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Traffic Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{density}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{tl\PYZus{}1\PYZus{}mean}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{tl\PYZus{}2\PYZus{}mean}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+              \PY{p}{\PYZcb{}}\PY{p}{)}
+          
+          \PY{n}{tl\PYZus{}df}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}956}]:}     Traffic Density  Single-lane Mean flow  Two-lane Mean flow
+          0               0.0                 0.0000              0.0000
+          1               0.1                 0.0698              0.5397
+          2               0.2                 0.1339              0.5595
+          3               0.3                 0.2062              0.5514
+          4               0.4                 0.1842              0.4920
+          5               0.5                 0.1549              0.4067
+          6               0.6                 0.1228              0.3300
+          7               0.7                 0.0890              0.2601
+          8               0.8                 0.0641              0.1797
+          9               0.9                 0.0309              0.0948
+          10              1.0                 0.0000              0.0000
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}957}]:} \PY{c+c1}{\PYZsh{}obstacle \PYZam{} lane\PYZhy{}merge}
+          
+          \PY{n}{obs\PYZus{}1\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{obs\PYZus{}1\PYZus{}mean}\PY{p}{,} \PY{n}{obs\PYZus{}1\PYZus{}CI} \PY{o}{=} \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimExtended}\PY{p}{,}
+                                                                  \PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{obstacle} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{speed\PYZus{}lim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{obs\PYZus{}2\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{obs\PYZus{}2\PYZus{}mean}\PY{p}{,} \PY{n}{obs\PYZus{}2\PYZus{}CI} \PY{o}{=} \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{TrafficSimExtendedTwoLane}\PY{p}{,}
+                                                                  \PY{n}{traffic\PYZus{}light} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{obstacle} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{speed\PYZus{}lim}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+          \PY{n}{speed\PYZus{}lim\PYZus{}zone}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{34}\PY{p}{,}\PY{l+m+mi}{67}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{67}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                                                  \PY{n}{lane\PYZus{}merge} \PY{o}{=}
+          \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}958}]:} \PY{c+c1}{\PYZsh{}plot stats}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{obs\PYZus{}1\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{obs\PYZus{}1\PYZus{}mean}\PY{p}{,} \PY{n}{obs\PYZus{}1\PYZus{}CI}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Obstacle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plot\PYZus{}flow}\PY{p}{(}\PY{n}{obs\PYZus{}2\PYZus{}traffic\PYZus{}flows}\PY{p}{,} \PY{n}{obs\PYZus{}2\PYZus{}mean}\PY{p}{,} \PY{n}{obs\PYZus{}2\PYZus{}CI}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane Lane Merge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}create dataframe}
+          \PY{n}{obs\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Traffic Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{density}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Single\PYZhy{}lane Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{obs\PYZus{}1\PYZus{}mean}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Two\PYZhy{}lane Mean flow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{obs\PYZus{}2\PYZus{}mean}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+              \PY{p}{\PYZcb{}}\PY{p}{)}
+          
+          \PY{n}{obs\PYZus{}df}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CS166_traffic_sim_assignment_files/CS166_traffic_sim_assignment_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}958}]:}     Traffic Density  Single-lane Mean flow  Two-lane Mean flow
+          0               0.0                 0.0000              0.0000
+          1               0.1                 0.0306              0.3319
+          2               0.2                 0.0581              0.3276
+          3               0.3                 0.0908              0.3148
+          4               0.4                 0.1174              0.2901
+          5               0.5                 0.1447              0.2641
+          6               0.6                 0.1593              0.2344
+          7               0.7                 0.1289              0.1830
+          8               0.8                 0.0896              0.1070
+          9               0.9                 0.0452              0.0471
+          10              1.0                 0.0000              0.0000
+\end{Verbatim}
+            
+    \subsection{How the Extended Models Work}
+
+By introducing speed limit zones, traffic lights, obstacles, and
+lane-merges, the extended models add some much needed complexity (but
+arguably still not enough) to the simple models. The various features
+work as follows:
+
+\subsubsection{Speed Limit Zones}
+
+The speed limit zone feature is implemented by setting a max speed limit
+in designated ranges throughout the numpy array. A new variable,
+curr\_max\_speed, is created and is set to the speed limit for each part
+of the road. The curr\_max\_speed variable substitutes the
+self.max\_speed parameter used in the simple models.\\
+
+To symbolize a part of the road without a speed limit, I either set the
+speed limit == max\_speed of the cars, or just remove that range from
+the speed\_lim\_zone parameter altogether (though the former step is
+easier to implement).
+
+\subsubsection{Traffic Lights}
+
+The traffic light is similar to the speed limit zone in that it enforces
+a speed limit within a limited range that can be roughly represented as
+( traffic\_light\_index - curr\_max\_speed, traffic\_light\_index ).
+This was not how I wrote it in the code, but my code does carry out its
+meaning, i.e. when the traffic light is on, any car whose index is
+before the traffic light index and whose current velocity would cause it
+to surpass the traffic light has to decelerate so that it comes to a
+stop at the traffic light index. This means that if a car is at the
+traffic\_light\_index, the speed limit is 0; if a car is one cell away
+from the traffic\_light\_index, the speed limit is 1; if a car is two
+cells away from the traffic\_light\_index, the speed limit is 2, etc.
+This is assuming that there are no other cars in front of the car.\\
+
+The traffic light on (stop) and off (go) time-intervals are created by
+dividing the global\_time parameter (i.e. the number of update steps
+carried out on the simulation) into regular intervals according to the
+designated on and off time as stipulated by the user.
+
+\subsubsection{Obstacles}
+
+The obstacle was represented as a permanently stationary car, i.e. an
+index permanently set to 0.
+
+\subsubsection{Lane Merges}
+
+The lane-merge was represented as a sequence of permanently stationary
+cars, i.e. a range of indices permanently set to 0.
+
+\subsubsection{New Lane-Switch Procedure}
+
+The most challenging part of implementing the extended models was
+figuring out the new lane-switch procedure for the two-lane model. In
+the simple model, the lane-switch could occur as long as it was safe and
+there was available distance to accelerate. In the extended model, even
+if those two conditions are met, the current car might still be better
+off not switching lanes since it could switch into a lane with a slower
+speed-zone limit or switch into a lane with an ongoing traffic light. To
+solve this issue, I made sure to run the traffic light check and the
+speed zone check on the other lane as well as the current lane, then
+compared the max speed limits of both lanes so that the optimal lane
+could be chosen.
+
+    \subsection{Summary of Results for Extended Models}
+
+From the results, it appears that the two-lane model outperforms the
+single-lane model when implementing speed limit zones, traffic lights,
+and obstacles/lane-merges, as predicted. While this is an intuitive
+prediction, it is still useful to run these simulations to prove the
+intuition. A key takeaway from this is that in the simple version of the
+models (sans extensions), the two-lane model does not appear to
+outperform the single-lane model that greatly. However, once additional
+features are implemented that make the model more closely resemble roads
+and traffic in real-life, the two-lane model greatly outperforms the
+single-lane model.
+
+\section{Future Work}
+
+Suggestions to make the model more realistic:
+
+\begin{itemize}
+\tightlist
+\item
+  Implement bad driver behavior, e.g. cutting lanes, tailgating,
+  speeding.
+\item
+  Implement more parallel lanes in the model, with slower speed limit
+  zones on the left, and faster speed limit zones on the right.
+\item
+  Implement a model with multidirectional traffic, so that intersections
+  can be created and the utility of traffic lights can be properly
+  demonstrated.
+\end{itemize}
+
+\section{Appendix}
+
+The code can be located online at: 
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
