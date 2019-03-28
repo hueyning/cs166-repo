@@ -1,0 +1,25 @@
+\BOOKMARK [1][-]{section.1}{The Basic Model}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Description}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Update Rules}{section.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.2.1}{People change opinions to more closely match those of people they have a strong relationship with.}{subsection.1.2}% 4
+\BOOKMARK [3][-]{subsubsection.1.2.2}{People strenghten or weaken their relationships depending on whether they agree or disagree with each other.}{subsection.1.2}% 5
+\BOOKMARK [3][-]{subsubsection.1.2.3}{People have a small probability of randomly making new connections with strangers.}{subsection.1.2}% 6
+\BOOKMARK [1][-]{section.2}{Modifications to the Basic Model}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Multiple Topics}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Personalized Parameters}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Model Persuasiveness}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Local Analysis}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{General Equations}{section.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Interpretation of \040and }{subsection.3.1}% 13
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Effects of Different Initial Edge Weight w}{subsection.3.1}% 14
+\BOOKMARK [2][-]{subsection.3.2}{Mod 1: Multiple Topics}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.3}{Mod 2: Personalized Parameters}{section.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Opinion Change}{subsection.3.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Relationship Change}{subsection.3.3}% 18
+\BOOKMARK [2][-]{subsection.3.4}{Model Persuasiveness}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.5}{Vector Field Plots}{section.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.5.1}{Analysis}{subsection.3.5}% 21
+\BOOKMARK [1][-]{section.4}{Implementation}{}% 22
+\BOOKMARK [1][-]{section.5}{Simulation Analysis}{}% 23
+\BOOKMARK [2][-]{subsection.5.1}{Choice of Graph}{section.5}% 24
+\BOOKMARK [2][-]{subsection.5.2}{Simulation Results}{section.5}% 25

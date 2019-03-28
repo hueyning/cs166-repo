@@ -21,6 +21,7 @@
     % Basic figure setup, for now with no caption control since it's done
     % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
     \usepackage{graphicx}
+    \usepackage{subfig}
     % We will generate all images so they have a width \maxwidth. This means
     % that they will get their normal width if they fit onto the page, but
     % are scaled down if they would overflow the margins.
@@ -141,7 +142,8 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
-    \title{cs166-assignment-3-network-sim}
+    \title{CS166 Assignment 3: Network Simulation}
+    \author{Huey Ning Lok}
     
     
     
@@ -277,12 +279,7 @@
     
     \maketitle
     
-    
 
-    
-    CS166: Assignment 3
-
-Network Simulation
 
 The goal of this assignment is to improve the social dynamics model
 covered in Session 7.2 on Adaptive Networks. I proposed my own changes
@@ -290,9 +287,9 @@ to the model to make the dynamics more realistic, implemented my
 improvements in a simulation, and analyze the expected (theoretical) and
 actual (experimental) effects of my changes on the model.
 
-    Part 0: The Basic Model
+    \section{The Basic Model}
 
-Description
+\subsection{Description}
 
 The basic model simulates the interaction between people's preferences
 or opinions and the strength of their social connections. The basic idea
@@ -309,19 +306,19 @@ is that social dynamics are driven by two factors:
 
 These processes are modeled on a small-world network (Watts-Strogatz
 graph) to observe how both opinions and relationships change over time.
-
-Nodes
+\\
+\textbf{Nodes}\\
 
 Nodes represent each person in the network. Each node has an opinion
 attribute associated with it that can take on a value between 0 and 1.
 People with similar-value opinions are in agreement on a topic and
-poeple with different values disagree.
+poeple with different values disagree.\\
 
 For example, given a node with opinion 0.3, and a different node with
 opinion 0.8, the nodes will have an opinion difference of
-\textbar{}0.3-0.8\textbar{} = 0.5.
+\textbar{}0.3-0.8\textbar{} = 0.5.\\
 
-Edges
+\textbf{Edges}\\
 
 Edges represent the existence of a social relationship between two nodes
 in the network. Each edge has a weight assigned to it, with a value
@@ -329,21 +326,21 @@ between 0 to 1. A weight close to 0 signifies a weak relationship
 between two people, and so their opinions will not influence each other
 much. A weight close to 1 signifies a strong relationship between two
 people, and so they will adjust their opinions to be closer to each
-other.
+other.\\
 
 For example, two nodes with an edge of w = 0.9 between them have a
 stronger relationship than two nodes with an edge of w = 0.2 between
 them.
 
-Update Rules
+\subsection{Update Rules}
 
 There are 3 update rules that dictate the evolution of the network's
 dynamics:
 
-Update Rule 1: People change opinions to more closely match those of
-people they have a strong relationship with.
+\subsubsection{People change opinions to more closely match those of
+people they have a strong relationship with.}
 
-Implementation
+\textbf{Implementation}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -358,26 +355,27 @@ Implementation
   closer to each other.
 \end{enumerate}
 
-Mathematical Derivation
+\textbf{Mathematical Derivation}
 
-The change in opinion of Person \(i\) when talking to Person \(j\) is:
+The change in opinion of Person \(i\) when talking to Person \(j\) is:\\
 
 \(\Delta o_i = \alpha w_{ij}(o_j-o_i)\)
+\\
 
 Person \(j\)'s opinion also changes, but in the opposite direction to
-Person \(i\)'s, thus bringing their opinions closer together.
+Person \(i\)'s, thus bringing their opinions closer together.\\
 
-Model Parameters
+\textbf{Model Parameters}\\
 
 \(\alpha \in (0,0.5]\) (flexibility level) - High \(\alpha\) indicates
 high flexibility: people change their opinions to match other people's
 relatively quickly. - Low \(\alpha\) indicates inflexibility, people
 change their opinions to match other people's relatively slowly.
 
-Update Rule 2: People strenghten or weaken their relationships depending
-on whether they agree or disagree with each other.
+\subsubsection{People strenghten or weaken their relationships depending
+on whether they agree or disagree with each other.}
 
-Implementation
+\textbf{Implementation}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -392,30 +390,31 @@ Implementation
   This models a social relationship that has broken down.
 \end{enumerate}
 
-Mathematical Derivation
+\textbf{Mathematical Derivation}\\
 
-The change in weight between Person \(i\) and Person \(j\):
+The change in weight between Person \(i\) and Person \(j\):\\
 
-\(\Delta w_{ij} = \beta w_{ij}(1-w_{ij})(1-\gamma |o_i-o_j|)\)
+\(\Delta w_{ij} = \beta w_{ij}(1-w_{ij})(1-\gamma |o_i-o_j|)\)\\
 
-Model Parameters
+\textbf{Model Parameters}\\
 
 \(\beta \in (0,1)\) (Relationship rate change) - High \(\beta\)
 indicates that relationships change drastically in response to a
 difference in opinion. - Low \(\beta\) indicates that relationships do
-not change much in response to a difference in opinion
+not change much in response to a difference in opinion\\
 
 \(\gamma > 0\) (Sensitivity to different opinions) - \(\gamma \leq 1\)
 indicates low sensitivity. All edge weights will converge to 1 over time
-since different opinions don't matter enough to decrease edge weights. -
+since different opinions don't matter enough to decrease edge weights. \\
+
 \(\gamma > 1\) indicates middle to high sensitivity. The edge weight
 between two nodes will decrease if the opinions of the nodes are
 different enough, i.e. if \(|o_i - o_j| > \gamma^{-1}\).
 
-Update Rule 3: People have a small probability of randomly making new
-connections with strangers.
+\subsubsection{People have a small probability of randomly making new
+connections with strangers.}
 
-Implementation
+\textbf{Implementation}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -562,64 +561,67 @@ Implementation
         \PY{n}{plot\PYZus{}network}\PY{p}{(}\PY{n}{sim}\PY{p}{)}
 \end{Verbatim}
 
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_0.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_1.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_2.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_3.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_4.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_5.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_6.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_7.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_8.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_9.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_10.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    Part 1: Modifications to the Basic Model
 
-Multiple Topics
+
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_0.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_1.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_2.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_3.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_4.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_5.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_6.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_7.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_8.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_9.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_10.png}
+    \end{center}
+
+    
+    \newpage
+    \section{Modifications to the Basic Model}
+
+\subsection{Multiple Topics}
 
 People can share similar opinions on certain topics while differing on
 others. Whenever two nodes interact, we randomly choose a topic for them
@@ -629,7 +631,7 @@ relationship will be positively affected. If they happen to share
 dissimilar opinions on the chosen topic, then their relationship will be
 negatively affected.
 
-Personalized Parameters
+\subsection{Personalized Parameters}
 
 Given the model parameters:
 
@@ -652,26 +654,26 @@ differing levels of flexibility, sensitivity, and emotional intensity -
 though they will not be too different since we are drawing from a normal
 distribution.
 
-Model Persuasiveness
+\subsection{Model Persuasiveness}
 
 Some people are more charismatic or convincing than others, and can
 therefore influence opinions and relationship strengths more than
 others. A persuasiveness parameter is included to observe the effects on
 the model's dynamics.
+\newpage
+\section{Local Analysis}
 
-    Part 2: Local Analysis
+\subsection{General Equations}
 
-General Equations
-
-Change in opinions: \(\Delta o_i = \alpha w_{ij}(o_j - o_i)\)
+\textbf{Change in opinions: \(\Delta o_i = \alpha w_{ij}(o_j - o_i)\)}\\
 
 From this equation, we see that the bigger the difference in opinion,
 the greater the change in opinion. As the relationship strength,
 \(w_{ij}\) increases, the change in opinion also increases. As the node
-flexibility \(\alpha\) increases, the change in opinion also increases.
+flexibility \(\alpha\) increases, the change in opinion also increases.\\
 
-Change in weight:
-\(\Delta w_{ij} = \beta w_{ij}(1-w_{ij})(1-\gamma |o_i-o_j|)\)
+\textbf{Change in weight:
+\(\Delta w_{ij} = \beta w_{ij}(1-w_{ij})(1-\gamma |o_i-o_j|)\)}\\
 
 Assuming that the initial edge weight between two nodes is
 \(w_{ij}=0.5\), we can test the resulting change to the edge weight
@@ -723,11 +725,10 @@ sensitivity \(\gamma\), and opinion differences, \(|o_i - o_j|\):
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_7_0.png}
+    \adjustimage{max size={0.99\linewidth}{1.5\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_7_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
-    Interpretation of \(\beta\) and \(\gamma\)
+    \subsubsection{Interpretation of \(\beta\) and \(\gamma\)}
 
 The graphs above show that irregardless of the starting edge weight,
 when both \(\beta\) and \(\gamma\) are high (0.9 and 9 respectively),
@@ -739,7 +740,7 @@ suggests that \(\gamma\) has a big effect on the point at which the
 change in edge weight turns from positive to negative, i.e. \(\gamma\)
 strongly affects the level of opinion difference needed before the
 interaction between two nodes weakens their relationship instead of
-strengthening it.
+strengthening it.\\
 
 \(\beta\) appears to have a magnifying effect - high \(\beta\) increases
 the magnitude of edge weight change, irregardless of whether the change
@@ -751,7 +752,7 @@ the change in edge weight to become negative. Once the purple and yellow
 lines cross the \(y = 0\) dotted line, the negative change in edge
 weight is also magnified in the purple line vs the yellow line. Since
 they have similar \(\gamma\) values, the purple and yellow lines cross
-the \(y = 0\) boundary at the same time.
+the \(y = 0\) boundary at the same time.\\
 
 From the graphs' depiction of the change in edge weights over various
 parameter settings, we can infer that a node with high \(\gamma\) will
@@ -766,7 +767,7 @@ negative emotions. When someone has low \(\beta\), the magnitude of
 positive or negative edge weight change is diminished. In real life,
 this could be someone who is more stoic in nature.
 
-Effects of Different Initial Edge Weight \(w\)
+\subsubsection{Effects of Different Initial Edge Weight \(w\)}
 
 When \(w=0.5\), the rate of edge weight decrease is greater than when
 \(w=0.1\) or \(w=0.9\) over the range of all \(\beta\) and \(\gamma\)
@@ -793,7 +794,7 @@ every interaction may have more impact as we try to "test the waters"
 and see whether we have enough in common so that the relationship is
 worth investing in.
 
-    Mod 1: Multiple Topics
+    \subsection{Mod 1: Multiple Topics}
 
 Let's assume that all topic opinions are normally distributed with a
 mean of 0.5 and a standard deviation of 0.2, i.e. most people have
@@ -814,7 +815,7 @@ emerge.
 This will be the most common case since the topic opinions will be
 normally distributed, with a "average opinion" mean of 0.5. With similar
 opinions, \(o_i \approx o_j\), and so
-\(\Delta o_i = \Delta o_j \approx 0\).
+\(\Delta o_i = \Delta o_j \approx 0\).\\
 
 From the graphs above, we see that different values of \(\gamma\) will
 adjust the "threshold of opinion difference" before the edge weight
@@ -859,14 +860,14 @@ in terms of that node's edge weight change trajectory.
 
 This will be the rarest case, since it relies on both node opinions for
 the chosen topic being sampled from the tail ends of the normal
-distribution. When this case does occur, if the topics are extreme but
+distribution.\footnote{\textbf{\#distributions:} By drawing the topics from a normal distribution, we expect most people to have similar opinions on various topics, with only a few people having extreme opinions since the more extreme the opinion, the lower the probability of sampling it from the tail ends of the normal distribution. In this case, the mean of the distribution is 0.5, and the standard deviation is 0.2, so for a person to have an extreme opinion, say 0.9, they will need to be at least 2 standard deviations away from the mean, which means that they need to be outside of the 95\% Confidence Interval of opinion values. In real life, we expect to see the distribution of opinions on a normal scale as well, since most people don't typically have overtly extreme opinions on a given random topic.} When this case does occur, if the topics are extreme but
 similar, we expect the edge weight to increase due to the small opinion
 difference. If the topics are dissimilar, we expect the edge weight to
 strongly decrease. Regardless of the parameters chosen, an opinion
 difference of \(\geq 0.7\) leads to the greatest decrease in terms of
-that node's edge weight change trajectory.
+that node's edge weight change trajectory.\\
 
-Summary
+\textbf{Summary}\\
 
 Since Case 1 will be the most common, while Case 2 and Case 3 are less
 common, we expect that most nodes will either increase their
@@ -875,25 +876,25 @@ most of their topics should have an averagely-weighted opinion, given
 that we are sampling from a normal distribution with mean 0.5 and
 standard deviation 0.2 for each topic.
 
-    Mod 2: Personalized Parameters
+    \subsection{Mod 2: Personalized Parameters}
 
 Let's assume that the \(\alpha, \beta,\gamma\) parameters are all
 sampled from normal distributions for any given node. We can test out
 the various combinations of parameter values to observe the resulting
 impact on the node opinion and edge weight.
 
-Opinion Change
+\subsubsection{Opinion Change}
 
 In the opinion change equation,
 \(\Delta o_i = \alpha w_{ij}(o_j - o_i)\), the three components:
-\$\alpha, w\_\{ij\}, \(and\) (o\_j - o\_i)\$, i.e. the node flexibility,
+$\alpha, w_{ij}$, and $(o_j - o_i)$, i.e. the node flexibility,
 relationship strength, and difference in opinions, affect the resulting
 change in opinion for a given node in a rather linear way, i.e. as
-\$\alpha, w\_\{ij\}, \$ or \$ (o\_j - o\_i)\$ increases, \(\Delta o_i\)
-increases linearly.
+$\alpha, w\_\{ij\}, $ or $ (o\_j - o\_i)$ increases, \(\Delta o_i\)
+increases linearly.\\
 
 We can observe the resulting change in opinion using different values of
-\$\alpha, w\_\{ij\}, \$ and \$ (o\_j - o\_i)\$ to model different kinds
+$\alpha, w\_\{ij\}, $ and $ (o\_j - o\_i)$ to model different kinds
 of relationships in the network:
 
    \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
@@ -939,7 +940,6 @@ of relationships in the network:
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_11_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
     From the graph above, we see a clear linearly increasing relationship
 between alpha values and opinion weight change, with the initial
@@ -954,14 +954,14 @@ and their opinions are too similar to enact opinion change. If edge
 weight is high but opinion difference is low, we see the same pattern as
 if edge weight is low but opinion difference is high. This means that a
 close friend with small opinion difference will change our opinion as
-much as a distant friend with big opinion difference.
+much as a distant friend with big opinion difference.\\
 
 The graph also reveals that at low alpha values, the initial weights and
 opinion differences do not differ that much in terms of resulting
 opinion weight change; however, at high alpha values, differing initial
 conditions can cause vastly different opinion weight changes.
 
-Relationship Change
+\subsubsection{Relationship Change}
 
 In the relationship change equation,
 \(\Delta w_{ij} = \beta w_{ij}(1-w_{ij})(1-\gamma |o_i-o_j|)\), the main
@@ -1014,9 +1014,8 @@ larger negative number, leading to a larger decrease in edge weight.
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_13_0.png}
+    \adjustimage{max size={0.99\linewidth}{1.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_13_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
     In comparison to the graphs in the "General Equations" part, here the
 \(\beta\) values are on the x-axis instead of the difference in opinion,
@@ -1025,7 +1024,7 @@ opinion, the edge weight change is constantly linearly increasing. These
 graphs emphasize the fact that when the opinion difference is low, i.e.
 \textasciitilde{}0.1, then even if \(\gamma\) is high, i.e. the node is
 sensitive to opinion differences, then the change in edge weight is
-still positive.
+still positive.\\
 
 These graphs also emphasize the phenomenon that when the opinion
 difference is low (\textasciitilde{}0.1), the change in edge weight is
@@ -1035,9 +1034,9 @@ negative; but when opinion difference is average (\textasciitilde{}0.5),
 then different sensitivities, i.e. different \(\gamma\) values, can
 actually lead to significantly different outcomes - low \(\gamma\) leads
 to an increase in relationship strength, while high \(\gamma\) leads to
-a decrease in relationship strength.
+a decrease in relationship strength.\\
 
-Summary
+\textbf{Summary}\\
 
 From the analyses and graphs above, we see the effect on the opinions
 and relationship of two nodes when using different \(\alpha,\beta\) and
@@ -1055,7 +1054,7 @@ respectively. A normal distribution is suitable since we expect most
 individuals to behave in a rather average way, with a few individuals
 having more extreme personality traits.
 
-    Mod 3: Model Persuasiveness
+    \subsection{Model Persuasiveness}
 
 A persuasiveness parameter can be added to the model to represent the
 different persuasive capabilities that people have. Each node will be
@@ -1063,13 +1062,13 @@ assigned a persuasiveness parameter, \(\theta\), that will increase the
 magnitude of opinion change. \(\theta \in [0.5,1.5]\). When
 \(\theta = 1\), the model follows its default behavior. \(\theta=0.5\)
 symbolizes poor persuasion ability and \(\theta=1.5\) symbolizes high
-persuasion ability.
+persuasion ability.\\
 
 As such, the opinion change equation will be changed from
 \(\Delta o_i = \alpha w_{ij}(o_j - o_i)\), to
 \(\Delta o_i = \theta_j\alpha_i w_{ij}(o_j - o_i)\) where \(\theta\)
 will be obtained from the node \(j\), while \(\alpha\) is obtained from
-node \(i\).
+node \(i\).\\
 
 The effect of \(\theta\) is demonstrated over varying levels of
 \(\alpha\) to observe how different flexibility and persuasion levels
@@ -1099,9 +1098,8 @@ interact. The weight and opinion difference are fixed at 0.5.
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_16_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
-    Summary
+    \textbf{Summary}\\
 
 As expected, the graph shows that as the level of persuasion,
 \(\theta\), increases, the opinion weight change also increases. Higher
@@ -1110,15 +1108,15 @@ any given value of \(\theta\). This suggests that if a node \(i\) with
 high persuasion interacts with a node \(j\) with high flexibility, then
 the expected opinion weight change in node \(j\) will be high. On the
 other hand, low persuasiveness from node \(i\) and low flexibility from
-node \(j\) will lead to a low expected opinion weight change.
+node \(j\) will lead to a low expected opinion weight change.\\
 
 As with the other parameters, the persuasiveness parameter, \(\theta\),
 of a given node will be sampled from a normal distribution. The default
 distribution will have a mean of \(0.5\) and standard deviation of
 \(0.1\) to represent the average persuasiveness of the general
 population. This can be adjusted to test out different scenarios.
-
-    Vector Field Plots
+\newpage
+    \subsection{Vector Field Plots}
 
 Using a vector field plot, we can observe the convergence or divergence
 between two nodes over different values of edge weights and opinion
@@ -1193,20 +1191,23 @@ weights.
                         \PY{n}{title\PYZus{}params}\PY{o}{=}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{alpha\PYZdl{}=}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i][0][0]\PYZcb{}}\PY{l+s+s1}{,\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{beta\PYZdl{}=}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i}
         \PY{l+s+si}{][0][1]\PYZcb{}}\PY{l+s+s1}{,\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma\PYZdl{}=}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i][0][2]\PYZcb{}}\PY{l+s+s1}{,\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{theta\PYZdl{}=}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i][0][3]\PYZcb{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
+    { \hspace*{\fill} \\}
+    \begin{center}
+    \adjustimage{max size={0.99\linewidth}{1.3\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_19_0.png}
+    \end{center}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_19_0.png}
+    \adjustimage{max size={0.99\linewidth}{1.3\paperheight}}{cs166-assignment-3-network-sim_files/vector_field_02.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
-    Analysis
+    \subsubsection{Analysis}
 
 The graphs above display the eventual convergence or divergence of edge
 weight and opinion difference between two nodes over various sets of
 parameter values. Each of the graphs are analyzed individually and the
 findings then synthesized:
 
-Default model (Row 1, column 1)
+    \subsubsection*{Default model (Row 1, column 1)}
 
 In the default model, we see that if we start with an opinion difference
 of \(\geq\) 0.5, unless the edge weight was already 1 to begin with, the
@@ -1221,19 +1222,19 @@ of 0.4, we see that an initial edge weight of \(\geq\) 0.5 tends to
 converge to 1, whereas an initial edge weight \(\leq\) 0.5 will converge
 to 0.
 
-Default model with High Emotional Intensity (Row 1, column 2)
+ \subsubsection*{Default model with High Emotional Intensity (Row 1, column 2)}
 
 When we increase the emotional intensity (\(\beta\)), we see the same
 node behavior as the default model occur at a faster rate, as indiciated
 by the steeper trace slopes.
 
-Default model with High Opinion Flexibility (Row 2, column 1)
+ \subsubsection*{Default model with High Opinion Flexibility (Row 2, column 1)}
 
 When opinion flexibility (\(\alpha\)) is high, the nodes almost always
 converge to an edge weight of 1 unless the initial edge weight is around
 0.3 or lower and the opinion difference is around 0.5 or greater.
 
-Default model with High Sensitivity (Row 2, column 2)
+ \subsubsection*{Default model with High Sensitivity (Row 2, column 2)}
 
 When sensitivity to different opinions (\(\gamma\)) is high, the
 threshold of tolerance for different opinions is lower, i.e. lower
@@ -1243,7 +1244,7 @@ difference of \(\geq\) 0.2 will already tend to towards zero
 convergence, unless the edge weight is really high
 (\textasciitilde{}0.9) around the 0.2 mark.
 
-Low-tension model (Row 3, column 1)
+ \subsubsection*{Low-tension model (Row 3, column 1)}
 
 In the low-tension model, the nodes have high flexibility, low emotional
 intensity, and low sensitivity. The edge weight converges to 1 and the
@@ -1251,14 +1252,14 @@ opinion difference converges to 0 irregardless of the starting points,
 which indicates that such a model will only ever have one final state,
 i.e. strong relationship and shared opinion among the nodes.
 
-High-tension model (Row 3, column 2)
+ \subsubsection*{High-tension model (Row 3, column 2)}
 
 In the high-tension model, the nodes have low flexibility, high
 emotional intensity, and high sensitivity. In sharp contrast to the
 low-tension model, the nodes almost always converge to an edge weight of
 0 unless the initial opinion difference is \(\leq\) 0.1
 
-Default model with High Persuasion (Row 4, column 1)
+ \subsubsection*{Default model with High Persuasion (Row 4, column 1)}
 
 When persuasion (\(\theta\)) is high, we see the green and purple trace
 intertwine at a higher level of opinion difference as compared to the
@@ -1267,14 +1268,14 @@ nodes can start at a point of lower edge weight and higher opinion
 difference vs the default model and still converge to an edge weight of
 1.
 
-Defualt model with Low Persuasion (Row 4, column 2)
+ \subsubsection*{Default model with Low Persuasion (Row 4, column 2)}
 
 When persuasion (\(\theta\)) is low, the opposite effect is observed
 from the high persuasion model. We see that a higher edge weight, and
 lower opinion difference is needed for the nodes to eventually converge
 to edge weight 1 and opinion difference of 0.
 
-Summary
+ \subsubsection*{Summary}
 
 While not every situation could be plotted and observed, these graphs
 provide a good idea of when we can expect convergence or divergence to
@@ -1286,14 +1287,15 @@ corners of the graph, i.e. when edge is high and opinion difference is
 low, and when edge is low and opinion difference is high, but even if
 starting from points in the middle of the graph, the nodes will still
 eventually either end up with edge weight of 1 or 0 depending on whether
-they lie mostly within the green or purple trace.
+they lie mostly within the green or purple trace.\\
 
 Assuming that most people start from an opinion difference of 0.5, and
 an edge weight of 0.5, we see that in the default model, two separate
 clusters will always form as edge weights converge to 0 between two
 nodes of differing opinions.
 
-    Part 3: Implementation
+\newpage
+\section{Implementation}
 
 The social dynamics model is modified to include: multiple opinions,
 personalized parameters, and a persuasion parameter, \(\theta\). The
@@ -1550,6 +1552,8 @@ multiple scenarios are tested with appropriate parameter settings:
                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
 \end{Verbatim}
 
+\newpage
+\subsection*{Default Model}
    \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
 {\color{incolor}In [{\color{incolor}10}]:} \PY{n}{default\PYZus{}model} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}\PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
          
@@ -1557,60 +1561,61 @@ multiple scenarios are tested with appropriate parameter settings:
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_0.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_1.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_2.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_2.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_3.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_3.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_4.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_4.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_5.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_5.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_6.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_6.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_7.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_7.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_8.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_8.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_9.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_9.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_10.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_10.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    
+
+    \newpage
+\subsection*{High-tension Model}
    \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
 {\color{incolor}In [{\color{incolor}11}]:} \PY{n}{high\PYZus{}tension} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}
                          \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
@@ -1623,60 +1628,60 @@ multiple scenarios are tested with appropriate parameter settings:
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_0.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_1.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_2.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_2.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_3.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_3.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_4.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_4.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_5.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_5.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_6.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_6.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_7.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_7.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_8.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_8.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_9.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_9.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_10.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_10.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    
+
+        \newpage
+\subsection*{Low-tension Model}
    \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
 {\color{incolor}In [{\color{incolor}12}]:} \PY{n}{low\PYZus{}tension} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}
                          \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
@@ -1689,60 +1694,61 @@ multiple scenarios are tested with appropriate parameter settings:
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_0.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_1.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_2.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_2.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_3.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_3.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_4.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_4.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_5.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_5.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_6.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_6.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_7.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_7.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_8.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_8.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_9.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_9.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_10.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_10.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    
+
+            \newpage
+\subsection*{High-Persuasion Model}
    \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
 {\color{incolor}In [{\color{incolor}13}]:} \PY{n}{high\PYZus{}persuasion} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}
                          \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
@@ -1752,60 +1758,60 @@ multiple scenarios are tested with appropriate parameter settings:
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_0.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_1.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_2.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_2.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_3.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_3.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_4.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_4.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_5.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_5.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_6.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_6.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_7.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_7.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_8.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_8.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_9.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_9.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_10.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_10.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    
+
+            \newpage
+\subsection*{Low-Persuasion Model}
    \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
 {\color{incolor}In [{\color{incolor}14}]:} \PY{n}{low\PYZus{}persuasion} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}
                          \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
@@ -1815,60 +1821,61 @@ multiple scenarios are tested with appropriate parameter settings:
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_0.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_1.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_2.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_2.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_3.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_3.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_4.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_4.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_5.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_5.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_6.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_6.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_7.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_7.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_8.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_8.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_9.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_9.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_10.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_10.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    
+
+            \newpage
+\subsection*{Multiple-Opinions Model}    
    \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
 {\color{incolor}In [{\color{incolor}15}]:} \PY{n}{multiple\PYZus{}opinions} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}\PY{n}{multi\PYZus{}opinion} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
          
@@ -1876,63 +1883,63 @@ multiple scenarios are tested with appropriate parameter settings:
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_0.png}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_1.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_2.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_3.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_4.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_5.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_6.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_7.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_8.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_9.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_10.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    Part 4: Simulation Analysis
 
-Choice of Graph
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_1.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_2.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_3.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_4.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_5.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_6.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_7.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_8.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_9.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_10.png}
+    \end{center}
+
+    
+\section{Simulation Analysis}
+
+\subsection{Choice of Graph}
 
 In the simulations above, the Watts-Strogatz graph was chosen since it
 has small-world properties, i.e. there is a power-law distribution of
@@ -1943,34 +1950,34 @@ properties as well, and so the Watts-Strogatz graph is an appropriate
 choice for simulating the evolution of network dynamics as we would
 expect to see in the real world.
 
-Simulation Results
+\subsection{Simulation Results}
 
 The results for the simulation of the six scenarios are as follows:
 
-Default model settings
+\subsubsection*{Default model settings}
 
 The end result shows two separate clusters with differing opinions. The
 colors of the two clusters did undergo some visible changes, which
 suggests that despite the nodes breaking into two clusters, some opinion
-change did occur.
+change did occur.\\
 
 The separation of clusters occurs around step 12000.
 
-High-tension model
+\subsubsection*{High-tension model}
 
 The end result shows two separate clusters with a stark color
 difference, suggesting that the nodes with differing opinions broke
 edges and also failed to change opinions of the other. The clustering
 also occurs rather quickly - around step 2000 - 4000.
 
-Low-tension model
+\subsubsection*{Low-tension model}
 
 Around step 2000, the nodes have already intermingled to form one
 cohesive cluster with a shared opinion. The nodes become increasingly
 intermingled as time passes, and we see many more edges within the
 network at the end result.
 
-High-persuasion default model
+\subsubsection*{High-persuasion default model}
 
 In the high-persuasion model, we see that the network is more durable,
 and only starts to break apart at around step 10,000. By that point, the
@@ -1980,21 +1987,21 @@ opposite ends (coral on one end and purple on the other), but are held
 together by some bridging nodes of moderating opinions. Furthermore, the
 nodes colors appear to have "bled" into each other, i.e. instead of two
 starkly different colors, we see a gradient from purple to coral in the
-resulting network.
+resulting network.\\
 
 This suggests that the introduction of high-persuasion nodes into a
 network is capable of bridging the network due to the minimizing of
 opinion difference at an earlier stage, resulting in slower edge
 breakage.
 
-Low-persuasion default model
+\subsubsection*{Low-persuasion default model}
 
 In the low-persuasion model, the nodes break into two different opinion
 clusters and the node colors are similar to the colors at the start of
 the simulation, which suggests that most of their opinions did not
 change. This is similar to the high-tension model.
 
-Multiple opinions model
+\subsubsection*{Multiple opinions model}
 
 In the multiple opinions model, node colors represent the mean of
 opinions over multiple topics, so the model nodes already start out with
@@ -2004,7 +2011,7 @@ nodes tend to have average opinions on topics, with maybe one or two
 extreme opinions. Since there is a higher probability of randomly
 choosing a topic in which both nodes have an average opinion, we see
 that the network grows more robust as time passes with more edges being
-formed while old edges are maintained.
+formed while old edges are maintained.\\
 
 In a multi-topic network, there is less chance of edges completely
 breaking since a) most people have average opinions on a topic, and b)
@@ -2014,7 +2021,7 @@ to relationship recovery. In a way, the model has an inbuilt
 "relationship recovery" system simply due to the higher odds of talking
 about a topic in which both nodes share a similar opinion.
 
-Summary
+\subsubsection*{Summary}
 
 As explained in part 2, the modifications added to the network
 simulation all help to make the model more similar to real life. While
@@ -2022,7 +2029,7 @@ we might not observe much deviation by sampling the personalized
 parameters from normal distributions with means around the average
 expected parameter values, we would in fact expect to see most people
 have roughly similar attitudes that adhere to some normal distribution
-that represents the average behavior in real life.
+that represents the average behavior in real life.\\
 
 In the multi-topic network, we observe that the network is robust and
 does not break apart easily. This is most similar to what we observe in
