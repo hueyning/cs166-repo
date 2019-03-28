@@ -1,0 +1,2083 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{cs166-assignment-3-network-sim}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    CS166: Assignment 3
+
+Network Simulation
+
+The goal of this assignment is to improve the social dynamics model
+covered in Session 7.2 on Adaptive Networks. I proposed my own changes
+to the model to make the dynamics more realistic, implemented my
+improvements in a simulation, and analyze the expected (theoretical) and
+actual (experimental) effects of my changes on the model.
+
+    Part 0: The Basic Model
+
+Description
+
+The basic model simulates the interaction between people's preferences
+or opinions and the strength of their social connections. The basic idea
+is that social dynamics are driven by two factors:
+
+\begin{itemize}
+\item
+  People prefer forming social relationships with others who share their
+  preferences, opinions, or interests.
+\item
+  People's preferences, opinions, or interests tend to become similar to
+  those of other people in their social circle.
+\end{itemize}
+
+These processes are modeled on a small-world network (Watts-Strogatz
+graph) to observe how both opinions and relationships change over time.
+
+Nodes
+
+Nodes represent each person in the network. Each node has an opinion
+attribute associated with it that can take on a value between 0 and 1.
+People with similar-value opinions are in agreement on a topic and
+poeple with different values disagree.
+
+For example, given a node with opinion 0.3, and a different node with
+opinion 0.8, the nodes will have an opinion difference of
+\textbar{}0.3-0.8\textbar{} = 0.5.
+
+Edges
+
+Edges represent the existence of a social relationship between two nodes
+in the network. Each edge has a weight assigned to it, with a value
+between 0 to 1. A weight close to 0 signifies a weak relationship
+between two people, and so their opinions will not influence each other
+much. A weight close to 1 signifies a strong relationship between two
+people, and so they will adjust their opinions to be closer to each
+other.
+
+For example, two nodes with an edge of w = 0.9 between them have a
+stronger relationship than two nodes with an edge of w = 0.2 between
+them.
+
+Update Rules
+
+There are 3 update rules that dictate the evolution of the network's
+dynamics:
+
+Update Rule 1: People change opinions to more closely match those of
+people they have a strong relationship with.
+
+Implementation
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Select a random edge from the network, i.e. two people who have an
+  existing social relationship, and let them interact (think of this
+  interaction as having a conversation about the topic on which everyone
+  has an opinion).
+\item
+  Update the opinion of each person to move a bit closer together. The
+  stronger their relationship, the more they will move their opinions
+  closer to each other.
+\end{enumerate}
+
+Mathematical Derivation
+
+The change in opinion of Person \(i\) when talking to Person \(j\) is:
+
+\(\Delta o_i = \alpha w_{ij}(o_j-o_i)\)
+
+Person \(j\)'s opinion also changes, but in the opposite direction to
+Person \(i\)'s, thus bringing their opinions closer together.
+
+Model Parameters
+
+\(\alpha \in (0,0.5]\) (flexibility level) - High \(\alpha\) indicates
+high flexibility: people change their opinions to match other people's
+relatively quickly. - Low \(\alpha\) indicates inflexibility, people
+change their opinions to match other people's relatively slowly.
+
+Update Rule 2: People strenghten or weaken their relationships depending
+on whether they agree or disagree with each other.
+
+Implementation
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  In the same interaction as in Update Rule 1, the weight of the edge
+  connecting nodes \(i\) and \(j\) is also changed. The update in edge
+  weight symbolizes the strengthening or weakening of the internode
+  relationship depending on how similar or dissimilar their opinions
+  were.
+\item
+  If an edge weight drops below 0.05, we remove it from the network.
+  This models a social relationship that has broken down.
+\end{enumerate}
+
+Mathematical Derivation
+
+The change in weight between Person \(i\) and Person \(j\):
+
+\(\Delta w_{ij} = \beta w_{ij}(1-w_{ij})(1-\gamma |o_i-o_j|)\)
+
+Model Parameters
+
+\(\beta \in (0,1)\) (Relationship rate change) - High \(\beta\)
+indicates that relationships change drastically in response to a
+difference in opinion. - Low \(\beta\) indicates that relationships do
+not change much in response to a difference in opinion
+
+\(\gamma > 0\) (Sensitivity to different opinions) - \(\gamma \leq 1\)
+indicates low sensitivity. All edge weights will converge to 1 over time
+since different opinions don't matter enough to decrease edge weights. -
+\(\gamma > 1\) indicates middle to high sensitivity. The edge weight
+between two nodes will decrease if the opinions of the nodes are
+different enough, i.e. if \(|o_i - o_j| > \gamma^{-1}\).
+
+Update Rule 3: People have a small probability of randomly making new
+connections with strangers.
+
+Implementation
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  1\% of the time, we pick two random unconnected nodes from the network
+  and build a new edge between them. The edge weight is initially set to
+  0.5.
+\item
+  Over time, the weight will either increase towards 1 or decrease
+  towards 0 depending on whether the two people have similar or
+  differing opinions using Update Rules 1 and 2.
+\end{enumerate}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}import libraries}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}\PY{p}{,} \PY{n}{HTML}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib} \PY{k}{as} \PY{n+nn}{mpl}
+        \PY{k+kn}{import} \PY{n+nn}{networkx} \PY{k}{as} \PY{n+nn}{nx}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{cycler}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{class} \PY{n+nc}{SocialDynamicsSim}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Simulate social dynamics by strengthening opinions and connection weights}
+        \PY{l+s+sd}{    based on random interactions between nodes.}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{network\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.03}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        Inputs:}
+        
+        \PY{l+s+sd}{            network\PYZus{}size (int) The number of nodes in the random Watts\PYZhy{}Strogatz}
+        \PY{l+s+sd}{              small\PYZhy{}world network. Default: 50.}
+        
+        \PY{l+s+sd}{            alpha (float) The rate at which nodes adjust their opinions to}
+        \PY{l+s+sd}{              match neighboring nodes\PYZsq{} opinions during interactions.}
+        \PY{l+s+sd}{              Default: 0.03.}
+        
+        \PY{l+s+sd}{            beta (float) The rate at which edge weights are changed in}
+        \PY{l+s+sd}{              response to differing opinions. Default: 0.3.}
+        
+        \PY{l+s+sd}{            gamma (float) The sensitivity of nodes. Nodes with opinions differing}
+        \PY{l+s+sd}{              by more than 1/gamma will result in an edge weight decreasing.}
+        \PY{l+s+sd}{              Default: 4.}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{network\PYZus{}size} \PY{o}{=} \PY{n}{network\PYZus{}size}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alpha} \PY{o}{=} \PY{n}{alpha}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta} \PY{o}{=} \PY{n}{beta}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gamma} \PY{o}{=} \PY{n}{gamma}
+        
+            \PY{k}{def} \PY{n+nf}{initialize}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        Initialize the simulation with a random graph, with random 0 or 1}
+        \PY{l+s+sd}{        opinions assigned to all nodes and initial edge weights of 0.5.}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph} \PY{o}{=} \PY{n}{nx}\PY{o}{.}\PY{n}{watts\PYZus{}strogatz\PYZus{}graph}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{edge} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.5}
+        
+                \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Initial visual layout}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{layout} \PY{o}{=} \PY{n}{nx}\PY{o}{.}\PY{n}{spring\PYZus{}layout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Initial step count}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step} \PY{o}{=} \PY{l+m+mi}{0}
+        
+            \PY{k}{def} \PY{n+nf}{observe}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        Draw the state of the network.}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{layout} \PY{o}{=} \PY{n}{nx}\PY{o}{.}\PY{n}{spring\PYZus{}layout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{p}{,} \PY{n}{pos} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{layout}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{clf}\PY{p}{(}\PY{p}{)}
+                \PY{n}{nx}\PY{o}{.}\PY{n}{draw}\PY{p}{(}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{p}{,} \PY{n}{pos}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{layout}\PY{p}{,} \PY{n}{with\PYZus{}labels}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                        \PY{n}{node\PYZus{}color}\PY{o}{=}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{edge\PYZus{}color}\PY{o}{=}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{edge\PYZus{}cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{binary}\PY{p}{,} \PY{n}{edge\PYZus{}vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{edge\PYZus{}vmax}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                        \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Step: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{update}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} 1\PYZpc{} of the time, create a new edge with weight 0.5 between two unconnected}
+        \PY{n}{nodes}
+                \PY{k}{if} \PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.01}\PY{p}{:}
+                    \PY{n}{nodes} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{)}
+                    \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                        \PY{n}{new\PYZus{}edge} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{nodes}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                        \PY{k}{if} \PY{n}{new\PYZus{}edge} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{:}
+                            \PY{k}{break}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{add\PYZus{}edge}\PY{p}{(}\PY{n}{new\PYZus{}edge}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{new\PYZus{}edge}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{weight}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+        
+                \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{} Select a random edge and update node opinions and edge weight}
+        
+                    \PY{c+c1}{\PYZsh{}select a random edge}
+                    \PY{n}{edge} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{)}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}get edge weight}
+                    \PY{n}{weight} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                    \PY{c+c1}{\PYZsh{}get opinions from both nodes on either end of the edge}
+                    \PY{n}{opinions} \PY{o}{=} \PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{edge}\PY{p}{]}
+        
+                    \PY{c+c1}{\PYZsh{}update opinions for both nodes}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{edge}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}
+                            \PY{n}{opinions}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alpha} \PY{o}{*} \PY{n}{weight} \PY{o}{*} \PY{p}{(}\PY{n}{opinions}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{opinions}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{}update the edge weight}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}
+                        \PY{n}{weight} \PY{o}{+}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta} \PY{o}{*} \PY{n}{weight} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{weight}\PY{p}{)} \PY{o}{*}
+                        \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gamma} \PY{o}{*} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{opinions}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{opinions}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{} Remove very weak connections}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.05}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{remove\PYZus{}edge}\PY{p}{(}\PY{o}{*}\PY{n}{edge}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{sim} \PY{o}{=} \PY{n}{SocialDynamicsSim}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}network}\PY{p}{(}\PY{n}{sim}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sim}\PY{o}{.}\PY{n}{initialize}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+            \PY{n}{sim}\PY{o}{.}\PY{n}{observe}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2000}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{sim}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+                \PY{n}{sim}\PY{o}{.}\PY{n}{observe}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{plot\PYZus{}network}\PY{p}{(}\PY{n}{sim}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_4_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Part 1: Modifications to the Basic Model
+
+Multiple Topics
+
+People can share similar opinions on certain topics while differing on
+others. Whenever two nodes interact, we randomly choose a topic for them
+to talk about (randomly select an index from the array of opinions). If
+they happen to share similar opinions on the chosen topic, then their
+relationship will be positively affected. If they happen to share
+dissimilar opinions on the chosen topic, then their relationship will be
+negatively affected.
+
+Personalized Parameters
+
+Given the model parameters:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\alpha\): flexibility (controls how easily people change their
+  opinions to match others)
+\item
+  \(\gamma\): sensitivity (controls the threshold of tolerance for a
+  difference in opinions)
+\item
+  \(\beta\): emotional intensity (controls how much the relationship
+  changes in response to differing opinions)
+\end{itemize}
+
+The parameters for each node are personalied by drawing from appropriate
+normal distributions. This means that different nodes will have
+differing levels of flexibility, sensitivity, and emotional intensity -
+though they will not be too different since we are drawing from a normal
+distribution.
+
+Model Persuasiveness
+
+Some people are more charismatic or convincing than others, and can
+therefore influence opinions and relationship strengths more than
+others. A persuasiveness parameter is included to observe the effects on
+the model's dynamics.
+
+    Part 2: Local Analysis
+
+General Equations
+
+Change in opinions: \(\Delta o_i = \alpha w_{ij}(o_j - o_i)\)
+
+From this equation, we see that the bigger the difference in opinion,
+the greater the change in opinion. As the relationship strength,
+\(w_{ij}\) increases, the change in opinion also increases. As the node
+flexibility \(\alpha\) increases, the change in opinion also increases.
+
+Change in weight:
+\(\Delta w_{ij} = \beta w_{ij}(1-w_{ij})(1-\gamma |o_i-o_j|)\)
+
+Assuming that the initial edge weight between two nodes is
+\(w_{ij}=0.5\), we can test the resulting change to the edge weight
+using different values of emotional intensity \(\beta\), node
+sensitivity \(\gamma\), and opinion differences, \(|o_i - o_j|\):
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{opinion\PYZus{}diff\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{edge\PYZus{}change}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{diff}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{beta}\PY{o}{*}\PY{n}{w}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{w}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{gamma}\PY{o}{*}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{diff}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{ec\PYZus{}df}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+        
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}o\PYZus{}i \PYZhy{} o\PYZus{}j\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{opinion\PYZus{}diff\PYZus{}vals}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta w\PYZus{}}\PY{l+s+si}{\PYZob{}ij\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{beta = 0.3, }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma = 4\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{edge\PYZus{}change}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{diff}\PY{p}{)} \PY{k}{for}
+        \PY{n}{diff} \PY{o+ow}{in} \PY{n}{opinion\PYZus{}diff\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta w\PYZus{}}\PY{l+s+si}{\PYZob{}ij\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{beta = 0.9, }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma = 9\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{edge\PYZus{}change}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{diff}\PY{p}{)} \PY{k}{for}
+        \PY{n}{diff} \PY{o+ow}{in} \PY{n}{opinion\PYZus{}diff\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta w\PYZus{}}\PY{l+s+si}{\PYZob{}ij\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{beta = 0.1, }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma = 9\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{edge\PYZus{}change}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{diff}\PY{p}{)} \PY{k}{for}
+        \PY{n}{diff} \PY{o+ow}{in} \PY{n}{opinion\PYZus{}diff\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta w\PYZus{}}\PY{l+s+si}{\PYZob{}ij\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{beta = 0.9, }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma = 1.5\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{edge\PYZus{}change}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{n}{diff}\PY{p}{)}
+        \PY{k}{for} \PY{n}{diff} \PY{o+ow}{in} \PY{n}{opinion\PYZus{}diff\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta w\PYZus{}}\PY{l+s+si}{\PYZob{}ij\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{beta = 0.1, }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma = 1.5\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{edge\PYZus{}change}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{n}{diff}\PY{p}{)}
+        \PY{k}{for} \PY{n}{diff} \PY{o+ow}{in} \PY{n}{opinion\PYZus{}diff\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+            \PY{p}{\PYZcb{}}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{df}
+        
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}ec}\PY{p}{(}\PY{n}{ec\PYZus{}df}\PY{p}{,}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{hlines}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{xmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{xmax}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}46494f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{linestyles}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Difference in Opinions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Change in Edge Weight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Changes in Edge Weight vs Difference in Opinions (\PYZdl{}w =\PYZdl{} }\PY{l+s+si}{\PYZob{}w\PYZcb{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ec\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{opinion\PYZus{}diff\PYZus{}vals}\PY{p}{,}\PY{n}{ec\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{ec\PYZus{}df}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{prop}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{13}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{init\PYZus{}edge\PYZus{}weights} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{]}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{init\PYZus{}edge\PYZus{}weights}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{edge\PYZus{}change\PYZus{}df} \PY{o}{=} \PY{n}{ec\PYZus{}df}\PY{p}{(}\PY{n}{init\PYZus{}edge\PYZus{}weights}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{plot\PYZus{}ec}\PY{p}{(}\PY{n}{edge\PYZus{}change\PYZus{}df}\PY{p}{,}\PY{n}{init\PYZus{}edge\PYZus{}weights}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Interpretation of \(\beta\) and \(\gamma\)
+
+The graphs above show that irregardless of the starting edge weight,
+when both \(\beta\) and \(\gamma\) are high (0.9 and 9 respectively),
+the change in edge weight has the steepest slope. However, we can also
+see that the low \(\beta =0.1\), high \(\gamma =0.9\) line cuts into the
+\(y = 0\) line at roughly the same point - i.e the red and green line
+both interesect the dotted black line at roughly the same point - which
+suggests that \(\gamma\) has a big effect on the point at which the
+change in edge weight turns from positive to negative, i.e. \(\gamma\)
+strongly affects the level of opinion difference needed before the
+interaction between two nodes weakens their relationship instead of
+strengthening it.
+
+\(\beta\) appears to have a magnifying effect - high \(\beta\) increases
+the magnitude of edge weight change, irregardless of whether the change
+in weight is positive or negative. The purple line
+(\(\beta =0.9, \gamma =0.15\)), in contrast to the yellow line
+(\(\beta =0.1, \gamma =0.15\)), has a much higher magnitude of positive
+effect before the difference in opinion becomes great enough to cause
+the change in edge weight to become negative. Once the purple and yellow
+lines cross the \(y = 0\) dotted line, the negative change in edge
+weight is also magnified in the purple line vs the yellow line. Since
+they have similar \(\gamma\) values, the purple and yellow lines cross
+the \(y = 0\) boundary at the same time.
+
+From the graphs' depiction of the change in edge weights over various
+parameter settings, we can infer that a node with high \(\gamma\) will
+be more sensitive towards a difference in opinion, i.e. experiences a
+negative change in edge weight even at low differences in opinion, while
+a node with low \(\gamma\) will be less sensitive, and only experiences
+a negative change in edge weight when opinion difference is very large.
+When a node has high \(\beta\), they experience greater magnitudes of
+edge weight change, which can be translated to real life as someone who
+experiences emotions very intensely - whether they be positive or
+negative emotions. When someone has low \(\beta\), the magnitude of
+positive or negative edge weight change is diminished. In real life,
+this could be someone who is more stoic in nature.
+
+Effects of Different Initial Edge Weight \(w\)
+
+When \(w=0.5\), the rate of edge weight decrease is greater than when
+\(w=0.1\) or \(w=0.9\) over the range of all \(\beta\) and \(\gamma\)
+values tested. This suggests that individuals, aka the nodes, experience
+greater relationship increase or decrease with other nodes that they
+share an "average" relationship with. On the other hand, when they have
+stronger or weaker relationship with other nodes, the magnitude of
+relationship change is smaller. This could be interpreted as stronger or
+weaker relationships not having much room for change since we either:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  have an established relationship with the other person that is not
+  that "susceptible" to change, or
+\item
+  do not know the other person enough to change our relationship
+  significantly after an interaction.
+\end{enumerate}
+
+However, if we are starting to get more intimate with someone so that
+they are no longer acquaintances, but also not yet close friends, then
+every interaction may have more impact as we try to "test the waters"
+and see whether we have enough in common so that the relationship is
+worth investing in.
+
+    Mod 1: Multiple Topics
+
+Let's assume that all topic opinions are normally distributed with a
+mean of 0.5 and a standard deviation of 0.2, i.e. most people have
+average opinions on most topics, but will occasionally have extreme
+opinions on one or two topics. When two nodes interact, we randomly
+select a topic from the list of topics available, and 3 possible cases
+emerge.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Both node \(i, n_i\) and node \(j, n_j\) have average opinions on the
+  chosen topic, topic a: \(t_{i} \approx 0.5\) and
+  \(t_{j} \approx 0.5\).
+\end{enumerate}
+
+This will be the most common case since the topic opinions will be
+normally distributed, with a "average opinion" mean of 0.5. With similar
+opinions, \(o_i \approx o_j\), and so
+\(\Delta o_i = \Delta o_j \approx 0\).
+
+From the graphs above, we see that different values of \(\gamma\) will
+adjust the "threshold of opinion difference" before the edge weight
+change goes from positive to negative. The graphs show that given an
+average value of \(\gamma=4\), an opinion difference of about up to
+\textasciitilde{}\(0.2\) should be tolerated before the edge weight
+change starts becoming negative.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  One of the nodes has an average opinion on the topic,
+  \(t_{ai} \approx 0.5\), while the other node has an extreme opinion on
+  the topic, \(t_{aj} \approx 0.9\).
+\end{enumerate}
+
+The probability of this occuring is rarer than case 1, since the extreme
+opinion node would have to be pulled from the tail ends of the normal
+distribution. When this case occurs, we expect the edge weight to
+experience a moderate decrease. Regardless of the parameters chosen, an
+opinion difference of around \(0.2 - 0.6\) leads to a moderate decrease
+in terms of that node's edge weight change trajectory.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Both nodes have extreme opinions on the topic.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Extreme but similar opinions, \(t_{i} = t_{j} \approx 0.9\)
+\item
+  Extreme but dissimilar opinions, \(t_{i} \approx 0.9\) and
+  \(t_{j} \approx 0.1\)
+\end{itemize}
+
+This will be the rarest case, since it relies on both node opinions for
+the chosen topic being sampled from the tail ends of the normal
+distribution. When this case does occur, if the topics are extreme but
+similar, we expect the edge weight to increase due to the small opinion
+difference. If the topics are dissimilar, we expect the edge weight to
+strongly decrease. Regardless of the parameters chosen, an opinion
+difference of \(\geq 0.7\) leads to the greatest decrease in terms of
+that node's edge weight change trajectory.
+
+Summary
+
+Since Case 1 will be the most common, while Case 2 and Case 3 are less
+common, we expect that most nodes will either increase their
+relationship, or only experience minor decreases in relationship since
+most of their topics should have an averagely-weighted opinion, given
+that we are sampling from a normal distribution with mean 0.5 and
+standard deviation 0.2 for each topic.
+
+    Mod 2: Personalized Parameters
+
+Let's assume that the \(\alpha, \beta,\gamma\) parameters are all
+sampled from normal distributions for any given node. We can test out
+the various combinations of parameter values to observe the resulting
+impact on the node opinion and edge weight.
+
+Opinion Change
+
+In the opinion change equation,
+\(\Delta o_i = \alpha w_{ij}(o_j - o_i)\), the three components:
+\$\alpha, w\_\{ij\}, \(and\) (o\_j - o\_i)\$, i.e. the node flexibility,
+relationship strength, and difference in opinions, affect the resulting
+change in opinion for a given node in a rather linear way, i.e. as
+\$\alpha, w\_\{ij\}, \$ or \$ (o\_j - o\_i)\$ increases, \(\Delta o_i\)
+increases linearly.
+
+We can observe the resulting change in opinion using different values of
+\$\alpha, w\_\{ij\}, \$ and \$ (o\_j - o\_i)\$ to model different kinds
+of relationships in the network:
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{opinion\PYZus{}change}\PY{p}{(}\PY{n}{alpha}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{diff}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{alpha}\PY{o}{*}\PY{n}{w}\PY{o}{*}\PY{n}{diff}
+        
+        \PY{n}{alpha\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}oc\PYZus{}df}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{opinion\PYZus{}change\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+        
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{alpha\PYZus{}vals}\PY{p}{,}
+        
+                \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta o\PYZus{}i\PYZdl{} (\PYZdl{}w\PYZdl{} = 0.1, \PYZdl{}o\PYZus{}j\PYZhy{}o\PYZus{}i\PYZdl{} = 0.1)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{c+c1}{\PYZsh{}Low weight, small opinion diff}
+                \PY{p}{[}\PY{n}{opinion\PYZus{}change}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{alpha\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+        
+                \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta o\PYZus{}i\PYZdl{} (\PYZdl{}w\PYZdl{} = 0.9, \PYZdl{}o\PYZus{}j\PYZhy{}o\PYZus{}i\PYZdl{} = 0.1)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{c+c1}{\PYZsh{}High weight, low opinion diff ==}
+        \PY{n}{low} \PY{n}{weight}\PY{p}{,} \PY{n}{high} \PY{n}{opinion} \PY{n}{diff}
+                \PY{p}{[}\PY{n}{opinion\PYZus{}change}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{alpha\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+        
+                \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta o\PYZus{}i\PYZdl{} (\PYZdl{}w\PYZdl{} = \PYZdl{}o\PYZus{}j\PYZhy{}o\PYZus{}i\PYZdl{} = 0.5)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{c+c1}{\PYZsh{}Avg weight, avg opinion diff}
+                \PY{p}{[}\PY{n}{opinion\PYZus{}change}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{alpha\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+        
+                \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta o\PYZus{}i\PYZdl{} (\PYZdl{}w\PYZdl{} = 0.9, \PYZdl{}o\PYZus{}j\PYZhy{}o\PYZus{}i\PYZdl{} = 0.9)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{c+c1}{\PYZsh{}High weight, high opinion diff}
+                \PY{p}{[}\PY{n}{opinion\PYZus{}change}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{)} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{alpha\PYZus{}vals}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{opinion\PYZus{}change\PYZus{}df}
+        
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}opinion\PYZus{}change}\PY{p}{(}\PY{n}{oc\PYZus{}df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{alpha\PYZdl{} values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Opinion Weight Change}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{alpha\PYZdl{} Values vs Changes in Opinion Weight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{oc\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{alpha\PYZus{}vals}\PY{p}{,}\PY{n}{oc\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{oc\PYZus{}df}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{prop}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{12}\PY{p}{\PYZcb{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{175}\PY{p}{)}
+        \PY{n}{opinion\PYZus{}change\PYZus{}df} \PY{o}{=} \PY{n}{create\PYZus{}oc\PYZus{}df}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot\PYZus{}opinion\PYZus{}change}\PY{p}{(}\PY{n}{opinion\PYZus{}change\PYZus{}df}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the graph above, we see a clear linearly increasing relationship
+between alpha values and opinion weight change, with the initial
+combination of high edge weight and big opinion difference having the
+steepest slope. This makes intuitive sense if we consider that the
+stronger a relationship is, the more influence the nodes will have on
+each other; and the more different their opinions are, the more room for
+change there will be in their respective opinions. On the other hand, if
+both edge weight and opinion difference are low, then the opinion weight
+will not change much since the nodes have less influence on each other,
+and their opinions are too similar to enact opinion change. If edge
+weight is high but opinion difference is low, we see the same pattern as
+if edge weight is low but opinion difference is high. This means that a
+close friend with small opinion difference will change our opinion as
+much as a distant friend with big opinion difference.
+
+The graph also reveals that at low alpha values, the initial weights and
+opinion differences do not differ that much in terms of resulting
+opinion weight change; however, at high alpha values, differing initial
+conditions can cause vastly different opinion weight changes.
+
+Relationship Change
+
+In the relationship change equation,
+\(\Delta w_{ij} = \beta w_{ij}(1-w_{ij})(1-\gamma |o_i-o_j|)\), the main
+components involved are \(\beta, w_{ij},\gamma,\) and \(|o_i - o_j|\).
+From the equation, we can infer that as \(\beta\) increases, the edge
+weight change magnitude increases, whether that be in the positive or
+negative direction; as \(\gamma\) increases, the magnitude of
+\(|o_i-o_j|\) is inflated, and so \((1-\gamma |o_i-o_j|)\) will be a
+larger negative number, leading to a larger decrease in edge weight.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{beta\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{edge\PYZus{}change}\PY{p}{(}\PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{diff}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{beta}\PY{o}{*}\PY{n}{w}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{w}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{gamma}\PY{o}{*}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{diff}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{ec\PYZus{}df}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{diff}\PY{p}{)}\PY{p}{:}
+        
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Beta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{beta\PYZus{}vals}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta w\PYZus{}}\PY{l+s+si}{\PYZob{}ij\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma\PYZdl{} = 1.5)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{edge\PYZus{}change}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{diff}\PY{p}{)} \PY{k}{for} \PY{n}{b} \PY{o+ow}{in}
+        \PY{n}{beta\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta w\PYZus{}}\PY{l+s+si}{\PYZob{}ij\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma\PYZdl{} = 5)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{edge\PYZus{}change}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{diff}\PY{p}{)} \PY{k}{for} \PY{n}{b} \PY{o+ow}{in} \PY{n}{beta\PYZus{}vals}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta w\PYZus{}}\PY{l+s+si}{\PYZob{}ij\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma\PYZdl{} = 9)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{edge\PYZus{}change}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{diff}\PY{p}{)} \PY{k}{for} \PY{n}{b} \PY{o+ow}{in} \PY{n}{beta\PYZus{}vals}\PY{p}{]}
+            \PY{p}{\PYZcb{}}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{df}
+        
+        \PY{n}{param\PYZus{}pairs} \PY{o}{=} \PY{p}{[} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,}
+                        \PY{p}{(}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{)}\PY{p}{,}
+                        \PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{,}
+                        \PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{)}\PY{p}{,}
+                        \PY{p}{(}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)} \PY{p}{]}
+        
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}ec}\PY{p}{(}\PY{n}{ec\PYZus{}df}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{diff}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{beta\PYZdl{} values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Edge Weight Change}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{beta\PYZdl{} Values vs Change in Edge Weight (\PYZdl{}w\PYZdl{} = }\PY{l+s+si}{\PYZob{}w\PYZcb{}}\PY{l+s+s2}{, \PYZdl{}|o\PYZus{}i \PYZhy{} o\PYZus{}j|\PYZdl{} =}
+        \PY{p}{\PYZob{}}\PY{n}{diff}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, size=20)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ec\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{beta\PYZus{}vals}\PY{p}{,}\PY{n}{ec\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{ec\PYZus{}df}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{prop}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,}\PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{param\PYZus{}pairs}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{edge\PYZus{}change\PYZus{}df} \PY{o}{=} \PY{n}{ec\PYZus{}df}\PY{p}{(}\PY{n}{param\PYZus{}pairs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{param\PYZus{}pairs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{plot\PYZus{}ec}\PY{p}{(}\PY{n}{edge\PYZus{}change\PYZus{}df}\PY{p}{,}\PY{n}{param\PYZus{}pairs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{param\PYZus{}pairs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In comparison to the graphs in the "General Equations" part, here the
+\(\beta\) values are on the x-axis instead of the difference in opinion,
+and so we see that for some of the graphs with low difference in
+opinion, the edge weight change is constantly linearly increasing. These
+graphs emphasize the fact that when the opinion difference is low, i.e.
+\textasciitilde{}0.1, then even if \(\gamma\) is high, i.e. the node is
+sensitive to opinion differences, then the change in edge weight is
+still positive.
+
+These graphs also emphasize the phenomenon that when the opinion
+difference is low (\textasciitilde{}0.1), the change in edge weight is
+consistently positive; when opinion difference is high
+(\textasciitilde{}0.9), the change in edge weight is consistently
+negative; but when opinion difference is average (\textasciitilde{}0.5),
+then different sensitivities, i.e. different \(\gamma\) values, can
+actually lead to significantly different outcomes - low \(\gamma\) leads
+to an increase in relationship strength, while high \(\gamma\) leads to
+a decrease in relationship strength.
+
+Summary
+
+From the analyses and graphs above, we see the effect on the opinions
+and relationship of two nodes when using different \(\alpha,\beta\) and
+\(\gamma\) values. Assuming that we sample the \(\alpha,\beta\) and
+\(\gamma\) values from normal distributions of means \(0.03,0.3\), and
+\(4\) respectively, with relatively small standard deviations, we can
+expect that the behavior of the model will not deviate too greatly.
+Different means and standard deviations can be used in building the
+normal distributions to observe the evolving behavior of different
+models. The main purpose of sampling from a normal distribution instead
+of using fixed values would be to emulate real life behavior where we
+expect individuals to have different flexibility, emotional intensity,
+and sensitivity as represented by \(\alpha,\beta\) and \(\gamma\)
+respectively. A normal distribution is suitable since we expect most
+individuals to behave in a rather average way, with a few individuals
+having more extreme personality traits.
+
+    Mod 3: Model Persuasiveness
+
+A persuasiveness parameter can be added to the model to represent the
+different persuasive capabilities that people have. Each node will be
+assigned a persuasiveness parameter, \(\theta\), that will increase the
+magnitude of opinion change. \(\theta \in [0.5,1.5]\). When
+\(\theta = 1\), the model follows its default behavior. \(\theta=0.5\)
+symbolizes poor persuasion ability and \(\theta=1.5\) symbolizes high
+persuasion ability.
+
+As such, the opinion change equation will be changed from
+\(\Delta o_i = \alpha w_{ij}(o_j - o_i)\), to
+\(\Delta o_i = \theta_j\alpha_i w_{ij}(o_j - o_i)\) where \(\theta\)
+will be obtained from the node \(j\), while \(\alpha\) is obtained from
+node \(i\).
+
+The effect of \(\theta\) is demonstrated over varying levels of
+\(\alpha\) to observe how different flexibility and persuasion levels
+interact. The weight and opinion difference are fixed at 0.5.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{w}\PY{p}{,} \PY{n}{diff} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}
+        
+        \PY{k}{def} \PY{n+nf}{opinion\PYZus{}change\PYZus{}ext}\PY{p}{(}\PY{n}{theta}\PY{p}{,}\PY{n}{alpha}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{diff}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{theta}\PY{o}{*}\PY{n}{alpha}\PY{o}{*}\PY{n}{w}\PY{o}{*}\PY{n}{diff}
+        
+        \PY{n}{theta\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.6}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)}
+        
+        \PY{n}{alpha\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.6}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{175}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{alpha\PYZus{}vals}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{theta\PYZdl{} Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Opinion Weight Change}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{theta\PYZdl{} Values vs Changes in Opinion Weight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{opinion\PYZus{}change} \PY{o}{=} \PY{p}{[}\PY{n}{opinion\PYZus{}change\PYZus{}ext}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{alpha\PYZus{}vals}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{diff}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{theta\PYZus{}vals}\PY{p}{]}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{theta\PYZus{}vals}\PY{p}{,} \PY{n}{opinion\PYZus{}change}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{alpha=\PYZdl{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(alpha\PYZus{}vals[i],1)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Summary
+
+As expected, the graph shows that as the level of persuasion,
+\(\theta\), increases, the opinion weight change also increases. Higher
+levels of \(\alpha\) increase the magnitude of opinion weight change for
+any given value of \(\theta\). This suggests that if a node \(i\) with
+high persuasion interacts with a node \(j\) with high flexibility, then
+the expected opinion weight change in node \(j\) will be high. On the
+other hand, low persuasiveness from node \(i\) and low flexibility from
+node \(j\) will lead to a low expected opinion weight change.
+
+As with the other parameters, the persuasiveness parameter, \(\theta\),
+of a given node will be sampled from a normal distribution. The default
+distribution will have a mean of \(0.5\) and standard deviation of
+\(0.1\) to represent the average persuasiveness of the general
+population. This can be adjusted to test out different scenarios.
+
+    Vector Field Plots
+
+Using a vector field plot, we can observe the convergence or divergence
+between two nodes over different values of edge weights and opinion
+weights.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{itertools}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}
+        
+        \PY{k}{def} \PY{n+nf}{vector\PYZus{}plot}\PY{p}{(}\PY{n}{alpha}\PY{p}{,}\PY{n}{beta}\PY{p}{,}\PY{n}{gamma}\PY{p}{,}\PY{n}{theta}\PY{p}{,}\PY{n}{title\PYZus{}desc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title\PYZus{}params}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+        
+            \PY{c+c1}{\PYZsh{} Plot traces of how opinion and weight change over time}
+            \PY{k}{for} \PY{n}{opinion}\PY{p}{,} \PY{n}{weight} \PY{o+ow}{in} \PY{p}{[}
+                \PY{p}{[}\PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.45}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.65}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{]}\PY{p}{,}
+                \PY{p}{[}\PY{l+m+mf}{0.85}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.65}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.45}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{]}\PY{p}{,}
+                \PY{p}{[}\PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mf}{0.15}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.15}\PY{p}{,} \PY{l+m+mf}{0.06}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.06}\PY{p}{]}
+            \PY{p}{]}\PY{p}{:}
+                \PY{n}{ow} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{opinion}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{weight}\PY{p}{]}\PY{p}{]}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{delta\PYZus{}o} \PY{o}{=} \PY{n}{theta} \PY{o}{*} \PY{n}{alpha} \PY{o}{*} \PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{delta\PYZus{}w} \PY{o}{=} \PY{p}{(}
+                        \PY{n}{beta} \PY{o}{*} \PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{*}
+                        \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{gamma}\PY{o}{*}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{new\PYZus{}weight} \PY{o}{=} \PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{+} \PY{n}{delta\PYZus{}w}
+                    \PY{k}{if} \PY{n}{new\PYZus{}weight} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.05}\PY{p}{:}
+                        \PY{n}{new\PYZus{}weight} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n}{ow}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{delta\PYZus{}o}\PY{p}{,} \PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{delta\PYZus{}o}\PY{p}{,} \PY{n}{new\PYZus{}weight}\PY{p}{]}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}
+                    \PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{row}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{ow}\PY{p}{]}\PY{p}{,}
+                    \PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{ow}\PY{p}{]}\PY{p}{,}
+                    \PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{n}{cmap}\PY{p}{(}\PY{l+m+mf}{0.15}\PY{p}{)} \PY{k}{if} \PY{n}{ow}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0} \PY{k}{else} \PY{n}{cmap}\PY{p}{(}\PY{l+m+mf}{0.75}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Plot vector field}
+            \PY{n}{opinion} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}  \PY{c+c1}{\PYZsh{} the difference in opinion, |o\PYZus{}i \PYZhy{} o\PYZus{}j|}
+            \PY{n}{weight} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}   \PY{c+c1}{\PYZsh{} the edge weight, w\PYZus{}ij}
+            \PY{n}{ow\PYZus{}grid} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{opinion}\PY{p}{,} \PY{n}{weight}\PY{p}{)}
+            \PY{n}{delta\PYZus{}o\PYZus{}grid} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{alpha} \PY{o}{*} \PY{n}{ow\PYZus{}grid}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{ow\PYZus{}grid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{theta}
+            \PY{n}{delta\PYZus{}w\PYZus{}grid} \PY{o}{=} \PY{n}{beta} \PY{o}{*} \PY{n}{ow\PYZus{}grid}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{ow\PYZus{}grid}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{gamma} \PY{o}{*} \PY{n}{ow\PYZus{}grid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{quiver}\PY{p}{(}\PY{n}{ow\PYZus{}grid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ow\PYZus{}grid}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{delta\PYZus{}o\PYZus{}grid}\PY{p}{,} \PY{n}{delta\PYZus{}w\PYZus{}grid}\PY{p}{)}
+        
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vector Field Plot of Opinion Difference vs Edge Weight }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZob{}title\PYZus{}desc\PYZcb{}}
+        \PYZbs{}\PY{n}{n} \PY{p}{\PYZob{}}\PY{n}{title\PYZus{}params}\PY{p}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, size=23)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Opinion Difference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Edge Weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        
+        \PY{n}{param\PYZus{}pairs} \PY{o}{=} \PY{p}{[}
+            \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.03}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.03}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default with high emotional intensity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default with high flexibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.03}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default with high sensitivity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low\PYZhy{}tension: high flexibility, low emotional intensity, low}
+        \PY{n}{sensitivity}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ),}
+            \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High\PYZhy{}tension: low flexibility, low emotional intensity, high}
+        \PY{n}{sensitivity}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{),}
+            \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.03}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default with high persuasion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.03}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default with low persuasion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{p}{]}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{)}\PY{p}{,}\PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{)}
+        \PY{n}{cmap} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{viridis}  \PY{c+c1}{\PYZsh{} good for color blindness}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{param\PYZus{}pairs}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{vector\PYZus{}plot}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{n}{param\PYZus{}pairs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{beta}\PY{o}{=}\PY{n}{param\PYZus{}pairs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{gamma}\PY{o}{=}\PY{n}{param\PYZus{}pairs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{theta}\PY{o}{=}\PY{n}{param\PYZus{}pairs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{title\PYZus{}desc}\PY{o}{=}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i][1]\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{n}{title\PYZus{}params}\PY{o}{=}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{alpha\PYZdl{}=}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i][0][0]\PYZcb{}}\PY{l+s+s1}{,\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{beta\PYZdl{}=}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i}
+        \PY{l+s+si}{][0][1]\PYZcb{}}\PY{l+s+s1}{,\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma\PYZdl{}=}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i][0][2]\PYZcb{}}\PY{l+s+s1}{,\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{theta\PYZdl{}=}\PY{l+s+si}{\PYZob{}param\PYZus{}pairs[i][0][3]\PYZcb{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Analysis
+
+The graphs above display the eventual convergence or divergence of edge
+weight and opinion difference between two nodes over various sets of
+parameter values. Each of the graphs are analyzed individually and the
+findings then synthesized:
+
+Default model (Row 1, column 1)
+
+In the default model, we see that if we start with an opinion difference
+of \(\geq\) 0.5, unless the edge weight was already 1 to begin with, the
+edge weight will tend to converge to 0. For opinion differences of
+roughly \(\leq\) 0.2, the edge weight will converge to 1 irregardless of
+the starting edge weight. In the middle zone, i.e. 0.2 \(\leq\) opinion
+difference \(\leq\) 0.5, the initial edge weight plays a role in
+determining whether the two nodes will eventually converge to an edge
+weight of 1 (following the green trace), or converge to an edge weight
+of 0 (following the purple trace). For example, at an opinion difference
+of 0.4, we see that an initial edge weight of \(\geq\) 0.5 tends to
+converge to 1, whereas an initial edge weight \(\leq\) 0.5 will converge
+to 0.
+
+Default model with High Emotional Intensity (Row 1, column 2)
+
+When we increase the emotional intensity (\(\beta\)), we see the same
+node behavior as the default model occur at a faster rate, as indiciated
+by the steeper trace slopes.
+
+Default model with High Opinion Flexibility (Row 2, column 1)
+
+When opinion flexibility (\(\alpha\)) is high, the nodes almost always
+converge to an edge weight of 1 unless the initial edge weight is around
+0.3 or lower and the opinion difference is around 0.5 or greater.
+
+Default model with High Sensitivity (Row 2, column 2)
+
+When sensitivity to different opinions (\(\gamma\)) is high, the
+threshold of tolerance for different opinions is lower, i.e. lower
+values of opinion difference will converge to an edge weight of 0, as
+compared to the default model. In this case, we see that an opinion
+difference of \(\geq\) 0.2 will already tend to towards zero
+convergence, unless the edge weight is really high
+(\textasciitilde{}0.9) around the 0.2 mark.
+
+Low-tension model (Row 3, column 1)
+
+In the low-tension model, the nodes have high flexibility, low emotional
+intensity, and low sensitivity. The edge weight converges to 1 and the
+opinion difference converges to 0 irregardless of the starting points,
+which indicates that such a model will only ever have one final state,
+i.e. strong relationship and shared opinion among the nodes.
+
+High-tension model (Row 3, column 2)
+
+In the high-tension model, the nodes have low flexibility, high
+emotional intensity, and high sensitivity. In sharp contrast to the
+low-tension model, the nodes almost always converge to an edge weight of
+0 unless the initial opinion difference is \(\leq\) 0.1
+
+Default model with High Persuasion (Row 4, column 1)
+
+When persuasion (\(\theta\)) is high, we see the green and purple trace
+intertwine at a higher level of opinion difference as compared to the
+default model vector plot. This suggests that with high persuasion, the
+nodes can start at a point of lower edge weight and higher opinion
+difference vs the default model and still converge to an edge weight of
+1.
+
+Defualt model with Low Persuasion (Row 4, column 2)
+
+When persuasion (\(\theta\)) is low, the opposite effect is observed
+from the high persuasion model. We see that a higher edge weight, and
+lower opinion difference is needed for the nodes to eventually converge
+to edge weight 1 and opinion difference of 0.
+
+Summary
+
+While not every situation could be plotted and observed, these graphs
+provide a good idea of when we can expect convergence or divergence to
+occur between the nodes. In short, we see that for a givens set of
+parameter values, the starting point of two nodes can determine the
+evolution and eventual state of their opinion difference and edge weight
+values. The strongest pulls occur at the top left and bottom right
+corners of the graph, i.e. when edge is high and opinion difference is
+low, and when edge is low and opinion difference is high, but even if
+starting from points in the middle of the graph, the nodes will still
+eventually either end up with edge weight of 1 or 0 depending on whether
+they lie mostly within the green or purple trace.
+
+Assuming that most people start from an opinion difference of 0.5, and
+an edge weight of 0.5, we see that in the default model, two separate
+clusters will always form as edge weights converge to 0 between two
+nodes of differing opinions.
+
+    Part 3: Implementation
+
+The social dynamics model is modified to include: multiple opinions,
+personalized parameters, and a persuasion parameter, \(\theta\). The
+default values are shown within the class initialization code, and
+multiple scenarios are tested with appropriate parameter settings:
+
+\begin{itemize}
+\tightlist
+\item
+  Default model settings
+\item
+  High-tension model
+\item
+  Low-tension model
+\item
+  High-persuasion default model
+\item
+  Low-persuasion default model
+\item
+  Multiple opinions model
+\end{itemize}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{class} \PY{n+nc}{SocialDynamicsMod}\PY{p}{(}\PY{n}{SocialDynamicsSim}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Modification of the social dynamics simulation class}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{network\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.03}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{theta}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                            \PY{n}{multi\PYZus{}opinion} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{topics} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{opinion\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,}
+        \PY{n}{opinion\PYZus{}sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,}
+                            \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}
+                            \PY{n}{alpha\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{0.03}\PY{p}{,} \PY{n}{alpha\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.02}\PY{p}{,}
+                            \PY{n}{beta\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{beta\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,}
+                            \PY{n}{gamma\PYZus{}mu} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{gamma\PYZus{}sigma} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,}
+                            \PY{n}{theta\PYZus{}mu} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{theta\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        Inputs:}
+        
+        \PY{l+s+sd}{            theta (float) The persuasion factor of the opinion change equation.}
+        \PY{l+s+sd}{                        Affects the rate at which nodes change their opinion.}
+        \PY{l+s+sd}{                        Default: 1.}
+        
+        \PY{l+s+sd}{            multi\PYZus{}opinion (bool) if True, the opinion array has length \PYZgt{} 1,}
+        \PY{l+s+sd}{                        and the distribution of opinions are drawn from a normal}
+        \PY{l+s+sd}{distribution}
+        \PY{l+s+sd}{                        with mu = opinion\PYZus{}mu and sigma = opinion\PYZus{}sigma. If False, the}
+        \PY{l+s+sd}{opinion array}
+        \PY{l+s+sd}{                        has length = 1 and opinions are drawn from a random uniform}
+        \PY{l+s+sd}{distribution.}
+        \PY{l+s+sd}{                        Default: False}
+        
+        \PY{l+s+sd}{                topics (int) Only applicable if multi\PYZus{}opinion = True.}
+        \PY{l+s+sd}{                            The number of topics in the opinion array.}
+        \PY{l+s+sd}{                            Default: 5.}
+        
+        \PY{l+s+sd}{                opinion\PYZus{}mu (float) Only applicable if multi\PYZus{}opinion = True.}
+        \PY{l+s+sd}{                            The mean of the normal distribution of topic opinions.}
+        \PY{l+s+sd}{                            Default: 0.5.}
+        
+        \PY{l+s+sd}{                opinion\PYZus{}sigma (float) Only applicable if multi\PYZus{}opinion = True.}
+        \PY{l+s+sd}{                            The standard deviation of the normal distribution of topic}
+        \PY{l+s+sd}{opinions.}
+        \PY{l+s+sd}{                            Default: 0.2.}
+        
+        \PY{l+s+sd}{            personal\PYZus{}params (bool) if True, then all the params (alpha, beta, gamma,}
+        \PY{l+s+sd}{theta) are sampled}
+        \PY{l+s+sd}{                        from normal distributions with mu and sigma as defined.}
+        \PY{l+s+sd}{                        Default: False}
+        
+        \PY{l+s+sd}{                alpha\PYZus{}mu, alpha\PYZus{}sigma (int) Only applicable if personal\PYZus{}params = True.}
+        \PY{l+s+sd}{                            The mean and standard deviation of alpha normal}
+        \PY{l+s+sd}{distribution.}
+        \PY{l+s+sd}{                            Default: 0.03, 0.02.}
+        
+        \PY{l+s+sd}{                beta\PYZus{}mu, beta\PYZus{}sigma (float) Only applicable if personal\PYZus{}params = True.}
+        \PY{l+s+sd}{                            The mean and standard deviation of beta normal distribution.}
+        \PY{l+s+sd}{                            Default: 0.3, 0.2.}
+        
+        \PY{l+s+sd}{                gamma\PYZus{}mu, gamma\PYZus{}sigma (float) Only applicable if personal\PYZus{}params = True.}
+        \PY{l+s+sd}{                            The mean and standard deviation of gamma normal}
+        \PY{l+s+sd}{distribution.}
+        \PY{l+s+sd}{                            Default: 4, 2.}
+        
+        \PY{l+s+sd}{                theta\PYZus{}mu, theta\PYZus{}sigma (float) Only applicable if personal\PYZus{}params = True.}
+        \PY{l+s+sd}{                            The mean and standard deviation of theta normal}
+        \PY{l+s+sd}{distribution.}
+        \PY{l+s+sd}{                            Default: 1, 0.2.}
+        
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+                \PY{c+c1}{\PYZsh{}inherit from parent SocialDynamicsSim class}
+                \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{network\PYZus{}size}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{}set lower and upper bound for the parameter normal distributions}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lower} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{upper} \PY{o}{=} \PY{l+m+mi}{1}
+        
+                \PY{c+c1}{\PYZsh{}multi\PYZhy{}opinion mod}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{multi\PYZus{}opinion} \PY{o}{=} \PY{n}{multi\PYZus{}opinion}
+        
+                \PY{k}{if} \PY{n}{multi\PYZus{}opinion}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{}number of topics in the opinion array}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{topics} \PY{o}{=} \PY{n}{topics}
+        
+                    \PY{c+c1}{\PYZsh{}opinion normal distribution params}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opinion\PYZus{}mu} \PY{o}{=} \PY{n}{opinion\PYZus{}mu}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opinion\PYZus{}sigma} \PY{o}{=} \PY{n}{opinion\PYZus{}sigma}
+        
+                \PY{c+c1}{\PYZsh{}personal params mod}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{n}{personal\PYZus{}params}
+        
+                \PY{k}{if} \PY{n}{personal\PYZus{}params}\PY{p}{:}
+        
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{params\PYZus{}lst} \PY{o}{=} \PY{p}{[}
+                        \PY{c+c1}{\PYZsh{}mu, sigma, lower, and upper boundaries}
+                        \PY{p}{(}\PY{n}{alpha\PYZus{}mu}\PY{p}{,} \PY{n}{alpha\PYZus{}sigma}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lower}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{upper}\PY{p}{)}\PY{p}{,}
+                        \PY{p}{(}\PY{n}{beta\PYZus{}mu}\PY{p}{,} \PY{n}{beta\PYZus{}sigma}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lower}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{upper}\PY{p}{)}\PY{p}{,}
+                        \PY{p}{(}\PY{n}{gamma\PYZus{}mu}\PY{p}{,} \PY{n}{gamma\PYZus{}sigma}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}
+                        \PY{p}{(}\PY{n}{theta\PYZus{}mu}\PY{p}{,} \PY{n}{theta\PYZus{}sigma}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lower}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{upper}\PY{p}{)}
+                    \PY{p}{]}
+        
+                \PY{c+c1}{\PYZsh{}persuasion mod}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{theta} \PY{o}{=} \PY{n}{theta}
+        
+            \PY{k}{def} \PY{n+nf}{initialize}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        Initialize the simulation with a random graph, with random 0 or 1}
+        \PY{l+s+sd}{        opinions assigned to all nodes and initial edge weights of 0.5.}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph} \PY{o}{=} \PY{n}{nx}\PY{o}{.}\PY{n}{watts\PYZus{}strogatz\PYZus{}graph}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{edge} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.5}
+        
+                \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{:}
+        
+                    \PY{c+c1}{\PYZsh{} multi\PYZhy{}opinion mod}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{multi\PYZus{}opinion}\PY{p}{:} \PY{c+c1}{\PYZsh{}let each node have an array of different topic}
+        \PY{n}{opinions}\PY{o}{.}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{truncnorm}\PY{p}{(}
+                                                            \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lower} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opinion\PYZus{}mu}\PY{p}{)} \PY{o}{/}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opinion\PYZus{}sigma}\PY{p}{,}
+                                                            \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{upper} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opinion\PYZus{}mu}\PY{p}{)} \PY{o}{/}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opinion\PYZus{}sigma}\PY{p}{,}
+                                                            \PY{n}{loc}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opinion\PYZus{}mu}\PY{p}{,}
+        \PY{n}{scale}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{opinion\PYZus{}sigma}\PY{p}{)}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{topics}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{} just select one opinion from a random uniform distribution}
+                    \PY{k}{else}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        
+        
+                    \PY{c+c1}{\PYZsh{} personal params mod}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{personal\PYZus{}params}\PY{p}{:} \PY{c+c1}{\PYZsh{}draw each node\PYZsq{}s personalized param from normal}
+        \PY{n}{distributions}
+                        \PY{n}{chosen\PYZus{}param\PYZus{}values} \PY{o}{=} \PY{p}{[}\PY{n}{stats}\PY{o}{.}\PY{n}{truncnorm}\PY{p}{(}
+                                                \PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                                \PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                                \PY{n}{loc}\PY{o}{=}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+                                                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{params\PYZus{}lst}\PY{p}{]}
+        
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{chosen\PYZus{}param\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{chosen\PYZus{}param\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{chosen\PYZus{}param\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{chosen\PYZus{}param\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+                    \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{}just assign the global params to each node}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alpha}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gamma}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{theta}
+        
+                \PY{c+c1}{\PYZsh{} Initial visual layout}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{layout} \PY{o}{=} \PY{n}{nx}\PY{o}{.}\PY{n}{spring\PYZus{}layout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Initial step count}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step} \PY{o}{=} \PY{l+m+mi}{0}
+        
+            \PY{k}{def} \PY{n+nf}{observe}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        Draw the state of the network.}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{layout} \PY{o}{=} \PY{n}{nx}\PY{o}{.}\PY{n}{spring\PYZus{}layout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{p}{,} \PY{n}{pos} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{layout}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{clf}\PY{p}{(}\PY{p}{)}
+        
+                \PY{n}{nx}\PY{o}{.}\PY{n}{draw}\PY{p}{(}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{p}{,} \PY{n}{pos}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{layout}\PY{p}{,} \PY{n}{with\PYZus{}labels}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                        \PY{c+c1}{\PYZsh{}take mean of opinion topics for node color}
+                        \PY{n}{node\PYZus{}color}\PY{o}{=}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{edge\PYZus{}color}\PY{o}{=}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{edge\PYZus{}cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{binary}\PY{p}{,} \PY{n}{edge\PYZus{}vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{edge\PYZus{}vmax}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                        \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+                \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Step: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{update}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} 1\PYZpc{} of the time, create a new edge with weight 0.5 between two unconnected}
+        \PY{n}{nodes}
+                \PY{k}{if} \PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.01}\PY{p}{:}
+                    \PY{n}{nodes} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{)}
+                    \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                        \PY{n}{new\PYZus{}edge} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{nodes}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                        \PY{k}{if} \PY{n}{new\PYZus{}edge} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{:} \PY{k}{break}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{add\PYZus{}edge}\PY{p}{(}\PY{n}{new\PYZus{}edge}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{new\PYZus{}edge}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{weight}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+        
+                \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{} Select a random edge and update node opinions and edge weight}
+        
+                    \PY{c+c1}{\PYZsh{}select a random edge}
+                    \PY{n}{edge} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{)}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{}get edge weight}
+                    \PY{n}{weight} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+                    \PY{c+c1}{\PYZsh{}get opinions from both nodes on either end of the edge}
+        
+                    \PY{c+c1}{\PYZsh{}multi\PYZhy{}opinion mod}
+                    \PY{c+c1}{\PYZsh{}randomly choose a topic index from the opinions array}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{multi\PYZus{}opinion}\PY{p}{:} \PY{n}{chosen\PYZus{}topic} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{topics}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:} \PY{n}{chosen\PYZus{}topic} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{}just default to 0, the only topic}
+        
+                    \PY{c+c1}{\PYZsh{}get opinions from both nodes}
+                    \PY{n}{node\PYZus{}opinions} \PY{o}{=} \PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{chosen\PYZus{}topic}\PY{p}{]} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in}
+        \PY{n}{edge}\PY{p}{]}
+        
+                    \PY{c+c1}{\PYZsh{}update opinions for both nodes}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+        
+                        \PY{c+c1}{\PYZsh{}alpha is taken from the current node}
+                        \PY{n}{alpha} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{edge}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                        \PY{c+c1}{\PYZsh{}theta is taken from the the other node}
+                        \PY{n}{theta} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{edge}\PY{p}{[}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{edge}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opinions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{chosen\PYZus{}topic}\PY{p}{]} \PY{o}{=} \PY{p}{(}
+                            \PY{n}{node\PYZus{}opinions}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{theta} \PY{o}{*} \PY{n}{alpha} \PY{o}{*} \PY{n}{weight} \PY{o}{*} \PY{p}{(}\PY{n}{node\PYZus{}opinions}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}}
+        \PY{n}{node\PYZus{}opinions}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{}take the average beta and gamma of both nodes to update the edge weight}
+                    \PY{n}{beta} \PY{o}{=}
+        \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{edge}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{edge}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{gamma} \PY{o}{=}
+        \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{edge}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{nodes}\PY{p}{[}\PY{n}{edge}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{}update the edge weight}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}
+                        \PY{n}{weight} \PY{o}{+} \PY{n}{beta} \PY{o}{*} \PY{n}{weight} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{weight}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{gamma} \PY{o}{*} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{node\PYZus{}opinions}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{o}{\PYZhy{}} \PY{n}{node\PYZus{}opinions}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{} Remove very weak connections}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{edges}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.05}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{graph}\PY{o}{.}\PY{n}{remove\PYZus{}edge}\PY{p}{(}\PY{o}{*}\PY{n}{edge}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{default\PYZus{}model} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}\PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}network}\PY{p}{(}\PY{n}{default\PYZus{}model}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_23_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{high\PYZus{}tension} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}
+                         \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+                         \PY{n}{alpha\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{alpha\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.02}\PY{p}{,}
+                         \PY{n}{beta\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{beta\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,}
+                         \PY{n}{gamma\PYZus{}mu} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,} \PY{n}{gamma\PYZus{}sigma} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,}
+                         \PY{n}{theta\PYZus{}mu} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{theta\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}network}\PY{p}{(}\PY{n}{high\PYZus{}tension}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_24_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{low\PYZus{}tension} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}
+                         \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+                         \PY{n}{alpha\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{n}{alpha\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.02}\PY{p}{,}
+                         \PY{n}{beta\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{beta\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,}
+                         \PY{n}{gamma\PYZus{}mu} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{gamma\PYZus{}sigma} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,}
+                         \PY{n}{theta\PYZus{}mu} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{theta\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}network}\PY{p}{(}\PY{n}{low\PYZus{}tension}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_25_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{high\PYZus{}persuasion} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}
+                         \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+                         \PY{n}{theta\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{theta\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}network}\PY{p}{(}\PY{n}{default\PYZus{}model}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_26_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{low\PYZus{}persuasion} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}
+                         \PY{n}{personal\PYZus{}params} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+                         \PY{n}{theta\PYZus{}mu} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{theta\PYZus{}sigma} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}network}\PY{p}{(}\PY{n}{low\PYZus{}persuasion}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_27_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{multiple\PYZus{}opinions} \PY{o}{=} \PY{n}{SocialDynamicsMod}\PY{p}{(}\PY{n}{multi\PYZus{}opinion} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}network}\PY{p}{(}\PY{n}{multiple\PYZus{}opinions}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs166-assignment-3-network-sim_files/cs166-assignment-3-network-sim_28_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Part 4: Simulation Analysis
+
+Choice of Graph
+
+In the simulations above, the Watts-Strogatz graph was chosen since it
+has small-world properties, i.e. there is a power-law distribution of
+number of edges per node since "hub" nodes with many connections tend to
+collect even more connections a la preferential attachment. The
+relationships we form in real life tend to exhibit small-world
+properties as well, and so the Watts-Strogatz graph is an appropriate
+choice for simulating the evolution of network dynamics as we would
+expect to see in the real world.
+
+Simulation Results
+
+The results for the simulation of the six scenarios are as follows:
+
+Default model settings
+
+The end result shows two separate clusters with differing opinions. The
+colors of the two clusters did undergo some visible changes, which
+suggests that despite the nodes breaking into two clusters, some opinion
+change did occur.
+
+The separation of clusters occurs around step 12000.
+
+High-tension model
+
+The end result shows two separate clusters with a stark color
+difference, suggesting that the nodes with differing opinions broke
+edges and also failed to change opinions of the other. The clustering
+also occurs rather quickly - around step 2000 - 4000.
+
+Low-tension model
+
+Around step 2000, the nodes have already intermingled to form one
+cohesive cluster with a shared opinion. The nodes become increasingly
+intermingled as time passes, and we see many more edges within the
+network at the end result.
+
+High-persuasion default model
+
+In the high-persuasion model, we see that the network is more durable,
+and only starts to break apart at around step 10,000. By that point, the
+nodes have interacted enough so that their opinions are less extreme. At
+the end of the simulation, the nodes have formed into two clusters as
+opposite ends (coral on one end and purple on the other), but are held
+together by some bridging nodes of moderating opinions. Furthermore, the
+nodes colors appear to have "bled" into each other, i.e. instead of two
+starkly different colors, we see a gradient from purple to coral in the
+resulting network.
+
+This suggests that the introduction of high-persuasion nodes into a
+network is capable of bridging the network due to the minimizing of
+opinion difference at an earlier stage, resulting in slower edge
+breakage.
+
+Low-persuasion default model
+
+In the low-persuasion model, the nodes break into two different opinion
+clusters and the node colors are similar to the colors at the start of
+the simulation, which suggests that most of their opinions did not
+change. This is similar to the high-tension model.
+
+Multiple opinions model
+
+In the multiple opinions model, node colors represent the mean of
+opinions over multiple topics, so the model nodes already start out with
+a fairly average "mean" opinion, as represented by the pinkish color.
+Since the node opinions are sampled from a normal distribution, most
+nodes tend to have average opinions on topics, with maybe one or two
+extreme opinions. Since there is a higher probability of randomly
+choosing a topic in which both nodes have an average opinion, we see
+that the network grows more robust as time passes with more edges being
+formed while old edges are maintained.
+
+In a multi-topic network, there is less chance of edges completely
+breaking since a) most people have average opinions on a topic, and b)
+even if an extreme-opinion topic is chosen during one interaction, the
+subsequent interaction could be with an average-opinion topic, leading
+to relationship recovery. In a way, the model has an inbuilt
+"relationship recovery" system simply due to the higher odds of talking
+about a topic in which both nodes share a similar opinion.
+
+Summary
+
+As explained in part 2, the modifications added to the network
+simulation all help to make the model more similar to real life. While
+we might not observe much deviation by sampling the personalized
+parameters from normal distributions with means around the average
+expected parameter values, we would in fact expect to see most people
+have roughly similar attitudes that adhere to some normal distribution
+that represents the average behavior in real life.
+
+In the multi-topic network, we observe that the network is robust and
+does not break apart easily. This is most similar to what we observe in
+real life, as we often have opinions on multiple topics, and can share
+relationships and make new, strong connections with other people through
+similar interests, even if we differ in opinions regarding certain
+topics. To make this even more realistic, we could assign:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  different probabilities for the topic to be chosen in the interaction
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Some topics come up more regularly in conversation than others. For
+  example, our opinions on friends and family, tv shows, our inclination
+  towards going outdoors vs staying indoors, etc. will be more commonly
+  brought up vs obscure topics such as how we feel about cilantro as a
+  garnish.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  different weights for different topics
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Some topics may carry more significance than others, and hold more
+  power to make or break a relationship. For example, a difference in
+  political or racial views may lead to bigger fall out vs a difference
+  in food preference. By assigning different weights, we can reflect the
+  boost or decrease in edge weight as according to the importance of
+  different topics.
+\end{itemize}
+
+By adding more complexity to the model, we could technically make the
+model more similar to real life, but this might also take away the
+appeal of the model as a simple simulation that can represent the
+complexity of real life without trying to include all the minute
+details. A careful consideration has to be made regarding the use-case
+of the model before additional modifications are added for the sake of
+making the model more "realistic".
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
