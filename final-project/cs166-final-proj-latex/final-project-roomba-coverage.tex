@@ -1,0 +1,2466 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CS166 Final Project: Roomba Coverage}
+    \author{Huey Ning Lok}
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+   
+\section{Introduction}
+
+A Roomba is a robotic vacuum cleaner that automatically moves around a
+room or a house to clean the floor. A Roomba can use different
+strategies to navigate a room and clean it, with each strategy having
+its own strengths and weaknesses in terms of cleaning efficiency
+\cite{woodford}.\\
+
+In this assignment, I will compare and contrast the efficiency of
+various Roomba strategies by modeling the Roomba as a moving unit on an
+integer grid and conducting a Monte Carlo experiment. To run a Monte
+Carlo experiment, simulations that contain elements of randomness are
+run multiple times to generate a result consisting of a range of values
+(number of values == number of simulations run), thus allowing us to
+assess the level of probability and certainty surrounding that value.
+
+\section{Object Representation}
+
+The three main elements in the simulation are the floor, the obstacles,
+and the Roomba. Walls are considered a type of fixed obstacle - they
+always occupy the outer border of the floor and do not change position
+across simulations.
+
+\subsection{The Floor}
+
+The floor is represented as a square grid of size x size, where size is
+a user input. For example, if size is 5, a 5 x 5 grid will be generated
+with 25 cells. The 25 cells are explorable by the Roomba unless there is
+an obstacle on them, or they are surrounded by obstacles in such a way
+that there is no opening for the Roomba to reach that part of the floor
+(this is an undesirable situation, but will occasionally occur given
+the random nature of the obstacle placement).\\
+
+Empty spots on the floor are represented with the integer \texttt{-1}
+when creating the simulation, and string '.' when displaying the
+simulation.
+
+\subsection{The Obstacles}
+
+The obstacles are represented as units on the square grid. Each obstacle
+generated occupies one cell on the grid; neighboring obstacles that are
+located side-by-side can be interpreted as a large object by the user,
+but are still counted as individual objects when the Roomba sim class
+generates and calculates the floor's obstacle density.\\
+
+The obstacle density is a user input and can range from 0 to 0.99 - any
+value greater than 0.99 is not allowed since then the entire floor will
+be covered by obstacles. The number of obstacles to be placed on the
+floor grid is calculated as
+\texttt{obstacle\_count\ =\ obstacle\_density\ x\ size\ x\ size}.\\
+
+Since the number of obstacles placed has to be an integer value, the
+result of \texttt{obstacle\_count} will be transformed into an integer
+using the \texttt{int} function, which ends up rounding down the value.
+For example, \texttt{0.99\ *\ 5\ *\ 5\ =\ 24.75;\ int(24.75)\ =\ 24}. As
+such, the user can go up to 0.99 obstacle density without ever covering
+the entire floor grid. That being said, when the Roomba sim class
+detects that the roomba is trapped on all sides by an object - as will
+be inevitable with a 0.99 obstacle density - the simulation will break
+out of the update loop and end.\\
+
+The obstacle positions are generated randomly each time, thus
+introducing randomness into each simulation. Obstacles are represented with the integer \texttt{1} when creating the
+simulation, and string \texttt{X} when displaying the simulation.
+
+\subsection{The Roomba}
+
+The Roomba is represented as a single unit on the square grid. The
+Roomba's starting location is randomly initialized each simulation by
+listing the cells on the floor that aren't occupied by an obstacle, and
+randomly placing the Roomba on one those empty cells.\\
+
+The Roomba's field of vision and movement follow a Moore neighborhood
+configuration, i.e. given that the Roomba occupies a single cell on the
+grid, it is capable of detecting obstacles in and moving to any of the 8
+cells surrounding it as long as those cells are not occupied by an
+obstacle.\\
+
+The Roomba's strategy will determine the way it chooses the next cell to
+move to. The four strategies will be elaborated below, but generally
+speaking, only the 'wall\_following' strategy makes use of the Roomba's
+field of vision to decide on the next position.\\
+
+The Roomba is represented with the integer \texttt{0} when creating the
+simulation, and string \texttt{O} when displaying the simulation. The
+Roomba's Moore neighborhood field of vision and movement range are
+colored in red.
+
+\subsection{The Walls}
+
+The walls are represented as fixed obstacles that make up the border of
+the floor. Given a fixed floor size, the walls never change position.
+Since the walls are represented as obstacles, they are also represented
+with the integer \texttt{1} when creating the simulation, and string
+\texttt{X} when displaying the simulation.
+
+\newpage
+\section{Roomba Strategies}
+
+For this experiment, the four strategies to be implemented by the Roomba
+are random bounce, wall-following, one-step memory, and multi-step
+memory. In all the strategies, we assume that the next position must
+always be within the Roomba's immediate Moore neighborhood. That is, it
+is impossible for the Roomba to move to a cell that it is not located
+next to.\\
+
+Each of the strategies require certain conditions to be met in order to
+be implemented by the Roomba. The wall-following, one-step memory, and
+multi-step memory strategies will default to random bounce behavior if
+their conditions are not met.\footnote{\textbf{\#creativeheuristics:} In order to brainstorm the various strategies that could be implemented by the Roomba, I used the creative heuristic of building on and extending on the baseline strategy (random bounce) to devise new strategies that would hopefully be improved versions. For example, the one-step memory builds on the random bounce by retaining information of the latest position. The muti-step memory builds on the one-step by retaining information of a sequence of positions. Lastly, the wall-following strategy uses elements of both random bounce and one-step to keep moving in a straight line while cleaning along a wall.}
+
+\subsection{Random Bounce}
+
+In the random bounce strategy, as long as a cell within the Moore
+neighborhood is not occupied by an obstacle, then the Roomba has a
+random chance of moving to it. Given set \(N\) representing the Roomba's
+Moore neighborhood, and set \(O\) representing the cells on the floor
+grid that contain obstacles, the possible next positions, \(P\), for the
+Roomba can be obtained by calculating \(P_{rb} = N - O\). The next move
+is picked from \(P\) with a random uniform probability.\footnote{\textbf{\#probability:} By choosing the next step by sampling from a random uniform probability distribution, we get unique simulations that allow us to map a range of values with varying probabilities, instead of deterministically calculating a single value. This random behavior forms the basis of the Monte Carlo experiments, and provide a more realistic analysis of how the Roomba would behave in real life. The other strategies build on random bounce with various other random choices, and so randomness is incorporated into the simulation from multiple aspects.}
+
+\subsection{One-Step Memory}
+
+The one-step memory strategy extends on the random bounce strategy by
+avoiding any obstacle-occupied cells and choosing randomly from any
+remaining obstacle-free cells within the Moore neighborhood \emph{that
+were not its most recent position}. That is, given set \(N\)
+representing the Roomba's Moore neighborhood, set \(O\) representing the
+obstacle-occupied cells within the entire grid, and a set of length one
+\(Z_{one}\) that represents the Roomba's most recent position, the
+available options for next moves are given by
+\(P_{os} = N - O - Z_{one}\). Since it is possible that the Roomba has
+nowhere else to move to except to backtrack to its most recent position
+- for example, if all other positions are occupied by obstacles - the
+strategy only applies if \(P_{os} = N - O - Z_{one} >= 1\).\\
+
+If \(P_{os} = N - O - Z_{one} >= 1\), the Roomba randomly chooses its
+next position from set \(P_{os}\). Else, it defaults to the random
+bounce strategy and just chooses from \(P_{rb} = N - O\), i.e. it has no
+other choice but to backtrack.\\
+
+This strategy is meant to encourage the Roomba to explore new areas of
+the grid as opposed to circling around the same area - which has a
+higher probability of occuring with random bounce.
+
+\subsection{Multi-Step Memory}
+
+The multi-step memory strategy extends on the one-step memory strategy.
+Instead of simply remembering the most recent position, i.e. a set
+\(Z_{one}\) of length 1 - a sequence of all previous positions are
+retained within the Roomba's memory. This set of all previous positions
+will be assigned the notation \(Z_{all}\), and can - and in most cases,
+should - have length \textgreater{} 1. The only cases where
+\(Z_{all} \leq 1\) would be either a) the Roomba is completely
+surrounded by obstacles and so cannot move at all, i.e. 8/8 neighborhood
+cells are occupied by obstacles; or b) 7/8 neighborhood cells are
+occupied by obstacles, and so the Roomba can only move back the way it
+came from.\\
+
+The list of available next positions are then given by  \(P_{ms} = N - O - Z_{all}\);
+ (\(N\): neighborhood cells, \(O\): all obstacle-occupied
+cells on grid, \(Z_{all}:\)set of all previous positions of the
+Roomba\()\). Once again, \(P_{ms} = N - M - Z_{all}\geq 1\) must hold
+for the strategy to be applied; else, it just defaults to the random
+bounce strategy.\\
+
+The multi-step memory strategy encourages the Roomba to explore an even
+wider terrain of the grid vs the one-step memory strategy, since the
+Roomba tries to avoid \emph{any} of its previous locations.
+
+\subsection{Wall-Following}
+
+In the wall-following strategy, the Roomba scans the 3 cells to its top,
+bottom, left, and right in order to detect a series of 3 obstacles in a
+row. When a series of 3 obstacles is detected, the Roomba will assume
+that the 3-cell obstacle is a wall, and proceed to move alongside it,
+thus "following the wall" as it cleans.
+
+\subsubsection{General algorithm}
+
+The general wall-following algorithm is as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Detect presence of wall (or a long obstacle, which can be mistaken as
+  a wall) by checking whether the top-bottom sensor coordinates, or
+  right-left sensor coordinates can be found within the set of obstacle
+  coordinates.
+\item
+  If condition 1 is true, check whether the Roomba was already
+  previously moving alongside the wall. If it was, keep moving in a
+  direction that ensures a straight path. For example, if the Roomba was
+  already moving horizontally alongside a top/bottom wall, keep moving
+  horizontally \emph{without backtracking to the previous location}. If
+  the Roomba was not already moving alongside the wall, randomly pick
+  from the positions that enable it to do so.
+\item
+  Lastly, check for obstacles. If there are obstacles in the picked
+  direction, switch Roomba orientation by 90 degrees and try to pick
+  from those directions instead. For example, if a Roomba had picked
+  Left, but there is an obstacle, switch to either up or down. This
+  encourages the Roomba to start cleaning the connecting wall when it
+  bumps into a corner.
+\item
+  A final obstacle check is conducted to see whether the Roomba is able
+  to change directions by 90 degrees. If there are obstacles in the way
+  even then, the Roomba defaults to random bounce behavior.
+\end{enumerate}
+
+\subsubsection{Detailed breakdown}
+
+Given the sets of \(T, B, R, L\) representing the top 3 cells, bottom 3
+cells, right 3 cells, and left 3 cells of the Roomba's Moore neighboor
+respectively, and \(O\) representing all obstacle positions on the
+floor, the Roomba's wall-detection can be carried out as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Check for top or bottom walls.
+\end{enumerate}
+
+Check if \(T\) or \(B\) is in \(O\). If so, the Roomba believes that
+there is a top or bottom wall, and proceeds to choose its next move from
+the available horizontal positions, i.e. left or right. The Roomba
+implements the one-step memory strategy here by going left if its
+previous position was right, and going right if its previous position
+was left. This ensures that the Roomba keeps moving in a straight
+horizontal line, and does not simply alternate between right and left
+within a limited range of cells. If the previous position was neither
+right or left, then the Roomba randomly chooses between the two for its
+next step.\\
+
+As a final check, the Roomba ensures that there are no obstacles in the
+way of the chosen horizontal next step. If there are, the Roomba tries
+to change its direction be vertical instead, i.e. to move either up or
+down (as opposed to diagonally). This is meant to encourage the Roomba
+to start moving alongside the other walls when it reaches a corner. If
+there are obstacles in the vertical direction as well, the Roomba
+defaults to random bounce behavior.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Check for right or left walls.
+\end{enumerate}
+
+The procedure for checking for top and bottom walls can be applied to
+checking the right and left walls as well. That is, check if \(R\) or
+\(L\) is in \(O\). If so, the Roomba believes that there is a right or
+left wall, and proceeds to choose its next move from the available
+vertical positions, i.e. top or bottom. If the Roomba's previous
+position was at the bottom, its next move should be the top; if its
+previous position was at the top, its next move should be the bottom.
+This ensures that it keeps moving in a straight line alongside the wall,
+and does not get stuck alternating between up and down movements. If the
+previous position was neither top or bottom, then the Roomba randomly
+chooses between the two for its next step.\\
+
+The obstacle final check is carried out: if there are any obstacles in
+the chosen vertical positions, the Roomba tries to move to a horizontal
+position, i.e. left or right. This design choice is meant to encourage
+the Roomba to start cleaning the other walls when it hits a corner. If
+there are obstacles in the horizontal positions as well, then the Roomba
+defaults to random bounce behavior.
+
+\subsubsection{Note}
+
+Since the top-bottom wall check is carried out before the right-left
+wall check, the Roomba will always prioritize moving alongside a
+top-bottom wall vs a right-left wall given that both are within its
+range of vision. That is, until it bumps into an obstacle (which it will
+assume to be a corner) and carries out the procedure of switching its
+orientation from vertical to horizontal movement. This decision was arbitrary on my part, and ideally, I would make the
+Roomba randomly choose between which check it should conduct first.
+While the order of the checks could be problematic if the floor has
+different width and height dimensions, since the floor is a square and
+obstacle positions are randomly generated for each simulation, I assume
+that setting the top-bottom check to always run first should not affect
+the results significantly.
+\newpage
+\section{Efficiency Metrics}
+
+Various metrics are used to measure the Roomba's efficiency at
+floor-cleaning. Metrics are important since they allow us to determine
+how effective each of the cleaning strategies are in various domains,
+e.g. coverage, speed, energy consumption..\footnote{\textbf{\#decisionselection:} In deciding which metrics I should use to measure the efficiency of my Roomba strategies, I used a holistic framework that encompasses the domains of coverage, speed, and energy consumption. This led me to choose the ratio of floor cleaned, rate of cleaning, and average number of repeats per tile as the efficiency metrics. It is important to use multiple metrics to evaluate efficiency since a particular strategy could perform well in one domain, but fail in the other, e.g. have good coverage but low speed.}
+
+\subsection{Ratio of Floor Cleaned}
+
+The ratio of floor cleaned is measured by dividing the number of
+\emph{unique} tiles cleaned by the number of \emph{obstacle-free} tiles.\\
+
+Mathematically, given a set \(R_{all}\) of all the Roomba's
+\emph{unique} previous locations, i.e. no repeats, and given a set of
+obstacles-free tiles represented by \(F =\) total number of tiles \(-\)
+total number of obstacle-occupied tiles, the ratio cleaned is obtained
+via the following equation: \texttt{len(R)\ /\ len(F)}; where the
+\texttt{len()} function is used to retrieve the length of the sets.\\
+
+The ratio of floor cleaned metric is important since it provides insight
+as to whether the Roomba was able to clean a large proportion of the
+room, or whether it just kept circling among the same tiles. Higher
+ratios indicate a more efficient Roomba; lower ratios indicate a
+less-efficient Roomba (in terms of floor coverage). If the Roomba
+successfully cleans all floor tiles, the ratio will be 1.
+
+\subsection{Rate of Cleaning}
+
+The rate of cleaning measures the number of \emph{unique} tiles cleaned
+per time-step in the simulation. Given a set of all previous locations,
+\(R_{all}\), which consists of only unique values, the cleaning rate is
+measured as \texttt{len(R)/time}, where \texttt{time} represents the
+cumulative time-steps as carried out by the update function in the
+simulation.\\
+
+The cleaning rate provides insight as to how efficient the Roomba is in
+terms of cleaning speed. It complements the ratio of floor cleaned well
+since both coverage and speed efficiency are important aspects to
+consider when buying a Roomba.\\
+
+A high cleaning rate indicates high efficiency; a low cleaning rate
+indicates low efficiency. A cleaning rate of 1 indicates that the Roomba
+is cleaning 1 unique tile per time-step, e.g. in 10 time-steps, the
+Roomba has cleaned 10 tiles.
+\newpage
+\subsection{Average Number of Repeats per Tile}
+
+In both the metrics above, the number of \emph{unique} tiles cleaned is
+considered since a Roomba should be evaluated based on each new tile
+that it is cleaning vs repeatedly cleaning a limited range of tiles.\\
+
+To understand the extent of the Roomba's repetitive cleaning behavior,
+this metric is used to measure the average number of times that the
+Roomba cleans the same tile. For example, if tile A was cleaned 10 times
+and tile B was cleaned 2 times, the average number of repeats per tile
+would be \((10 + 2)/2 = 6\). While one could argue that a Roomba with
+such an uneven distribution should be considered less efficient than a
+Roomba that cleans tiles A and B evenly, e.g. \(6\) times each, I chose
+to simply take the average for convenience, thus also imposing the
+assumption that each repeat in the simulation is assigned an equal
+weight, irregardless of whether it was skewed towards heavy repetition
+on only one tile, or whether the repetitions were evenly distributed.\\
+
+Given a counter \(C\) which measures the number of repeat cleans per
+floor tile in the \texttt{key:\ value} format of
+\texttt{tile:\ number\ of\ repeats}, the average number of repeats per
+tile is measured as the sum of \(C\)'s values divided by the total
+number of keys in \(C\). In Python code, this would be written as
+\texttt{sum(C.values)/len(C)}.\\
+
+A high average number of repeats indicates low efficiency; a low average
+number of repeats indicates high efficiency. Since the returned value is
+not a ratio, the best performance would be a value of 1, indicating that
+each tile is only cleaned once, whereas the worst performance would be
+equal to the number of total time-steps, suggesting that the Roomba just
+cleaned the same tile throughout the whole simulation. That being said,
+in my simulations I chose to end the simulation whenever the Roomba was
+boxed in on all sides by obstacles, so the worst possible performance in
+my simulations would be half the number of total time-steps - indicating
+that the Roomba kept alternating between two tiles for the entire
+simulation.
+\newpage
+\section{Assumptions and Limitations}
+
+\begin{itemize}
+\item
+  The Roomba's performance on a square grid is sufficiently
+  generalizable to its performance on floors of other shapes. This
+  assumption fails when we consider that the wall-following strategy
+  would not work as intended at all on a circular floor, but for now, we
+  assume that most rooms are square or at least rectangular in shape.
+\item
+  The Roomba is unable to clean under obstacles. In real life, there are
+  obstacles that the Roomba can clean under, e.g. tables. In the
+  simulation, obstacles that can be cleaned under - such as tables - are
+  assumed to be sufficiently represented by the obstacle-free cells.
+\item
+  The Roomba cleans every tile that it lands on, and the tiles' level of
+  cleanliness are equal irregardless of how many times the Roomba
+  repeatedly moves across them. This assumption is fair considering that
+  most floors do not accumulate noticeable dirt within the time-span
+  that the Roomba is cleaning.
+\item
+  The Roomba's cleaning mechanism, e.g. vacuum power, operates at the
+  same level throughout the simulation and at any location on the floor.
+  In real life, the Roomba can have weaker vacuum power at different
+  levels of energy and on different floor textures. We assume a basic
+  floor texture and constant energy level that maintains the Roomba at
+  consistent vacuuming power throughout.
+\item
+  The Roomba does not need to recharge throughout the simulation.
+  Roomba's often need to recharge after cleaning for a given amount of
+  time. They also are programmed to automatically find their recharging
+  dock and resume cleaning after recharging. In this simulation, we
+  assume that the number of time-steps is small enough that the Roomba
+  does not need to recharge.
+\item
+  The Roomba only comes in one size. Roomba's can come in different
+  sizes - one would imagine that there are pros and cons of different
+  sizes, e.g. big Roombas can clean more tiles per time-step, but small
+  Roomba's can fit into corners. In this case, we assume one constant
+  size and no comparisons are made between different sizes.
+\item
+  Room does not have any 'moving obstacles' at time of cleaning.
+  Oftentimes, there are moving obstacles such as people or pets in the
+  room even while the Roomba is cleaning. In this case, we assume that
+  the room does not contain moving obstacles and this is justified by
+  the fact that Roombas are noisy and most people (and pets) would move
+  to another room when the Roomba is cleaning.
+\end{itemize}
+
+\subsection{Summary of Assumptions}
+
+Overall, I think that the assumptions are fair with perhaps only the
+recharging assumption being the most "unrealistic" since in my personal
+experience, Roombas run out of power very quickly and constantly need to
+recharge. As such, a strategy that takes this into consideration by
+making the Roomba start cleaning near the charging dock when energy is
+low may be worth exploring in the future.
+\newpage
+    \section{Python Implementation}
+
+The Roomba simulation is implemented in Python by creating a RoombaSim
+class. The parameters of the class include floor size, obstacle density,
+and cleaning strategy. There are additional demo and verbose parameters
+that simply control whether the class should display the simulation and
+captions respectively.\footnote{\textbf{\#algorithms:} I used objected-oriented programming to create a Roomba simulation class that creates a floor plan of different sizes and obstacle densities (depending on the users input) to simulate the Roomba cleaning a floor with different strategies. In the section above, I explained the logic and steps of the various strategies, breaking them down into their general algorithms. In this section, the actual code behind the algorithms is shown. }\\
+
+A brief description of the parameters are given below, with further
+explanations in the code and comments:
+
+\subsection*{size}
+
+Needs a minimum value of 1, and has no maximum value, though the user
+should bear in mind the implications of having a 1 x 1 floor grid or a
+1000 x 1000 floor grid. In the former case, the Roomba simulation will
+keep terminating since the Roomba is constantly boxed in by obstacles,
+aka the walls. In the latter, the time-steps has to be adjusted
+appropriately to accurately evaluate the Roomba's performance.
+
+\subsection*{obstacle\_density}
+
+Has to be \textless{} 1. If obstacle density == 0, the floor will have
+no obstacles (except for the 4 bordering walls). If obstacle\_density
+\textgreater{}= 1, the class will raise a ValueError since there is no
+space to place the Roomba and the simulation will be meaningless.
+
+\subsection*{strat}
+
+The floor-cleaning strategy to be used in the simulation. Available
+values are random\_bounce, one\_step\_memory, multi\_step\_memory, and
+wall\_following. If any other value is used, the simulation will default
+to the random bounce strategy.
+
+\subsection*{demo}
+
+If true, the floor grid with the Roomba and obstacles will be displayed.
+
+\subsection*{verbose}
+
+If true, captions will be displayed narrating the Roomba's current
+position, next position, and the cleaning metrics, e.g. ratio of floor
+cleaned, rate of cleaning, and average number of repeats per tile.
+
+\newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}import libraries}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{}Roomba Simulation class}
+         \PY{k}{class} \PY{n+nc}{RoombaSim}\PY{p}{:}
+         
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{obstacle\PYZus{}density} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{strat} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}bounce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{demo} \PY{o}{=}
+         \PY{k+kc}{False}\PY{p}{,} \PY{n}{verbose} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Create a new roomba simulation object.}
+         
+         \PY{l+s+sd}{        Inputs:}
+         
+         \PY{l+s+sd}{            size (int) The grid will have a dimension of size x size.}
+         \PY{l+s+sd}{                Default: 5.}
+         
+         \PY{l+s+sd}{            obstacle\PYZus{}density (float) The fraction of cells that have an obstacle on}
+         \PY{l+s+sd}{them.}
+         \PY{l+s+sd}{                Default: 0.3.}
+         
+         \PY{l+s+sd}{            strat (str) The strategy to be used for floor cleaning.}
+         \PY{l+s+sd}{                Options: random\PYZus{}bounce, one\PYZus{}step\PYZus{}memory, multi\PYZus{}step\PYZus{}memory,}
+         \PY{l+s+sd}{wall\PYZus{}following}
+         \PY{l+s+sd}{                Default: random\PYZus{}bounce.}
+         
+         \PY{l+s+sd}{            demo (bool) If True, will display the floor grid with walls, obstacles, and}
+         \PY{l+s+sd}{Roomba.}
+         \PY{l+s+sd}{                Default: False}
+         
+         \PY{l+s+sd}{            verbose (bool) If True, will display captions detailing the Roomba\PYZsq{}s steps}
+         \PY{l+s+sd}{and stats.}
+         \PY{l+s+sd}{                Default: False}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+         
+                 \PY{c+c1}{\PYZsh{} check if obstacle\PYZus{}density input is valid}
+                 \PY{k}{if} \PY{n}{obstacle\PYZus{}density} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+                     \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Obstacle density too high, has to be \PYZlt{} 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} check if strategy input is valid}
+                 \PY{n}{valid\PYZus{}strat} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}bounce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{multi\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wall\PYZus{}following}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{k}{if} \PY{n}{strat} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{valid\PYZus{}strat}\PY{p}{:}
+                     \PY{n}{warnings}\PY{o}{.}\PY{n}{warn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Strategy not found. Defaulting to random\PYZus{}bounce.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} input variables}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{demo} \PY{o}{=} \PY{n}{demo}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{verbose} \PY{o}{=} \PY{n}{verbose}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size} \PY{o}{=} \PY{n}{size} \PY{o}{+} \PY{l+m+mi}{2} \PY{c+c1}{\PYZsh{} add 2 to size to account for the walls bordering the}
+         \PY{n}{floor} \PY{n}{grid}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}density} \PY{o}{=} \PY{n}{obstacle\PYZus{}density}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{strat} \PY{o}{=} \PY{n}{strat}
+         
+                 \PY{c+c1}{\PYZsh{} Track the time steps.}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step} \PY{o}{=} \PY{l+m+mi}{0}
+         
+                 \PY{c+c1}{\PYZsh{} initialize state by creating the floor}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{create\PYZus{}floor}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} get obstacle locations}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{p}{[}\PY{n+nb}{tuple}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{==}
+         \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} intialize Roomba\PYZsq{}s starting location on the floor grid}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}start\PYZus{}loc}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         
+                 \PY{c+c1}{\PYZsh{} initialize previous location counter}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc} \PY{o}{=} \PY{k+kc}{None}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc\PYZus{}counter} \PY{o}{=} \PY{n}{Counter}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} initialize Roomba\PYZsq{}s neighborhood sensor}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+                 \PY{c+c1}{\PYZsh{} initialize metrics}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ratio\PYZus{}cleaned} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cleaning\PYZus{}rate} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{avg\PYZus{}tile\PYZus{}repeat} \PY{o}{=} \PY{l+m+mi}{0}
+         
+                 \PY{c+c1}{\PYZsh{} record when roomba is trapped; this variable is then used to terminate sim.}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}trapped} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{check\PYZus{}roomba\PYZus{}trapped}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{create\PYZus{}floor}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Initializes floor according to grid size and obstacle density.}
+         \PY{l+s+sd}{        Walls are represented as obstacles and occupy the outermost border}
+         \PY{l+s+sd}{        of the floor grid, e.g. first and last row, first and last column.}
+         
+         \PY{l+s+sd}{        Outputs:}
+         \PY{l+s+sd}{            state (arr) numpy array of dimensions size x size representing the floor}
+         \PY{l+s+sd}{grid.}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+         
+                 \PY{c+c1}{\PYZsh{} number of obstacles to place (use self.size\PYZhy{}2 so that walls are not counted)}
+                 \PY{n}{obstacle\PYZus{}count} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}density} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} initialize empty set for storing tuples of row, col values \PYZhy{} set prevents}
+         \PY{n}{duplicate} \PY{n}{values}
+                 \PY{n}{random\PYZus{}indices} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} assign row, col values to set until length of set == obstacle count}
+                 \PY{k}{while} \PY{n+nb}{len}\PY{p}{(}\PY{n}{random\PYZus{}indices}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{obstacle\PYZus{}count}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} randomly draw row, col values from range of (1, size \PYZhy{} 1) to avoid}
+         \PY{n}{selecting} \PY{n}{wall} \PY{n}{locations}
+                     \PY{n}{indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{random\PYZus{}indices}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{p}{(}\PY{n}{indices}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{indices}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} assign \PYZhy{}1 to each empty cell}
+                 \PY{n}{state} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} assign 1 to each obstacle coordinate on the floor}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{random\PYZus{}indices}\PY{p}{:}
+                     \PY{n}{state}\PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+                 \PY{c+c1}{\PYZsh{} assign 1 to the borders to create fixed walls}
+                 \PY{n}{state}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{state}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{state}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{state}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}
+         
+                 \PY{k}{return} \PY{n}{state}
+         
+             \PY{k}{def} \PY{n+nf}{get\PYZus{}start\PYZus{}loc}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Get roomba\PYZsq{}s starting location by randomly choosing from any empty space on the}
+         \PY{l+s+sd}{floor grid.}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{c+c1}{\PYZsh{} get all obstacle\PYZhy{}free coordinates, e.g. \PYZhy{}1}
+                 \PY{n}{empty\PYZus{}cells} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{state} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         
+                 \PY{c+c1}{\PYZsh{} randomly choose a starting location for the Roomba from the obstacle\PYZhy{}free}
+         \PY{n}{coordinates}
+                 \PY{n}{start\PYZus{}loc} \PY{o}{=} \PY{n}{empty\PYZus{}cells}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{empty\PYZus{}cells}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         
+                 \PY{k}{return} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{start\PYZus{}loc}\PY{p}{)}
+         
+         
+             \PY{k}{def} \PY{n+nf}{get\PYZus{}free\PYZus{}pos}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Get free positions that Roomba can move to.}
+         \PY{l+s+sd}{        Free positions = Roomba\PYZsq{}s moore neighborhood \PYZhy{} obstacle coordinates}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{c+c1}{\PYZsh{} get Roomba\PYZsq{}s immediate Moore neighborhood}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood} \PY{o}{=} \PY{p}{\PYZob{}}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top\PYZhy{}right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top\PYZhy{}left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom\PYZhy{}right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom\PYZhy{}left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                     \PY{p}{\PYZcb{}}
+         
+                 \PY{c+c1}{\PYZsh{} default free positions = Roomba\PYZsq{}s neighborhood coordinates \PYZhy{} obstacles}
+         \PY{n}{coordinates}
+                 \PY{n}{free\PYZus{}pos} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}
+         
+                 \PY{k}{return} \PY{n}{free\PYZus{}pos}
+         
+             \PY{k}{def} \PY{n+nf}{check\PYZus{}roomba\PYZus{}trapped}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Check if Roomba is trapped}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{n}{free\PYZus{}pos} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}free\PYZus{}pos}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} if there are no free positions, set roomba\PYZus{}trapped to True}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{free\PYZus{}pos}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{n}{roomba\PYZus{}trapped} \PY{o}{=} \PY{k+kc}{True}
+                 \PY{k}{else}\PY{p}{:} \PY{n}{roomba\PYZus{}trapped} \PY{o}{=} \PY{k+kc}{False}
+         
+                 \PY{k}{return} \PY{n}{roomba\PYZus{}trapped}
+         
+             \PY{k}{def} \PY{n+nf}{choose\PYZus{}pos}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Choose the roomba\PYZsq{}s next position based on the floor\PYZhy{}cleaning strategy.}
+         
+         \PY{l+s+sd}{        Output:}
+         \PY{l+s+sd}{            new\PYZus{}pos (tuple) A tuple in the form of (row, col) with the roomba\PYZsq{}s new}
+         \PY{l+s+sd}{coordinates.}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{n}{free\PYZus{}pos} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}free\PYZus{}pos}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}get free positions}
+         
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{strat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+         
+                     \PY{c+c1}{\PYZsh{} remove the previous location from the list of next positions}
+                     \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{free\PYZus{}pos} \PY{o}{\PYZhy{}} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc}\PY{p}{\PYZcb{}}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+                         \PY{n}{free\PYZus{}pos} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc}\PY{p}{\PYZcb{}}
+         
+                 \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{strat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{multi\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+         
+                     \PY{c+c1}{\PYZsh{} remove all previous locations from the list of next positions}
+                     \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{free\PYZus{}pos} \PY{o}{\PYZhy{}} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc\PYZus{}counter}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+                         \PY{n}{free\PYZus{}pos} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc\PYZus{}counter}\PY{p}{)}
+         
+                 \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{strat} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wall\PYZus{}following}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+         
+                     \PY{c+c1}{\PYZsh{} initialize the wall\PYZhy{}sensor coordinates}
+                     \PY{n}{top\PYZus{}sensor} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                       \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top\PYZhy{}right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                       \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top\PYZhy{}left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+                     \PY{n}{bottom\PYZus{}sensor} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom\PYZhy{}right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom\PYZhy{}left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+                     \PY{n}{right\PYZus{}sensor} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top\PYZhy{}right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom\PYZhy{}right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+                     \PY{n}{left\PYZus{}sensor} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top\PYZhy{}left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom\PYZhy{}left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+                     \PY{c+c1}{\PYZsh{} if there is a top or bottom wall, then move horizontally}
+                     \PY{k}{if} \PY{n}{top\PYZus{}sensor} \PY{o}{==} \PY{p}{(}\PY{n}{top\PYZus{}sensor} \PY{o}{\PYZam{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{)} \PY{o+ow}{or} \PY{n}{bottom\PYZus{}sensor} \PY{o}{==}
+         \PY{p}{(}\PY{n}{bottom\PYZus{}sensor} \PY{o}{\PYZam{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{)}\PY{p}{:}
+         
+                         \PY{c+c1}{\PYZsh{} move opposite of previous position to keep moving in a straight line}
+                         \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:} \PY{n}{pos} \PY{o}{=}
+         \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+                         \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:} \PY{n}{pos} \PY{o}{=}
+         \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+                         \PY{k}{else}\PY{p}{:} \PY{n}{pos} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} if}
+         \PY{n}{previous} \PY{n}{position} \PY{n}{was} \PY{o+ow}{not} \PY{n}{horizontal}\PY{p}{,} \PY{n}{randomly} \PY{n}{choose} \PY{n}{the} \PY{n+nb}{next} \PY{n}{horizontal} \PY{n}{position}
+         
+                         \PY{c+c1}{\PYZsh{} if no obstacles in the horizontal path, then proceed as planned}
+                         \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pos} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+                             \PY{n}{free\PYZus{}pos} \PY{o}{=} \PY{n}{pos} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}
+         
+                         \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{} if horizontal path has obstacles, change direction to vertical}
+                             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{o}{\PYZhy{}}
+         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+                                 \PY{n}{free\PYZus{}pos} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}
+         
+                     \PY{c+c1}{\PYZsh{} if there is a left or right wall, then move vertically}
+                     \PY{k}{elif} \PY{n}{right\PYZus{}sensor} \PY{o}{==} \PY{p}{(}\PY{n}{right\PYZus{}sensor} \PY{o}{\PYZam{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{)} \PY{o+ow}{or} \PY{n}{left\PYZus{}sensor} \PY{o}{==}
+         \PY{p}{(}\PY{n}{left\PYZus{}sensor} \PY{o}{\PYZam{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{)}\PY{p}{:}
+         
+                         \PY{c+c1}{\PYZsh{} move opposite of previous position to keep moving in a straight line}
+                         \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:} \PY{n}{pos} \PY{o}{=}
+         \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+                         \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:} \PY{n}{pos} \PY{o}{=}
+         \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+                         \PY{k}{else}\PY{p}{:} \PY{n}{pos} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} if}
+         \PY{n}{previous} \PY{n}{position} \PY{n}{was} \PY{o+ow}{not} \PY{n}{vertical}\PY{p}{,} \PY{n}{randomly} \PY{n}{choose} \PY{n}{the} \PY{n+nb}{next} \PY{n}{vertical} \PY{n}{position}
+         
+                         \PY{c+c1}{\PYZsh{} if no obstacles in the vertical path, then proceed as planned}
+                         \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pos} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+                             \PY{n}{free\PYZus{}pos} \PY{o}{=} \PY{n}{pos} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}
+         
+                         \PY{k}{else}\PY{p}{:}  \PY{c+c1}{\PYZsh{} if vertical path has obstacles, change direction to horizontal}
+                             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{o}{\PYZhy{}}
+         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+                                 \PY{n}{free\PYZus{}pos} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}
+         
+                 \PY{c+c1}{\PYZsh{} default to random bounce strategy for final selection of next position}
+                 \PY{n}{new\PYZus{}pos} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{free\PYZus{}pos}\PY{p}{)}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{free\PYZus{}pos}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         
+                 \PY{k}{return} \PY{n}{new\PYZus{}pos}
+         
+             \PY{k}{def} \PY{n+nf}{move\PYZus{}roomba}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{new\PYZus{}pos}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Move roomba to the given next position.}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{c+c1}{\PYZsh{} create a copy of the old state}
+                 \PY{n}{new\PYZus{}state} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}loc}\PY{p}{:} \PY{n}{new\PYZus{}state}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+                 \PY{c+c1}{\PYZsh{} make the old roomba position empty again}
+                 \PY{n}{new\PYZus{}state}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         
+                 \PY{c+c1}{\PYZsh{} move roomba to the new position}
+                 \PY{n}{new\PYZus{}state}\PY{p}{[}\PY{n}{new\PYZus{}pos}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         
+                 \PY{k}{return} \PY{n}{new\PYZus{}state}
+         
+             \PY{k}{def} \PY{n+nf}{get\PYZus{}ratio\PYZus{}cleaned}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Returns the proportion of floor tiles cleaned at current time\PYZhy{}step.}
+         \PY{l+s+sd}{        Tiles occupied by obstacles are not included in the calculation.}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{c+c1}{\PYZsh{} use self.size\PYZhy{}2 in calculations so that walls are not counted}
+         
+                 \PY{n}{obstacle\PYZus{}count} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{obstacle\PYZus{}density} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}}
+         \PY{n}{get} \PY{n}{number} \PY{n}{of} \PY{n}{obstacles} \PY{n}{on} \PY{n}{floor}
+                 \PY{n}{open\PYZus{}floor} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{obstacle\PYZus{}count} \PY{c+c1}{\PYZsh{} get number of}
+         \PY{n}{obstacle}\PY{o}{\PYZhy{}}\PY{n}{free} \PY{n}{cells}
+                 \PY{n}{tiles\PYZus{}cleaned} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc\PYZus{}counter}\PY{p}{)} \PY{c+c1}{\PYZsh{} get number of unique tiles cleaned}
+                 \PY{n}{ratio} \PY{o}{=} \PY{n}{tiles\PYZus{}cleaned} \PY{o}{/} \PY{n}{open\PYZus{}floor}
+         
+                 \PY{k}{return} \PY{n}{ratio}
+         
+             \PY{k}{def} \PY{n+nf}{get\PYZus{}cleaning\PYZus{}rate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Returns the tiles\PYZus{}cleaned per time\PYZus{}step}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{n}{tiles\PYZus{}cleaned} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc\PYZus{}counter}\PY{p}{)} \PY{c+c1}{\PYZsh{} get number of unique tiles cleaned}
+                 \PY{n}{rate} \PY{o}{=} \PY{n}{tiles\PYZus{}cleaned}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step}
+         
+                 \PY{k}{return} \PY{n}{rate}
+         
+             \PY{k}{def} \PY{n+nf}{get\PYZus{}avg\PYZus{}repeat}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Returns the average number of repeats per floor tile}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{k}{return} \PY{n+nb}{sum}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc\PYZus{}counter}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc\PYZus{}counter}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{step}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Advance one time step in the simulation.}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{c+c1}{\PYZsh{} choose roomba\PYZsq{}s next position}
+                 \PY{n}{next\PYZus{}pos} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{choose\PYZus{}pos}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ratio\PYZus{}cleaned} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}ratio\PYZus{}cleaned}\PY{p}{(}\PY{p}{)}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cleaning\PYZus{}rate} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}cleaning\PYZus{}rate}\PY{p}{(}\PY{p}{)}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{avg\PYZus{}tile\PYZus{}repeat} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}avg\PYZus{}repeat}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} if demo == True, display the roomba sim}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{demo}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} if verbose == True, display captions}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{verbose}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Roomba is currently at }\PY{l+s+si}{\PYZob{}self.roomba\PYZus{}loc\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Roomba is moving to }\PY{l+s+si}{\PYZob{}next\PYZus{}pos\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ratio of floor cleaned: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(self.ratio\PYZus{}cleaned, 2)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rate of cleaning: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(self.cleaning\PYZus{}rate, 2)\PYZcb{} tiles per time\PYZhy{}}
+         \PY{n}{step}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average number of repeats per tile:}
+         \PY{p}{\PYZob{}}\PY{n+nb}{round}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{avg\PYZus{}tile\PYZus{}repeat}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         
+                 \PY{c+c1}{\PYZsh{} move roomba}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{move\PYZus{}roomba}\PY{p}{(}\PY{n}{next\PYZus{}pos}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} record the Roomba\PYZsq{}s previous location}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc\PYZus{}counter} \PY{o}{+}\PY{o}{=} \PY{n}{Counter}\PY{p}{(}\PY{p}{\PYZob{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{prev\PYZus{}loc}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} set the new roomba location}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{roomba\PYZus{}loc} \PY{o}{=} \PY{n}{next\PYZus{}pos}
+         
+                 \PY{c+c1}{\PYZsh{} increase time step}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{time\PYZus{}step} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+             \PY{k}{def} \PY{n+nf}{display}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Print out the current state of the simulation.}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{size}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{disp} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                     \PY{k}{for} \PY{n}{cell} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{row}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{row}\PY{p}{]}\PY{p}{[}\PY{n}{cell}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:} \PY{n}{disp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} empty spot}
+                         \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}\PY{p}{[}\PY{n}{row}\PY{p}{]}\PY{p}{[}\PY{n}{cell}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:} \PY{n}{disp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} obstacle}
+                         \PY{k}{else}\PY{p}{:} \PY{n}{disp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{O}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Roomba}
+         
+                         \PY{c+c1}{\PYZsh{} Color Roomba\PYZsq{}s Moore neighborhood in red}
+                         \PY{k}{if} \PY{p}{(}\PY{n}{row}\PY{p}{,} \PY{n}{cell}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{neighborhood}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{disp}\PY{p}{[}\PY{n}{cell}\PY{p}{]} \PY{o}{=} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[31m}\PY{l+s+si}{\PYZob{}disp[cell]\PYZcb{}}\PY{l+s+se}{\PYZbs{}x1b}\PY{l+s+s2}{[0m}\PY{l+s+s2}{\PYZdq{}}
+         
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{x} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{   }\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{disp}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k}{def} \PY{n+nf}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{roomba\PYZus{}sim}\PY{p}{,} \PY{n}{density} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}\PY{p}{,} \PY{n}{n\PYZus{}loops} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,}
+         \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+         
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Run Roomba sim at different densities to analyze its behavior.}
+         \PY{l+s+sd}{    For each loop in n\PYZus{}loops, the simulation is updated by 100 steps.}
+         \PY{l+s+sd}{    The results returned contains the cleaning\PYZus{}rate, ratio\PYZus{}cleaned, and avg\PYZus{}tile\PYZus{}repeat}
+         \PY{l+s+sd}{metrics (in that order).}
+         
+         \PY{l+s+sd}{    Inputs:}
+         
+         \PY{l+s+sd}{    roomba\PYZus{}sim (class) The roomba simulation class to be used.}
+         
+         \PY{l+s+sd}{    density (arr) The range of obstacle densities to run the simulations across.}
+         \PY{l+s+sd}{                    Default: np.arange(0, 1, 0.05)}
+         
+         \PY{l+s+sd}{    n\PYZus{}loops (int) The number of times to run the simulation for a given density.}
+         \PY{l+s+sd}{                    Default: 100}
+         
+         \PY{l+s+sd}{    **kwargs      Any additional keywords for the roomba\PYZus{}sim class.}
+         
+         \PY{l+s+sd}{    Outputs:}
+         
+         \PY{l+s+sd}{    results (arr) Results for each density.}
+         \PY{l+s+sd}{                The columns contain (in order): density, cleaning\PYZus{}rate, ratio\PYZus{}cleaned,}
+         \PY{l+s+sd}{avg\PYZus{}tile\PYZus{}repeat.}
+         \PY{l+s+sd}{                (length: n\PYZus{}loops * len(density))}
+         
+         \PY{l+s+sd}{    results\PYZus{}mean (arr) Mean of results for each density.}
+         \PY{l+s+sd}{                    The columns contain (in order) the mean for: cleaning\PYZus{}rate,}
+         \PY{l+s+sd}{ratio\PYZus{}cleaned, avg\PYZus{}tile\PYZus{}repeat.}
+         \PY{l+s+sd}{                    (length: len(density))}
+         
+         \PY{l+s+sd}{    results\PYZus{}CI (arr) 95\PYZpc{} Confidence intervals of results for each density.}
+         \PY{l+s+sd}{                    The columns contain (in order) the 95 CI for: cleaning\PYZus{}rate,}
+         \PY{l+s+sd}{ratio\PYZus{}cleaned, avg\PYZus{}tile\PYZus{}repeat.}
+         \PY{l+s+sd}{                    (length: len(density))}
+         
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{c+c1}{\PYZsh{} initialize the results, mean, and CI arrays with appropriate shapes}
+             \PY{n}{results} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}loops}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{density}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+             \PY{n}{results\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{density}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+             \PY{n}{results\PYZus{}CI} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{density}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{p}{(}\PY{n+nb}{float}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{density}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{temp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}loops}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}loops}\PY{p}{)}\PY{p}{:}
+         
+                     \PY{n}{roomba\PYZus{}trapped} \PY{o}{=} \PY{k+kc}{True}
+         
+                     \PY{k}{while} \PY{n}{roomba\PYZus{}trapped}\PY{p}{:} \PY{c+c1}{\PYZsh{} initialize sim where roomba isn\PYZsq{}t trapped}
+                         \PY{n}{sim} \PY{o}{=} \PY{n}{roomba\PYZus{}sim}\PY{p}{(}\PY{n}{obstacle\PYZus{}density}\PY{o}{=}\PY{n}{density}\PY{p}{[}\PY{n}{d}\PY{p}{]}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+                         \PY{n}{roomba\PYZus{}trapped} \PY{o}{=} \PY{n}{sim}\PY{o}{.}\PY{n}{roomba\PYZus{}trapped}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{n}{roomba\PYZus{}trapped}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} update the sim 100 times}
+                     \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{sim}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} store the results for a given density}
+                     \PY{n}{results}\PY{p}{[}\PY{n}{d} \PY{o}{*} \PY{n}{n\PYZus{}loops} \PY{o}{+} \PY{n}{n}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{density}\PY{p}{[}\PY{n}{d}\PY{p}{]}\PY{p}{,} \PY{n}{sim}\PY{o}{.}\PY{n}{cleaning\PYZus{}rate}\PY{p}{,}
+         \PY{n}{sim}\PY{o}{.}\PY{n}{ratio\PYZus{}cleaned}\PY{p}{,} \PY{n}{sim}\PY{o}{.}\PY{n}{avg\PYZus{}tile\PYZus{}repeat}
+                     \PY{n}{temp}\PY{p}{[}\PY{n}{n}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{sim}\PY{o}{.}\PY{n}{cleaning\PYZus{}rate}\PY{p}{,} \PY{n}{sim}\PY{o}{.}\PY{n}{ratio\PYZus{}cleaned}\PY{p}{,} \PY{n}{sim}\PY{o}{.}\PY{n}{avg\PYZus{}tile\PYZus{}repeat}
+         
+                 \PY{c+c1}{\PYZsh{} store result mean for a given density}
+                 \PY{n}{results\PYZus{}mean}\PY{p}{[}\PY{n}{d}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} store 95 CI of results for a given density}
+                 \PY{n}{results\PYZus{}CI}\PY{p}{[}\PY{n}{d}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{2.5}\PY{p}{,}\PY{l+m+mf}{97.5}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+         \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{2.5}\PY{p}{,}\PY{l+m+mf}{97.5}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{2.5}\PY{p}{,}\PY{l+m+mf}{97.5}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{results}\PY{p}{,} \PY{n}{results\PYZus{}mean}\PY{p}{,} \PY{n}{results\PYZus{}CI}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{size}\PY{p}{,} \PY{n}{density}\PY{p}{,} \PY{n}{n\PYZus{}loops}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Run simulation to generate results for all four strategies}
+         \PY{l+s+sd}{    (random\PYZus{}bounce, wall\PYZus{}following, one\PYZus{}step\PYZus{}memory, multi\PYZus{}step\PYZus{}memory) and return}
+         \PY{l+s+sd}{    a dataframe of the results, result means, and result confidence intervals.}
+         
+         \PY{l+s+sd}{    Input:}
+         \PY{l+s+sd}{        size (int) The grid will have a dimension of size x size.}
+         
+         \PY{l+s+sd}{        density (arr) The range of obstacle densities to run the simulations across.}
+         
+         \PY{l+s+sd}{        n\PYZus{}loops (int) The number of times to run the simulation for a given density.}
+         
+         \PY{l+s+sd}{    Output:}
+         \PY{l+s+sd}{        results\PYZus{}df (DataFrame) Dataframe of simulation performance over all strategies.}
+         
+         \PY{l+s+sd}{        mean\PYZus{}df (DataFrame) Dataframe of mean of simulation performance over all}
+         \PY{l+s+sd}{strategies.}
+         
+         \PY{l+s+sd}{        CI\PYZus{}df (DataFrame) Dataframe of 95 CI of simulation performance over all}
+         \PY{l+s+sd}{strategies.}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+         
+             \PY{c+c1}{\PYZsh{}different strategies and metrics}
+             \PY{n}{strategies} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}bounce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wall\PYZus{}following}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{multi\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{metrics} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaning\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ratio\PYZus{}cleaned}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg\PYZus{}tile\PYZus{}repeat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{}initialize dataframes}
+             \PY{n}{results\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{densities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{d} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{density} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in}
+         \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}loops}\PY{p}{)}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{mean\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{densities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{density}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{CI\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{densities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{density}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{strategies}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} generate results by running simulation across different densities}
+                 \PY{n}{temp\PYZus{}result}\PY{p}{,} \PY{n}{temp\PYZus{}mean}\PY{p}{,} \PY{n}{temp\PYZus{}CI} \PY{o}{=} \PY{n}{sim\PYZus{}diff\PYZus{}density}\PY{p}{(}\PY{n}{RoombaSim}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{n}{density}\PY{p}{,}
+                                                                       \PY{n}{n\PYZus{}loops}\PY{o}{=}\PY{n}{n\PYZus{}loops}\PY{p}{,}
+         \PY{n}{size}\PY{o}{=}\PY{n}{size}\PY{p}{,}
+                                                                        \PY{n}{strat}\PY{o}{=}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{metrics}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+         
+                     \PY{c+c1}{\PYZsh{} add results to dataframe with column name showing the strategy and metric}
+                     \PY{n}{results\PYZus{}df}\PY{p}{[}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{metrics}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{temp\PYZus{}result}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{} results}
+                     \PY{n}{mean\PYZus{}df}\PY{p}{[}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{metrics}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{temp\PYZus{}mean}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]} \PY{c+c1}{\PYZsh{} mean}
+                     \PY{n}{CI\PYZus{}df}\PY{p}{[}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{metrics}\PY{p}{[}\PY{n}{m}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}lower}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{temp\PYZus{}CI}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{}}
+         \PY{n}{lower} \PY{n}{boundary} \PY{n}{of} \PY{l+m+mi}{95} \PY{n}{CI}
+                     \PY{n}{CI\PYZus{}df}\PY{p}{[}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{metrics}\PY{p}{[}\PY{n}{m}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}upper}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{temp\PYZus{}CI}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{}}
+         \PY{n}{upper} \PY{n}{boundary} \PY{n}{of} \PY{l+m+mi}{95} \PY{n}{CI}
+         
+             \PY{k}{return} \PY{n}{results\PYZus{}df}\PY{p}{,} \PY{n}{mean\PYZus{}df}\PY{p}{,} \PY{n}{CI\PYZus{}df}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}results}\PY{p}{(}\PY{n}{metric}\PY{p}{,} \PY{n}{floor\PYZus{}size}\PY{p}{,} \PY{n}{results\PYZus{}df}\PY{p}{,} \PY{n}{mean\PYZus{}df}\PY{p}{,} \PY{n}{CI\PYZus{}df}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Plot metric results for all four strategies in the form: metric vs obstacle density.}
+         \PY{l+s+sd}{    Four plots are generated showing the metric performance for different levels of}
+         \PY{l+s+sd}{obstacle density.}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{)}\PY{p}{,}
+         \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}metric\PYZcb{}}\PY{l+s+s1}{ vs Obstacle Density (}\PY{l+s+si}{\PYZob{}floor\PYZus{}size\PYZcb{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{27}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.04}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obstacle Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mf}{0.04}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}metric\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{va}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{strategies}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{col\PYZus{}name} \PY{o}{=} \PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{metric}
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{s}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{results\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{densities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{results\PYZus{}df}\PY{p}{[}\PY{n}{col\PYZus{}name}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{c} \PY{o}{=}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{density}\PY{p}{,} \PY{n}{mean\PYZus{}df}\PY{p}{[}\PY{n}{col\PYZus{}name}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{density}\PY{p}{,} \PY{n}{CI\PYZus{}df}\PY{p}{[}\PY{n}{col\PYZus{}name} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}lower}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{density}\PY{p}{,} \PY{n}{CI\PYZus{}df}\PY{p}{[}\PY{n}{col\PYZus{}name} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}upper}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}strategies[s]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\newpage
+    \subsection{Simulation Demonstration}
+
+This section will consist of a static demo of the floor configuration at
+different sizes and obstacle densities;\footnote{The bigger floor-plan demos were not able to be displayed properly in LaTeX. Please refer to \ref{appendix:code} for the Python notebook with the proper floor plan demo. } and a demo of the first 5 steps
+of each strategy on a floor of size 5 x 5 cells with obstacle density of
+0.3.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{size} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{]}
+         \PY{n}{density} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.25}\PY{p}{,}\PY{l+m+mf}{0.75}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}static demo of floor configuration}
+         \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{size}\PY{p}{:}
+             \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{density}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Size: }\PY{l+s+si}{\PYZob{}s\PYZcb{}}\PY{l+s+s2}{, Density: }\PY{l+s+si}{\PYZob{}d\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{sim} \PY{o}{=} \PY{n}{RoombaSim}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{n}{s}\PY{p}{,} \PY{n}{obstacle\PYZus{}density}\PY{o}{=}\PY{n}{d}\PY{p}{,} \PY{n}{demo}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{sim}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Size: 5, Density: 0.25
+X   X   X   X   X   X   X
+X   .   X   .   .   .   X
+X   .   .   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{.}   X
+X   X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   X
+X   .   .   X   .   X   X
+X   X   X   X   X   X   X
+
+Size: 5, Density: 0.75
+X   X   X   X   X   X   X
+X   X   X   X   X   X   X
+X   X   X   X   X   .   X
+X   X   X   .   .   X   X
+\textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   .   .   X   X
+\textcolor{ansi-red}{X}   O   \textcolor{ansi-red}{X}   X   X   .   X
+\textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   X   X   X   X
+\end{Verbatim}
+\newpage
+ \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Size: 20, Density: 0.25
+X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X
+X   .   .   .   .   .   .   .   .   .   X   .   X   X   X   X   .   .   .   .   X   X
+X   .   .   X   .   .   .   .   .   .   X   .   X   .   .   .   .   .   .   .   .   X
+X   .   .   X   X   .   .   .   X   .   .   X   .   .   .   .   .   .   .   .   X   X
+X   X   X   X   .   .   .   .   .   .   .   .   .   .   .   .   .   X   X   .   X   X
+X   .   .   .   .   X   X   .   .   .   .   .   .   .   .   .   .   X   .   .   .   X
+X   .   .   X   .   .   .   X   .   .   X   .   .   .   .   .   X   .   .   .   .   X
+X   .   .   .   .   .   .   X   .   .   X   .   .   X   .   .   .   X   .   .   .   X
+X   X   .   .   X   .   X   X   X   .   .   X   X   .   .   X   .   X   .   .   .   X
+X   .   .   .   .   .   .   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   .   .   .   X
+X   .   .   .   .   .   X
+X   X   .   X   .   .   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}   .   .   .   .   .   .
+X   .   .   .   X
+X   X   .   .   .   X   .   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X   .   .   X
+.   .   .   X   .   .   X
+X   .   X   .   .   X   .   X   X   .   X   .   .   X   .   .   .   .   .   .   .   X
+X   .   .   .   .   .   X   .   X   .   .   .   .   X   .   .   X   .   .   X   X   X
+X   .   .   .   .   X   .   .   .   X   .   .   .   X   .   .   X   X   X   .   .   X
+X   .   .   .   .   .   .   .   .   .   .   .   .   .   X   X   X   .   .   .   X   X
+X   .   .   .   .   .   X   .   X   .   .   .   .   .   X   X   .   .   .   .   .   X
+X   X   .   .   .   .   X   X   .   .   .   .   .   .   .   .   .   X   .   X   X   X
+X   X   .   .   .   X   .   .   X   .   .   X   .   .   .   .   .   .   X   .   .   X
+X   X   X   .   .   .   .   X   .   .   .   X   .   X   .   X   X   .   .   .   X   X
+X   .   .   X   .   .   .   .   .   .   .   .   X   .   .   .   X   .   X   .   .   X
+X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X
+
+Size: 20, Density: 0.75
+X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X
+X   X   X   X   X   .   X   X   X   X   X   X   .   X   X   X   X   X   X   X   X   X
+X   X   X   X   X   X   X   X   X   X   X   X   X   X   .   X   .   X   X   X   X   X
+X   X   X   X   X   X   .   .   .   .   .   X   X   X   X   X   .   .   X   X   X   X
+X   X   X   .   X   X   X   X   X   .   X   X   X   X   X   X   X   X   X   X   X   X
+X   X   .   X   X   X   X   X   .   X   X   X   .   X   X   X   .   .   X   X   X   X
+X   X   X   X   X   X   .   X   X   X   X   X   X   .   .   X   X   .   X   X   .   X
+X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   .   .   X   X   X   X   X
+X   X   X   X   X   .   .   X   X   X   .   X   X   .   .   .   .   X   X   X   X   X
+X   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   X   X   X   X   X   .   X   X   .   X
+X   .   X   .   X   .   X
+X   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}   X   .   X   X   X   X   X   X   .   .   X   X
+.   .   X   X   X
+X   X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   X   X   .   X   X   .   X   X   X   X
+X   X   .   X   X   .   X
+X   .   .   X   X   X   .   .   X   X   X   X   X   X   X   X   .   X   .   X   X   X
+X   X   .   .   .   X   .   X   .   .   X   X   .   .   X   X   X   X   X   X   X   X
+X   X   .   .   X   .   .   X   X   X   .   X   X   .   X   X   X   .   X   X   X   X
+X   X   X   X   X   X   X   .   X   X   X   X   X   X   X   X   .   X   X   X   X   X
+X   X   X   X   X   X   X   X   X   X   X   .   X   X   X   X   X   .   X   X   X   X
+X   X   X   X   X   X   .   .   .   X   .   X   .   .   X   X   X   .   .   X   X   X
+X   .   X   X   .   .   X   X   X   X   X   .   X   .   X   X   .   .   X   X   X   X
+X   X   X   .   X   X   X   X   X   X   X   X   .   X   X   X   .   X   X   X   X   X
+X   X   .   X   .   X   .   .   X   .   X   X   X   X   X   X   X   .   X   X   X   X
+X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X   X
+
+
+    \end{Verbatim}
+\newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}demo}\PY{p}{(}\PY{n}{strategy}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Create a short demo of the Roomba simulation for a given strategy.}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{strategy}\PY{p}{)}
+             \PY{n}{roomba\PYZus{}trapped} \PY{o}{=} \PY{k+kc}{True}
+             \PY{k}{while} \PY{n}{roomba\PYZus{}trapped}\PY{p}{:}
+                 \PY{n}{sim} \PY{o}{=} \PY{n}{RoombaSim}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{obstacle\PYZus{}density}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{strat}\PY{o}{=}\PY{n}{strategy}\PY{p}{,} \PY{n}{demo}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+         \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{roomba\PYZus{}trapped} \PY{o}{=} \PY{n}{sim}\PY{o}{.}\PY{n}{roomba\PYZus{}trapped}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Step }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{i+1\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{sim}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{make\PYZus{}demo}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}bounce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+random\_bounce
+Step 1
+X   X   X   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   X   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}
+X   .   .   X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   .   .   .   .   .   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (1, 5)
+Roomba is moving to (2, 4)
+Ratio of floor cleaned: 0
+Rate of cleaning: 0 tiles per time-step
+Average number of repeats per tile: 0
+
+Step 2
+X   X   X   X   X   X   X
+X   X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{X}   O   \textcolor{ansi-red}{X}   X
+X   .   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (2, 4)
+Roomba is moving to (3, 4)
+Ratio of floor cleaned: 0.06
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 3
+X   X   X   X   X   X   X
+X   X   .   .   .   .   X
+X   .   .   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   X
+X   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (3, 4)
+Roomba is moving to (2, 4)
+Ratio of floor cleaned: 0.11
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 4
+X   X   X   X   X   X   X
+X   X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{X}   O   \textcolor{ansi-red}{X}   X
+X   .   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (2, 4)
+Roomba is moving to (3, 3)
+Ratio of floor cleaned: 0.17
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 5
+X   X   X   X   X   X   X
+X   X   .   .   .   .   X
+X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   X   X
+X   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{.}   .   X
+X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (3, 3)
+Roomba is moving to (3, 2)
+Ratio of floor cleaned: 0.17
+Rate of cleaning: 0.75 tiles per time-step
+Average number of repeats per tile: 1.33
+
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{make\PYZus{}demo}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wall\PYZus{}following}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+wall\_following
+Step 1
+X   X   X   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   X   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}
+X   .   .   X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   .   .   .   .   .   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (1, 5)
+Roomba is moving to (1, 4)
+Ratio of floor cleaned: 0
+Rate of cleaning: 0 tiles per time-step
+Average number of repeats per tile: 0
+
+Step 2
+X   X   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   X
+X   X   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   X
+X   .   .   .   .   .   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (1, 4)
+Roomba is moving to (1, 3)
+Ratio of floor cleaned: 0.06
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 3
+X   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   X   X
+X   X   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{.}   .   X
+X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   X   X
+X   .   .   .   .   .   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (1, 3)
+Roomba is moving to (1, 2)
+Ratio of floor cleaned: 0.11
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 4
+X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   X   X   X
+X   \textcolor{ansi-red}{X}   O   \textcolor{ansi-red}{.}   .   .   X
+X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   .   X   X
+X   .   .   .   .   .   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (1, 2)
+Roomba is moving to (2, 2)
+Ratio of floor cleaned: 0.17
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 5
+X   X   X   X   X   X   X
+X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   .   .   X
+X   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}   .   X   X
+X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   .   .   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (2, 2)
+Roomba is moving to (3, 1)
+Ratio of floor cleaned: 0.22
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{make\PYZus{}demo}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+one\_step\_memory
+Step 1
+X   X   X   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   X   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}
+X   .   .   X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   .   .   .   .   .   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (1, 5)
+Roomba is moving to (2, 4)
+Ratio of floor cleaned: 0
+Rate of cleaning: 0 tiles per time-step
+Average number of repeats per tile: 0
+
+Step 2
+X   X   X   X   X   X   X
+X   X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{X}   O   \textcolor{ansi-red}{X}   X
+X   .   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (2, 4)
+Roomba is moving to (3, 5)
+Ratio of floor cleaned: 0.06
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 3
+X   X   X   X   X   X   X
+X   X   .   .   .   .   X
+X   .   .   X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   .   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}
+X   .   .   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (3, 5)
+Roomba is moving to (3, 4)
+Ratio of floor cleaned: 0.11
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 4
+X   X   X   X   X   X   X
+X   X   .   .   .   .   X
+X   .   .   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   X
+X   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (3, 4)
+Roomba is moving to (3, 3)
+Ratio of floor cleaned: 0.17
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 5
+X   X   X   X   X   X   X
+X   X   .   .   .   .   X
+X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   X   X
+X   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{.}   .   X
+X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (3, 3)
+Roomba is moving to (4, 2)
+Ratio of floor cleaned: 0.22
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{make\PYZus{}demo}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{multi\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+multi\_step\_memory
+Step 1
+X   X   X   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   X   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}
+X   .   .   X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   .   .   .   .   .   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (1, 5)
+Roomba is moving to (2, 4)
+Ratio of floor cleaned: 0
+Rate of cleaning: 0 tiles per time-step
+Average number of repeats per tile: 0
+
+Step 2
+X   X   X   X   X   X   X
+X   X   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{X}   O   \textcolor{ansi-red}{X}   X
+X   .   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   X
+X   .   .   X   X   .   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (2, 4)
+Roomba is moving to (3, 5)
+Ratio of floor cleaned: 0.06
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 3
+X   X   X   X   X   X   X
+X   X   .   .   .   .   X
+X   .   .   X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}
+X   .   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{X}
+X   .   .   X   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (3, 5)
+Roomba is moving to (3, 4)
+Ratio of floor cleaned: 0.11
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 4
+X   X   X   X   X   X   X
+X   X   .   .   .   .   X
+X   .   .   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}   X
+X   .   .   \textcolor{ansi-red}{.}   O   \textcolor{ansi-red}{.}   X
+X   .   .   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{X}   \textcolor{ansi-red}{.}   X
+X   X   .   X   .   .   X
+X   X   X   X   X   X   X
+
+Roomba is currently at (3, 4)
+Roomba is moving to (4, 5)
+Ratio of floor cleaned: 0.17
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+Step 5
+X   X   X   X   X   X   X
+X   X   .   .   .   .   X
+X   .   .   X   .   X   X
+X   .   .   .   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}
+X   .   .   X   \textcolor{ansi-red}{X}   O   \textcolor{ansi-red}{X}
+X   X   .   X   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{.}   \textcolor{ansi-red}{X}
+X   X   X   X   X   X   X
+
+Roomba is currently at (4, 5)
+Roomba is moving to (5, 4)
+Ratio of floor cleaned: 0.22
+Rate of cleaning: 1.0 tiles per time-step
+Average number of repeats per tile: 1.0
+
+
+    \end{Verbatim}
+\newpage
+    \section{Results and Analysis}
+
+In this section, the RoombaSim simulations are conducted. For a given
+set of parameters, 1000 simulations will be conducted and the data
+stored in a dataframe of results. For each simulation, the RoombaSim is
+updated 100 times.\\
+
+Floor sizes of 5 x 5, 10 x 10, and 20 x 20 are used to test the Roomba's
+performance in a small, medium, and big room respectively. The number of
+updates is fixed at 100 times throughout the experiments to follow the
+hypotheses in the form of, "Given a fixed amount of time, how efficient
+is the Roomba's cleaning performance in a small/medium/big room?"\footnote{\textbf{\#hypothesisdevelopment:} By defining the form of hypothesis to follow, the Monte Carlo simulations can be conducted with a clear goal in mind - find the strategy that performs most efficiently across all room sizes. The time is fixed to emulate the real life situation of having limited time to clean a room. Having a hypothesis helps to frame the intention and organization of how the experiments should be conducted, and the main takeaways that we are seeking within the results.} Since
+the largest room is fixed at a size of 20 x 20, i.e. 400 floor tiles,
+the results will be analyzed with the understanding that the ratio of
+tiles cleaned will necessarily be of a smaller magnitude vs the smaller
+sized rooms. Similarly, we expect the average number of tile repeats to
+be of higher magnitude in the smaller rooms since there is more
+time-steps than floor tiles to clean. \\
+
+The main goal of these experiments
+is to test how the strategies compare to each other within the same
+floor size, across different floor sizes, with an understanding that
+different floor sizes offer different challenges to overcome given a
+limited amount of cleaning time.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} density range}
+         \PY{n}{density} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mf}{0.05}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} number of loops per simulation}
+         \PY{n}{n\PYZus{}loops} \PY{o}{=} \PY{l+m+mi}{1000}
+         
+         \PY{c+c1}{\PYZsh{} dimensions of floor grid (size x size)}
+         \PY{n}{size} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} small floor results}
+         \PY{n}{results\PYZus{}df\PYZus{}small}\PY{p}{,} \PY{n}{mean\PYZus{}df\PYZus{}small}\PY{p}{,} \PY{n}{CI\PYZus{}df\PYZus{}small} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{size}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{density}\PY{p}{,} \PY{n}{n\PYZus{}loops}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} medium floor results}
+         \PY{n}{results\PYZus{}df\PYZus{}med}\PY{p}{,} \PY{n}{mean\PYZus{}df\PYZus{}med}\PY{p}{,} \PY{n}{CI\PYZus{}df\PYZus{}med} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{size}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{density}\PY{p}{,} \PY{n}{n\PYZus{}loops}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} big floor results}
+         \PY{n}{results\PYZus{}df\PYZus{}big}\PY{p}{,} \PY{n}{mean\PYZus{}df\PYZus{}big}\PY{p}{,} \PY{n}{CI\PYZus{}df\PYZus{}big} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{size}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{density}\PY{p}{,} \PY{n}{n\PYZus{}loops}\PY{p}{)}
+\end{Verbatim}
+\newpage
+    \subsection{Small Floor}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{c+c1}{\PYZsh{} different strategies and metrics}
+         \PY{n}{strategies} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}bounce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wall\PYZus{}following}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{multi\PYZus{}step\PYZus{}memory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{metrics} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaning\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ratio\PYZus{}cleaned}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg\PYZus{}tile\PYZus{}repeat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n}{metrics}\PY{p}{:}
+             \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{small floor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{results\PYZus{}df\PYZus{}small}\PY{p}{,} \PY{n}{mean\PYZus{}df\PYZus{}small}\PY{p}{,} \PY{n}{CI\PYZus{}df\PYZus{}small}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_17_0.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_17_1.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_17_2.png}
+    \end{center}
+
+    
+    \subsubsection{Small Floor Analysis}
+
+    \subsubsection*{Cleaning Rate}
+
+For all strategies, we see that the mean cleaning rate is around 0.2
+tiles per time-step when there are no obstacles, and this decreases to 0
+tiles per time-step in a rather linear trend as the obstacle-density
+increases. Since the room is small (5 x 5 = 25 cells) and the number of
+time-steps is 100, the tiles are repeatedly cleaned which can bring down
+the cleaning rate (cleaning rate only considers the number of
+\emph{unique} tiles cleaned per time-step, hence as time increases, the
+cleaning rate decreases as the number of \emph{unique} tiles is fixed
+due to the floor size constraints). Regardless, we see that the
+multi-step memory strategy performs best as it has the highest mean
+cleaning-rate at 0 obstacle density, and the tighest confidence
+intervals for obstacle-density values between 0.1 - 0.4, which is the
+most balanced room setup and so would be most commonly found in real
+life. The other strategies have wider confidence intervals even at low
+obstacle-densities, with wall-following having the most
+uncertainty in its results.
+
+\subsubsection*{Ratio Cleaned}
+
+The ratio of floor cleaned starts off high for most strategies (0.9 -
+1.0), then gradually decreases when the density hits 0.4, with the
+lowest point around 0.6 - 0.7, and starts increasing again at a density
+of 0.8. This is probably because at low density, the Roomba is able to
+explore the floor grid easily. With more obstacles, the Roomba has a
+higher probability of being stuck within a certain area either because
+a) the obstacle layout sections of certain areas from being explored
+(this is undesirable but does occur due to the random obstacle
+distribution), or the Roomba is unable to find the exit. When the
+obstacle density is very high - \textgreater{}= 0.8 - there is less
+empty space to explore overall, and so as long as empty spaces aren't
+blocked by obstacles, the Roomba has a higher probability of cleaning
+it.\\
+
+Once again, we see that the multi-step memory strategy performs best
+with the tightest confidence intervals at low obstacle density compared
+to the other strategies. The wall-following strategy has the worst
+performance, scoring only a mean of \textasciitilde{}0.7 even at 0
+obstacle density. This is probably because the wall-following strategy
+causes the Roomba to cling to the walls as it cleans, avoiding the
+center of the room.
+
+\subsubsection*{Average Number of Tile Repeats}
+
+For all strategies, the average number of tile repeats starts off at
+around 3-5 tiles per time-step at low obstacle density, and reaches a
+mean of 20 - 30 tiles per time-step at high obstacle density, reaching a
+max of 50 tiles per time-step at the highest density of 0.95. The
+confidence intervals start out narrow, but start to widen when the
+obstacle density hits 0.3, diverging to an upper CI boundary of 50
+repeats per tile. The upper boundary of 50 probably occurs when the
+Roomba is only able to move between two tiles, and hence keeps
+alternating between the two tiles throughout the simulation of 100
+time-steps. We see that the upper boundary, mean, and lower boundary all
+converge at 50 at the 0.95 mark as the Roomba is almost always stuck
+alternating between two tiles.\\
+
+Performance-wise, multi-step memory is the strongest strategy again
+since it has tight confidence intervals at least until the 0.5 obstacle
+density point. Tight confidence intervals are desirable since given
+roughly similar mean results between the strategies, we would prefer the
+strategy that has more certainty of delivering that result, so that
+there is less probability of underperforming.
+
+\subsubsection{Summary}
+
+The multi-step memory strategy appears to be the best-performing
+strategy. Even when the mean value does not differ too much between
+strategies, the multi-step memory strategy constantly has the tightest
+confidence intervals, which in this case is good given that wider
+confidence intervals of the other strategies are inclined towards the
+"underperforming" direction vs the "overperforming" direction. For
+example, the confidence intervals of the ratio of floor cleaned values
+tend to have a wider lower boundaries vs wider upper boundaries, which
+indicate that the strategies have a higher probability of having
+\emph{low ratio of floor cleaned} vs having a \emph{high ratio of floor
+cleaned}. By having tight confidence intervals, the multi-step memory
+strategy is superior since it limits the probability of underperforming.\footnote{\textbf{\#probability:} By analyzing the confidence intervals, how wide or narrow they are, and where the boundaries lie in regards to the mean, we can gain a deeper insight into the probability of obtaining a specific value vs simply looking at the mean. By analyzing my scatter plots, I can see that the multi-step memory strategy has a higher probability of outperforming the other strategies since it has a high mean value and tight confidence intervals. While the other strategies may have confidence intervals that reach values that rival those of the multi-step memory strategy as well, the fact that those values lie on the boundary of the confidence intervals means that there is a lower probability that they will beat the multi-step memory strategy.}
+
+   \subsection{ Medium Floor}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n}{metrics}\PY{p}{:}
+             \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{medium floor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{results\PYZus{}df\PYZus{}med}\PY{p}{,} \PY{n}{mean\PYZus{}df\PYZus{}med}\PY{p}{,} \PY{n}{CI\PYZus{}df\PYZus{}med}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_20_0.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_20_1.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_20_2.png}
+    \end{center}
+
+    
+    \subsubsection{Medium Floor Analysis}
+
+The medium floor results are roughly similar to the small floor results,
+and so a less detailed analysis will be carried out; particularly
+significant insights will be pointed out.
+
+\subsubsection*{Cleaning Rate}
+
+For all strategies, we see that the mean cleaning rate is around 0.5
+tiles per time-step when there are no obstacles; though multi-step
+memory outperforms the others with a mean cleaning rate of around 0.8
+tiles per time-step. This is a higher mean than the small-floor
+performance because, as explained, there is more space in the
+medium-floor for the Roomba to explore unique tiles and avoid repeats.
+As the obstacle density increases, the cleaning rate decreases as
+expected since the Roomba is forced to explore the same constrained area
+as the time-step increases, or some areas are cordoned off by obstacles
+and the Roomba cannot reach them.\\
+
+Multi-step memory outperforms the other strategies again as it has the
+best performance throughout the range of 0.0 - 0.4, which as explained
+before, would be the most common setup we see in real life rooms. This
+"best performance" is determined via the higher mean value and tighter
+confidence intervals.
+
+\subsubsection*{Ratio Cleaned}
+
+The ratio of floor cleaned plots are similar to the small floor results
+where the ratio of floor cleaned starts off relatively high, then dips
+towards the middle, before increasing again at the higher densities.
+Once again, multi-step memory is the superior strategy, with the highest
+mean ratio of floor cleaned at the lower density levels, and also
+tighter confidence intervals.
+
+\subsubsection*{Average Number of Tile Repeats}
+
+In comparison to the small floor plots, the average number of tile
+repeats for the medium floors start to experience a widening of
+confidence intervals around the 0.4 obstacle density mark. This makes
+sense since there are more floor tiles to explore within 100 time-steps
+before the Roomba is forced to repeat. Given that the mean values, and
+95 CI boundaries are roughly the same for all strategies after the 0.4
+obstacle density point, the multi-step memory strategy would have to be
+considered the best-performing since it has the tighest confidence
+intervals within the obstacle density range of 0 - 0.4.
+
+\subsubsection{Summary}
+
+Once again, the multi-step memory strategy is superior.
+\newpage
+    \subsection{Big Floor}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n}{metrics}\PY{p}{:}
+             \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{big floor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{results\PYZus{}df\PYZus{}big}\PY{p}{,} \PY{n}{mean\PYZus{}df\PYZus{}big}\PY{p}{,} \PY{n}{CI\PYZus{}df\PYZus{}big}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_23_0.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_23_1.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_23_2.png}
+    \end{center}
+
+    
+    \subsubsection{Big Floor Analysis}
+
+    \subsubsection*{Cleaning Rate}
+
+Since the big floor has a size of 20 x 20 (400) tiles, it understandably
+returns the highest cleaning rate values as compared to the smaller
+floors. The multi-step memory strategy's effeciency is emphasized as it
+not only has a higher mean value than the other strategies at the
+obstacle density range of 0 - 0.4, it is also capable of reaching a 95
+CI upper boundary of 1.0, indicating a cleaning rate of 1 tile per
+time-step - which is the optimal performance. Furthermore, its lower
+bound is also generally higher than the upper 95 CI boundary of the
+other strategies, which suggests that even in the worst case, we can
+still expect the multi-step memory strategy to outperform the other
+strategies with 95\% confidence.
+
+ \subsubsection*{Ratio Cleaned}
+
+On the big floor, the ratio of floor cleaned maxes out around 0.4 since
+there are 400 tiles and the simulation is only run for 100 time steps.
+It can reach a bit higher than 0.4 since obstacle-occupied cells are not
+considered within the ratio cleaned calculation, so there is actually
+bit less than 400 cells being considered when measuring the proportion
+of unique tiles cleaned. Multi-step memory is the only strategy that was
+able to reach this 0.4 ratio cleaned mark (which occurs around an
+obstacle density of 0.55, probably because the obstacles are positioned
+in such a way to enable the Roomba to avoid repeating the same tile,
+e.g. if the obstacles were ordered in a maze-like fashion). Although the
+95 CI is widest at that point, the multi-step memory strategy still has
+the highest mean and upper 95 CI boundary, while sharing a similar lower
+boundary value with the other strategies. Multi-step memory also has the
+best performance at obstacle densities of 0 - 0.4, showing both high
+values and tight confidence intervals.
+
+ \subsubsection*{Average Number of Tile Repeats}
+
+The 95\% confidence interval of the number of tile repeats starts to
+widen around an obstacle-density of 0.45 - a bit later than the medium
+sized floor, as expected. Due to having the narrowest confidence
+intervals before that point, the multi-step memory strategy is deemed
+the best again.
+
+ \subsubsection{Summary}
+
+With the final room size examined, we see that the multi-step strategy
+consistently shows the best performance across various room sizes, given
+a fixed number of 100 updates per simulation.
+\newpage
+   \section{ Roomba Performance at Obstacle Densities of \(\leq 0.5\)}
+
+From the above plots, we see that the metrics tend to have the best
+values (high ratio cleaned, high cleaning rate, low number of repeats)
+at lower obstacle densities. Since lower obstacle densities are also
+more representative of the typical room setup one would see in real
+life, histogram distributions of the various metrics across the
+different strategies for densities \(\leq 0.5\) are analyzed and their
+underlying probability distributions are described.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}subset\PYZus{}histograms}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{floor\PYZus{}size}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{df\PYZus{}subset} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{densities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{]}
+         
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{27}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,}
+                             \PY{n}{gridspec\PYZus{}kw}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}floor\PYZus{}size\PYZcb{}}\PY{l+s+s1}{ Metrics for Obstacle Density in Range (0,0.5)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{27}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{strategies}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ax}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{metrics}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{metrics}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+                     \PY{n}{ax}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df\PYZus{}subset}\PY{p}{[}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{metrics}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+                     \PY{n}{lower}\PY{p}{,} \PY{n}{upper} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{df\PYZus{}subset}\PY{p}{[}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{metrics}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+         \PY{p}{[}\PY{l+m+mf}{2.5}\PY{p}{,}\PY{l+m+mf}{97.5}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{df\PYZus{}subset}\PY{p}{[}\PY{n}{strategies}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{metrics}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{ax}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{lower}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{ax}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{upper}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{ax}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{mean}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\newpage
+    \subsection{Small Floor}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{plot\PYZus{}subset\PYZus{}histograms}\PY{p}{(}\PY{n}{results\PYZus{}df\PYZus{}small}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Small floor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_28_0.png}
+    \end{center}
+
+    \newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{results\PYZus{}df\PYZus{}small}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{results\PYZus{}df\PYZus{}small}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{densities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}103}]:}        densities  random\_bounce\_cleaning\_rate  random\_bounce\_ratio\_cleaned  \textbackslash{}
+          count  11000.000                    11000.000                    11000.000   
+          mean       0.250                        0.174                        0.899   
+          std        0.158                        0.045                        0.128   
+          min        0.000                        0.020                        0.105   
+          25\%        0.100                        0.141                        0.867   
+          50\%        0.250                        0.182                        0.933   
+          75\%        0.400                        0.212                        1.000   
+          max        0.500                        0.253                        1.000   
+          
+                 random\_bounce\_avg\_tile\_repeat  wall\_following\_cleaning\_rate  \textbackslash{}
+          count                      11000.000                     11000.000   
+          mean                           6.514                         0.162   
+          std                            4.271                         0.042   
+          min                            3.960                         0.020   
+          25\%                            4.714                         0.141   
+          50\%                            5.500                         0.162   
+          75\%                            7.071                         0.192   
+          max                           49.500                         0.242   
+          
+                 wall\_following\_ratio\_cleaned  wall\_following\_avg\_tile\_repeat  \textbackslash{}
+          count                     11000.000                       11000.000   
+          mean                          0.845                           7.056   
+          std                           0.167                           4.691   
+          min                           0.100                           4.125   
+          25\%                           0.750                           5.211   
+          50\%                           0.900                           6.188   
+          75\%                           1.000                           7.071   
+          max                           1.000                          49.500   
+          
+                 one\_step\_memory\_cleaning\_rate  one\_step\_memory\_ratio\_cleaned  \textbackslash{}
+          count                      11000.000                      11000.000   
+          mean                           0.183                          0.941   
+          std                            0.045                          0.116   
+          min                            0.020                          0.105   
+          25\%                            0.152                          0.929   
+          50\%                            0.182                          1.000   
+          75\%                            0.222                          1.000   
+          max                            0.253                          1.000   
+          
+                 one\_step\_memory\_avg\_tile\_repeat  multi\_step\_memory\_cleaning\_rate  \textbackslash{}
+          count                        11000.000                        11000.000   
+          mean                             6.181                            0.188   
+          std                              4.106                            0.047   
+          min                              3.960                            0.020   
+          25\%                              4.500                            0.152   
+          50\%                              5.500                            0.192   
+          75\%                              6.600                            0.232   
+          max                             49.500                            0.253   
+          
+                 multi\_step\_memory\_ratio\_cleaned  multi\_step\_memory\_avg\_tile\_repeat  
+          count                        11000.000                          11000.000  
+          mean                             0.967                              6.010  
+          std                              0.112                              3.950  
+          min                              0.111                              3.960  
+          25\%                              1.000                              4.304  
+          50\%                              1.000                              5.211  
+          75\%                              1.000                              6.600  
+          max                              1.000                             49.500  
+\end{Verbatim}
+            
+    \subsubsection{Small Floor Analysis}
+
+The histograms show that the cleaning rate tends to be normally
+distributed throughout the strategies, though the one-step memory and
+multi-step memory strategies have distributions that are a bit more
+left-skewed - which indicates better performance since they have a
+higher tendency to have cleaning rates on the high end. The ratio of
+floor cleaned and average number of tile repeat metrics have exponential
+distributions. In the small-floor layout, the ratio of floor cleaned
+tends towards 1, with multi-step memory having the tightest confidence
+interval. The average number of repeats per tile tends towards 5, though
+it stretches as far as 50 in the worst case - this is very unlikely to
+happen, as indicated by the extreme right skew and very narrow right
+tail of the exponential distribution. The multi-step memory strategy
+once again has the tighest confidence interval.\\
+
+From the descriptive statistics table, we see that the multi-step memory
+strategy tends to consistently have the best mean value for each of the
+performance metrics. It also appears to be superior up to the 25\% -
+50\% percentile, at which point the results start to converge to the
+same value among the different strategies. This supports the observation of narrow 95\%
+confidence intervals for the multi-step memory in the
+histograms, as it suggests that even though the multi-step memory
+strategy can occasionally show poor performance that rivals those of the
+other strategies, the majority percentage of its results still consists
+of better performance values, with only a small percentage of results
+ever being equal to those of the less-efficient strategies.\footnote{\textbf{\#descriptivestats:} By creating descriptive statistics tables, we can analyze various important statistics concerning our simulations. I did not create a descriptive stats table in the earlier section when testing across multiple densities, since the stats would not be that informative given that the Roomba performance can vary so starkly between densities. Instead, I chose to create descriptive stats tables for Roomba performance on only a subset of obstacle density values <= 0.5 since this subset of values are more representative of the obstacle density in real life floors, and can also be described with the same set of descriptive stats without too much information loss.}
+\newpage
+\subsection{Medium Floor}
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{plot\PYZus{}subset\PYZus{}histograms}\PY{p}{(}\PY{n}{results\PYZus{}df\PYZus{}med}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medium floor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_31_0.png}
+    \end{center}
+
+    \newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{results\PYZus{}df\PYZus{}med}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{results\PYZus{}df\PYZus{}med}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{densities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}104}]:}        densities  random\_bounce\_cleaning\_rate  random\_bounce\_ratio\_cleaned  \textbackslash{}
+          count  11000.000                    11000.000                    11000.000   
+          mean       0.250                        0.338                        0.445   
+          std        0.158                        0.107                        0.108   
+          min        0.000                        0.020                        0.027   
+          25\%        0.100                        0.263                        0.382   
+          50\%        0.250                        0.343                        0.450   
+          75\%        0.400                        0.414                        0.517   
+          max        0.500                        0.646                        0.820   
+          
+                 random\_bounce\_avg\_tile\_repeat  wall\_following\_cleaning\_rate  \textbackslash{}
+          count                      11000.000                     11000.000   
+          mean                           3.576                         0.346   
+          std                            3.389                         0.119   
+          min                            1.547                         0.020   
+          25\%                            2.415                         0.263   
+          50\%                            2.912                         0.354   
+          75\%                            3.808                         0.424   
+          max                           49.500                         0.707   
+          
+                 wall\_following\_ratio\_cleaned  wall\_following\_avg\_tile\_repeat  \textbackslash{}
+          count                     11000.000                       11000.000   
+          mean                          0.456                           3.593   
+          std                           0.127                           3.341   
+          min                           0.025                           1.414   
+          25\%                           0.370                           2.357   
+          50\%                           0.457                           2.829   
+          75\%                           0.545                           3.808   
+          max                           0.867                          49.500   
+          
+                 one\_step\_memory\_cleaning\_rate  one\_step\_memory\_ratio\_cleaned  \textbackslash{}
+          count                      11000.000                      11000.000   
+          mean                           0.412                          0.547   
+          std                            0.111                          0.120   
+          min                            0.020                          0.025   
+          25\%                            0.343                          0.480   
+          50\%                            0.424                          0.554   
+          75\%                            0.495                          0.625   
+          max                            0.747                          0.900   
+          
+                 one\_step\_memory\_avg\_tile\_repeat  multi\_step\_memory\_cleaning\_rate  \textbackslash{}
+          count                        11000.000                        11000.000   
+          mean                             2.903                            0.602   
+          std                              3.205                            0.182   
+          min                              1.338                            0.020   
+          25\%                              2.020                            0.485   
+          50\%                              2.357                            0.626   
+          75\%                              2.912                            0.747   
+          max                             49.500                            0.960   
+          
+                 multi\_step\_memory\_ratio\_cleaned  multi\_step\_memory\_avg\_tile\_repeat  
+          count                        11000.000                          11000.000  
+          mean                             0.785                              2.213  
+          std                              0.151                              3.694  
+          min                              0.024                              1.042  
+          25\%                              0.733                              1.338  
+          50\%                              0.820                              1.597  
+          75\%                              0.882                              2.062  
+          max                              1.000                             49.500  
+\end{Verbatim}
+            
+     \subsubsection{ Medium Floor Analysis}
+
+The cleaning rate and ratio of floors cleaned metric values tend to
+resemble normal distributions, although the multi-step memory's
+distribution does have a left-skew, indicating that it has a higher
+tendency to return better metric values. The multi-step memory's
+underlying distribution may be more exponential in nature, with more
+values towards the higher end, and a narrow tail towards the low values.
+This is obviously more desirable vs a normal distribution, since one is
+more skewed towards getting a high performance vs a low performance. In
+a normal distribution, the probabilty of getting a high or low
+performance would be more equally distributed, with extreme high values
+being much harder to obtain due to the narrow tails. With the
+exponential, the extreme high values are the most frequent values.\footnote{\textbf{\#distributions:} The distributions of the efficiency metrics under the implementation of various cleaning strategies are analyzed. I noted the normal-like distribution of the random-bounce, wall-following, and one-step-memory strategies vs the more exponential-like distribution of the multi-step-memory strategy, and pointed out that the exponential distribution is desirable since it signifies a skew towards better metric values, and so indicates a higher probability of high efficiency.}\\
+
+The average tile repeat is exponential with a right skew, similar to the
+small floor analysis. The random bounce strategy has the heaviest right
+tail, which indicates that it has the most amount of repeats. The other
+strategies all have relatively narrow right tails, which is desirable.\\
+
+The descriptive statistics table confirms that the multi-step memory
+strategy has the best mean values overall, and actually converges to the
+same value as the other strategies at a much slower rate - we see that
+even at the 75\% percentile, the multi-step memory values are still
+better than those of the other strategies, whereas in the small floor
+table we started to see convergence at this point. Since the medium
+sized floor allows more exploration and less tile repeats, the strength
+of the multi-memory strategy is emphasized.
+\newpage
+\subsection{Big Floor}
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{plot\PYZus{}subset\PYZus{}histograms}\PY{p}{(}\PY{n}{results\PYZus{}df\PYZus{}big}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Big floor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{final-project-roomba-coverage_files/final-project-roomba-coverage_34_0.png}
+    \end{center}
+    
+    \newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{results\PYZus{}df\PYZus{}big}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{results\PYZus{}df\PYZus{}big}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{densities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}105}]:}        densities  random\_bounce\_cleaning\_rate  random\_bounce\_ratio\_cleaned  \textbackslash{}
+          count  11000.000                    11000.000                    11000.000   
+          mean       0.250                        0.414                        0.137   
+          std        0.158                        0.127                        0.034   
+          min        0.000                        0.020                        0.007   
+          25\%        0.100                        0.323                        0.115   
+          50\%        0.250                        0.414                        0.138   
+          75\%        0.400                        0.505                        0.159   
+          max        0.500                        0.818                        0.275   
+          
+                 random\_bounce\_avg\_tile\_repeat  wall\_following\_cleaning\_rate  \textbackslash{}
+          count                      11000.000                     11000.000   
+          mean                           2.856                         0.461   
+          std                            2.632                         0.182   
+          min                            1.222                         0.020   
+          25\%                            1.980                         0.333   
+          50\%                            2.415                         0.444   
+          75\%                            3.094                         0.566   
+          max                           49.500                         0.980   
+          
+                 wall\_following\_ratio\_cleaned  wall\_following\_avg\_tile\_repeat  \textbackslash{}
+          count                     11000.000                       11000.000   
+          mean                          0.150                           2.774   
+          std                           0.042                           2.959   
+          min                           0.006                           1.021   
+          25\%                           0.122                           1.768   
+          50\%                           0.150                           2.250   
+          75\%                           0.181                           3.000   
+          max                           0.296                          49.500   
+          
+                 one\_step\_memory\_cleaning\_rate  one\_step\_memory\_ratio\_cleaned  \textbackslash{}
+          count                      11000.000                      11000.000   
+          mean                           0.521                          0.174   
+          std                            0.135                          0.043   
+          min                            0.020                          0.008   
+          25\%                            0.434                          0.147   
+          50\%                            0.535                          0.173   
+          75\%                            0.616                          0.200   
+          max                            0.899                          0.370   
+          
+                 one\_step\_memory\_avg\_tile\_repeat  multi\_step\_memory\_cleaning\_rate  \textbackslash{}
+          count                        11000.000                        11000.000   
+          mean                             2.221                            0.834   
+          std                              2.336                            0.182   
+          min                              1.112                            0.020   
+          25\%                              1.623                            0.758   
+          50\%                              1.868                            0.899   
+          75\%                              2.302                            0.970   
+          max                             49.500                            1.000   
+          
+                 multi\_step\_memory\_ratio\_cleaned  multi\_step\_memory\_avg\_tile\_repeat  
+          count                        11000.000                          11000.000  
+          mean                             0.279                              1.437  
+          std                              0.058                              2.256  
+          min                              0.007                              1.000  
+          25\%                              0.248                              1.031  
+          50\%                              0.275                              1.112  
+          75\%                              0.314                              1.320  
+          max                              0.470                             49.500  
+\end{Verbatim}
+            
+    \subsubsection{Big Floor Analysis}
+
+In the big floor configuration, the cleaning rate is normally
+distributed for all strategies except multi-step memory, where it is
+exponentially distributed and left-skewed. Since there is more floor
+area to explore, there are less tile-repeats by the Roomba, and so the
+multi-step memory strategy's strength is emphasized, as shown by the
+skew towards higher cleaning rate values.\\
+
+The ratio of floors cleaned is normally distributed for all strategies,
+though the multi-step memory strategy has the highest mean value, upper
+95 CI boundary, and lower 95 CI boundary, indicating that it has a
+better performance. As previously explained, the ratio of floor cleaned
+for the big floor is maxed out around 0.4 due to having only 100 time
+steps for roughly 400 cells. That being said, we can still see that the
+multi-step memory's distribution is a little more left-skewed than the
+others, despite still largely resembling a normal distribution.\\
+
+The average tile repeat distributions are exponential and right-skewed,
+and largely similar across all the strategies.\\
+
+The descriptive statistics table is similar to that of the medium floor
+table in the sense that the multi-step memory's mean values are
+consistently superior even up to the 75\% percentile and max value. This
+emphasizes the point that on bigger floors, the multi-step memory
+strategy is shown to be vastly more superior, while on smaller sized
+floors the performance metrics may be misleading as to its true
+efficiency.
+\newpage
+    \section{Conclusion}
+
+After conducting the Monte Carlo simulations, my conclusion is that the
+multi-step memory strategy is the best. Within an obstacle density range
+of (0,0.5), we see that the multi-step memory strategy returns better
+efficiency metrics (high ratio of floor cleaned, high cleaning rate, low
+average number of repeated tiles) and also has tighter 95\% confidence
+intervals. Considering that the other results tend to have wider
+boundaries towards the "underperforming" direction while sharing rather
+similar boundaries towards the "overperforming" direction, a tighter confidence interval is desirable
+since it indicates a lower probability of underperforming.\\
+
+That being said, realistically speaking, the multi-step memory strategy
+would probably be the most expensive strategy to implement as well,
+since it requires that the Roomba has an internal mapping system that
+allows it to keep track of all its previous locations. In comparison,
+the random bounce strategy would only rely on the Roomba's current
+surroundings, the wall-following strategy only relies on detecting long
+obstacles with sensors, and the one-step memory strategy only needs to
+keep track of the most recent position.
+\newpage
+\subsection{General Advice to Interested Parties}
+
+If I had to write a memo advising the CEO of \\\texttt{www.RoombasAreAMansBestFriend.com} on the pros and cons of each strategy, it would be as follows:
+
+\rule{\textwidth}{0.4pt}
+
+Dear Mr. CEO,\\
+
+As you know, the market is rife with low-quality Roombas. If we truly
+hope to achieve our mission of making our Roombas a man's best friend,
+we need to make Roombas that are efficient and get the job done.\\
+
+After running some Monte Carlo experiments, my colleagues and I have
+found that a cleaning strategy which implements some form of path
+recollection consistently outperforms the other strategies in terms of
+coverage, speed, and energy conservation, as represented by the metrics
+of the proportion of floor cleaned, the rate of cleaning, and the number
+of repeat cleans per tile.\\
+
+We call this strategy the "multi-step memory" strategy since it
+remembers all its previous locations and tries to avoid them whenever
+possible. While this system may be more expensive to invest in vs a more
+simple strategy such as random bounce (where the Roomba just bounces off
+obstacles and randomly determines a next position based on whereever
+there \emph{isn't} a obstacle), we believe that it is worth the
+investment as it performs well in small, medium, and big-sized rooms,
+and thus can accomodate customers of varying house sizes and layouts.
+This strategy also has very tight 95\% confidence intervals, and so when
+reporting our results to customers and investors, we can be more
+confident in our claims and appease the statistically savvy consumer and
+board member.\\
+
+Our main takeaway from experimentation was that the more we can
+encourage the Roomba to explore the wide open floor, the better. The
+random bounce strategy is terrible because the Roomba keeps cleaning the
+same old area; the multi-step memory strategy is great because it
+encourages the Roomba to explore the brave unknown.\\
+
+Thank you for your consideration.
+
+\rule{\textwidth}{0.4pt}
+
+\newpage
+\begin{thebibliography}{9}
+\bibitem{woodford}
+Woodford, C. (2018, December 17). How do Roomba robot vacuum cleaners
+work? Retrieved April 24, 2019, from
+https://www.explainthatstuff.com/how-roomba-works.html
+\end{thebibliography}
+
+\appendix
+\section{Appendix: Code}
+\label{appendix:code}
+\url{https://nbviewer.jupyter.org/github/hueyning/cs166-repo/blob/master/final-project/final-project-roomba-coverage.ipynb}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
