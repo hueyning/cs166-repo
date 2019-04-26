@@ -1,0 +1,41 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Object Representation}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{The Floor}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{The Obstacles}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{The Roomba}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{The Walls}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Roomba Strategies}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Random Bounce}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{One-Step Memory}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Multi-Step Memory}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.4}{Wall-Following}{section.3}% 11
+\BOOKMARK [3][-]{subsubsection.3.4.1}{General algorithm}{subsection.3.4}% 12
+\BOOKMARK [3][-]{subsubsection.3.4.2}{Detailed breakdown}{subsection.3.4}% 13
+\BOOKMARK [3][-]{subsubsection.3.4.3}{Note}{subsection.3.4}% 14
+\BOOKMARK [1][-]{section.4}{Efficiency Metrics}{}% 15
+\BOOKMARK [2][-]{subsection.4.1}{Ratio of Floor Cleaned}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.2}{Rate of Cleaning}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.3}{Average Number of Repeats per Tile}{section.4}% 18
+\BOOKMARK [1][-]{section.5}{Assumptions and Limitations}{}% 19
+\BOOKMARK [2][-]{subsection.5.1}{Summary of Assumptions}{section.5}% 20
+\BOOKMARK [1][-]{section.6}{Python Implementation}{}% 21
+\BOOKMARK [2][-]{subsection.6.1}{Simulation Demonstration}{section.6}% 22
+\BOOKMARK [1][-]{section.7}{Results and Analysis}{}% 23
+\BOOKMARK [2][-]{subsection.7.1}{Small Floor}{section.7}% 24
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Small Floor Analysis}{subsection.7.1}% 25
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Summary}{subsection.7.1}% 26
+\BOOKMARK [2][-]{subsection.7.2}{ Medium Floor}{section.7}% 27
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Medium Floor Analysis}{subsection.7.2}% 28
+\BOOKMARK [3][-]{subsubsection.7.2.2}{Summary}{subsection.7.2}% 29
+\BOOKMARK [2][-]{subsection.7.3}{Big Floor}{section.7}% 30
+\BOOKMARK [3][-]{subsubsection.7.3.1}{Big Floor Analysis}{subsection.7.3}% 31
+\BOOKMARK [3][-]{subsubsection.7.3.2}{Summary}{subsection.7.3}% 32
+\BOOKMARK [1][-]{section.8}{ Roomba Performance at Obstacle Densities of 0.5}{}% 33
+\BOOKMARK [2][-]{subsection.8.1}{Small Floor}{section.8}% 34
+\BOOKMARK [3][-]{subsubsection.8.1.1}{Small Floor Analysis}{subsection.8.1}% 35
+\BOOKMARK [2][-]{subsection.8.2}{Medium Floor}{section.8}% 36
+\BOOKMARK [3][-]{subsubsection.8.2.1}{ Medium Floor Analysis}{subsection.8.2}% 37
+\BOOKMARK [2][-]{subsection.8.3}{Big Floor}{section.8}% 38
+\BOOKMARK [3][-]{subsubsection.8.3.1}{Big Floor Analysis}{subsection.8.3}% 39
+\BOOKMARK [1][-]{section.9}{Conclusion}{}% 40
+\BOOKMARK [2][-]{subsection.9.1}{General Advice to Interested Parties}{section.9}% 41
